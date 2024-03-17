@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6l0w6xyhd0c6"]
+
+[ext_resource type="PackedScene" uid="uid://waoc5b05mji6" path="res://Scenes/BaseCharacter.tscn" id="1_fjtlr"]
+[ext_resource type="Texture2D" uid="uid://bp2qwfibe2ufe" path="res://Assets/Actor/Characters/Lion/SpriteSheet.png" id="2_3xyw3"]
+[ext_resource type="Resource" uid="uid://j8jb5anb2mnv" path="res://WeaponResources/LongSword.tres" id="2_08e5b"]
+
+[sub_resource type="GDScript" id="GDScript_uaom6"]
+resource_name = "EnemyBehaviour"
+script/source = "extends Character
+
+@onready var player = get_parent().get_node(\"Player\")
+@onready var agent = get_node(\"NavigationAgent2D\")
+
+func _physics_process(delta):
+	if position.distance_to(agent.get_final_position()) < 5:
+		_on_timer_timeout()
+	var direction = to_local(agent.get_next_path_position()).normalized()
+	vertDir = direction.y
+	horiDir = direction.x	
+	
+	var toPlayer = global_position - player.global_position
+	if position.distance_to(player.position) < 20:
+		_attack(toPlayer * -1)
+	
+	super._physics_process(delta)
+	
+func _on_timer_timeout():
+	agent.target_position = player.position
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do2nw"]
+
+[node name="Enemy" instance=ExtResource("1_fjtlr")]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = SubResource("GDScript_uaom6")
+moveSpeed = 40
+weapon = ExtResource("2_08e5b")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_3xyw3")
+
+[node name="WalkingCollider" parent="." index="1"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_do2nw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
+
+[node name="Timer" type="Timer" parent="." index="5"]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

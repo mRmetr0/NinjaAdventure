@@ -1,0 +1,212 @@
+[gd_scene load_steps=14 format=3 uid="uid://13siya7oyt25"]
+
+[ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
+[ext_resource type="FontFile" uid="uid://do5usggxcsrm2" path="res://Assets/HUD/Font/NormalFont.ttf" id="2_s5wpd"]
+[ext_resource type="Texture2D" uid="uid://b0o8b3etu82a6" path="res://Assets/Weapons/Stick/Sprite.png" id="4_6p35y"]
+[ext_resource type="Texture2D" uid="uid://dej4dcpq7lnyp" path="res://Assets/HUD/Dialog/DialogueBoxSimple.png" id="4_j0n23"]
+[ext_resource type="Texture2D" uid="uid://c5mtv8pl1o8t6" path="res://Assets/Weapons/Sai/Sprite.png" id="4_jtd4i"]
+[ext_resource type="Texture2D" uid="uid://da0v2o61tbbke" path="res://Assets/Actor/Characters/GreenNinja/Faceset.png" id="4_ptfur"]
+[ext_resource type="Texture2D" uid="uid://bsyljp8g88uwy" path="res://Assets/Actor/Characters/EskimoNinja/Faceset.png" id="5_ihv8t"]
+[ext_resource type="Texture2D" uid="uid://c1xyfeyqjxdp8" path="res://Assets/HUD/Dialog/ChoiceBox.png" id="5_o4wgf"]
+[ext_resource type="Texture2D" uid="uid://bhb37sseoluae" path="res://Assets/Actor/Characters/RedNinja2/Faceset.png" id="6_6c4li"]
+[ext_resource type="Texture2D" uid="uid://dq3pxtjo84i26" path="res://Assets/Weapons/Lance/Sprite.png" id="6_ain7m"]
+[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Weapons/Katana/Sprite.png" id="6_qvsum"]
+[ext_resource type="Texture2D" uid="uid://chgaerhc0cqhy" path="res://Assets/Weapons/Whip/Sprite.png" id="7_eke6o"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
+load_path = "res://.godot/imported/Faceset.png-420bf2d928e890058cc77f80d68415a2.ctex"
+
+[node name="PauseScreen" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 192.0
+color = Color(0.368627, 0.368627, 0.368627, 1)
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 950.0
+offset_bottom = 273.0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/font = ExtResource("2_s5wpd")
+theme_override_font_sizes/font_size = 200
+text = "PAUSED"
+metadata/_edit_lock_ = true
+
+[node name="FacesetBox" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 68.0
+offset_bottom = 88.0
+texture = ExtResource("1_5g772")
+metadata/_edit_lock_ = true
+
+[node name="Profile" type="TextureRect" parent="FacesetBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_ynomg")
+metadata/_edit_lock_ = true
+
+[node name="ItemBoxBackground" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 218.0
+offset_bottom = 160.0
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("4_j0n23")
+expand_mode = 1
+
+[node name="ItemContainer" type="HBoxContainer" parent="ItemBoxBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.295
+offset_top = -25.0
+offset_right = 174.295
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Item5" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
+custom_minimum_size = Vector2(8.27, 16.98)
+layout_mode = 2
+texture = ExtResource("4_6p35y")
+stretch_mode = 5
+
+[node name="Item1" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("4_jtd4i")
+stretch_mode = 5
+
+[node name="Item2" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
+custom_minimum_size = Vector2(11.095, 15)
+layout_mode = 2
+texture = ExtResource("6_ain7m")
+stretch_mode = 5
+
+[node name="Item3" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
+custom_minimum_size = Vector2(23.28, 15)
+layout_mode = 2
+texture = ExtResource("7_eke6o")
+stretch_mode = 5
+
+[node name="Item4" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
+custom_minimum_size = Vector2(17.25, 15)
+layout_mode = 2
+texture = ExtResource("6_qvsum")
+stretch_mode = 5
+
+[node name="ClothingBoxBackground" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 130.0
+offset_right = 218.0
+offset_bottom = 190.0
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("4_j0n23")
+expand_mode = 1
+
+[node name="OutfitContainer" type="HBoxContainer" parent="ClothingBoxBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -25.0
+offset_right = 96.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Outfit1" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("4_ptfur")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="Outfit2" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("5_ihv8t")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="Outfit3" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("6_6c4li")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="LeaveButton" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -29.0
+offset_right = 46.0
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("5_o4wgf")
+
+[node name="lable" type="Label" parent="LeaveButton"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.8086
+offset_top = -16.0926
+offset_right = 612.191
+offset_bottom = 251.907
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/font = ExtResource("2_s5wpd")
+theme_override_font_sizes/font_size = 200
+text = "QUIT"
+metadata/_edit_lock_ = true

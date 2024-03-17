@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0yxyhit56ocu"]
+
+[ext_resource type="Texture2D" uid="uid://bp7rqgxwdh1vw" path="res://Assets/HUD/Heart.png" id="1_u1nxu"]
+
+[sub_resource type="GDScript" id="GDScript_i3fec"]
+resource_name = "GameUI"
+script/source = "extends Control
+
+var heart_sprites : Array
+
+func _ready():
+	var container = get_node(\"HealthContainer\")
+	for child in container.get_children():
+		var sprite = child.get_child(0)
+		heart_sprites.append(sprite)
+		
+
+func _update_health_ui(new_heath : int):
+	for sprite in heart_sprites:
+		if (new_heath - 4 >= 0):
+			sprite.set_frame(4)
+			new_heath -= 4
+		else:
+			sprite.set_frame(4-new_heath)
+			break
+	if (new_heath > 0):
+		print(\"TOO MUCH HEALTH\")
+"
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_i3fec")
+
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+texture_filter = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Control" type="Control" parent="HealthContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/Control"]
+texture = ExtResource("1_u1nxu")
+centered = false
+hframes = 5
+
+[node name="Control2" type="Control" parent="HealthContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/Control2"]
+texture = ExtResource("1_u1nxu")
+centered = false
+hframes = 5

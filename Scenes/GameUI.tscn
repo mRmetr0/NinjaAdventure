@@ -1,0 +1,105 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0yxyhit56ocu"]
+
+[ext_resource type="Texture2D" uid="uid://bp7rqgxwdh1vw" path="res://Assets/HUD/Heart.png" id="1_u1nxu"]
+[ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="2_gvxld"]
+[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Weapons/Katana/Sprite.png" id="3_e354y"]
+
+[sub_resource type="GDScript" id="GDScript_e2bjs"]
+resource_name = "GameUI"
+script/source = "extends Control
+
+@onready var weapon_display = get_node(\"WeaponBackground/WeaponSprite\")
+
+var heart_sprites : Array
+
+func _ready():	
+	var container = get_node(\"HealthContainer\")
+	for child in container.get_children():
+		var sprite = child.get_child(0)
+		heart_sprites.append(sprite)
+		
+
+func _update_health_ui(new_health : int):
+	new_health = max(0, new_health)
+	for sprite in heart_sprites:
+		if (new_health - 4 >= 0):
+			sprite.set_frame(0)
+			new_health -= 4
+		else:
+			sprite.set_frame(4-new_health)
+			new_health = 0
+			break
+	if (new_health > 0):
+		print(\"TOO MUCH HEALTH\")
+		
+func _update_weapon_ui(newWeapon : WeaponResource):
+	weapon_display.texture = newWeapon.weapon_icon
+	
+"
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_e2bjs")
+
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Control" type="Control" parent="HealthContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/Control"]
+texture = ExtResource("1_u1nxu")
+centered = false
+hframes = 5
+
+[node name="Control2" type="Control" parent="HealthContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/Control2"]
+texture = ExtResource("1_u1nxu")
+centered = false
+hframes = 5
+
+[node name="WeaponBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -34.0
+offset_right = 34.0
+offset_bottom = -4.0
+grow_vertical = 0
+texture = ExtResource("2_gvxld")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WeaponSprite" type="TextureRect" parent="WeaponBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.605, 1.605)
+texture = ExtResource("3_e354y")
+expand_mode = 1
+stretch_mode = 5

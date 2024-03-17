@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsm3d6r5brn16"]
+
+[ext_resource type="PackedScene" uid="uid://waoc5b05mji6" path="res://Scenes/BaseCharacter.tscn" id="1_27kjt"]
+
+[sub_resource type="GDScript" id="GDScript_2uchs"]
+resource_name = "PlayerControls"
+script/source = "extends Character
+
+
+func _physics_process(delta):	
+	_handle_movement_inputs(delta)
+	
+func _handle_movement_inputs(delta):
+	vertDir = Input.get_axis(\"up\", \"down\")
+	horiDir = Input.get_axis(\"rigth\", \"left\")
+	super._physics_process(delta)
+	
+func _handle_attack_input(delta):
+	pass
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tjds5"]
+load_path = "res://.godot/imported/SpriteSheet.png-c5cbbaa6ed116eeaa84f3e287f479b64.ctex"
+
+[node name="Player" instance=ExtResource("1_27kjt")]
+script = SubResource("GDScript_2uchs")
+moveSpeed = 40
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("CompressedTexture2D_tjds5")
