@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0yxyhit56ocu"]
+[gd_scene load_steps=8 format=3 uid="uid://b0yxyhit56ocu"]
 
 [ext_resource type="Texture2D" uid="uid://bp7rqgxwdh1vw" path="res://Assets/HUD/Heart.png" id="1_u1nxu"]
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="2_gvxld"]
-[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Weapons/Katana/Sprite.png" id="3_e354y"]
+[ext_resource type="Texture2D" uid="uid://cbixquk7apigo" path="res://Assets/Items/Treasure/SilverCoin.png" id="2_hnvid"]
+[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Items/Weapons/Katana/Sprite.png" id="3_2hsei"]
+[ext_resource type="Texture2D" uid="uid://w3p4f7o87xjh" path="res://Assets/HUD/Dialog/DialogBoxFaceset.png" id="4_8djfl"]
+[ext_resource type="Texture2D" uid="uid://ckolcmmlnil52" path="res://Assets/Items/Scroll/ScrollPlant.png" id="4_yyplr"]
 
 [sub_resource type="GDScript" id="GDScript_e2bjs"]
 resource_name = "GameUI"
@@ -10,14 +13,21 @@ script/source = "extends Control
 
 @onready var weapon_display = get_node(\"WeaponBackground/WeaponSprite\")
 
+@onready var dialogue = get_node(\"Dialogue\")
+@onready var portrait_box = get_node(\"Dialogue/Portrait\")
+@onready var text_box = get_node(\"Dialogue/Text\")
+
 var heart_sprites : Array
 
 func _ready():	
+	dialogue.hide()
+	set_process(false)
 	var container = get_node(\"HealthContainer\")
 	for child in container.get_children():
 		var sprite = child.get_child(0)
 		heart_sprites.append(sprite)
-		
+	
+	_update_weapon_ui(GameManager.player_weapon)
 
 func _update_health_ui(new_health : int):
 	new_health = max(0, new_health)
@@ -33,11 +43,36 @@ func _update_health_ui(new_health : int):
 		print(\"TOO MUCH HEALTH\")
 		
 func _update_weapon_ui(newWeapon : WeaponResource):
-	weapon_display.texture = newWeapon.weapon_icon
+	if newWeapon == null:
+		weapon_display.get_parent().hide()
+	else:
+		weapon_display.get_parent().show()
+		weapon_display.texture = newWeapon.weapon_icon
+
+func _update_item_ui(_newItem):
+	pass
 	
+func _set_text_box(portrait: Texture = null, text : String = \"null\"):
+	if (portrait == null && text == \"null\"):
+		dialogue.hide()
+		get_tree().paused = false
+		set_process(false)
+		return
+	get_tree().paused = true
+	text_box.text = text
+	portrait_box.texture = portrait
+	dialogue.show()
+	await get_tree().create_timer(0.1).timeout
+	set_process(true)
+
+func _process(_delta):
+	if (get_tree().paused):
+		if Input.is_action_just_pressed(\"interact\"):
+			_set_text_box()
 "
 
 [node name="GameUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,6 +107,25 @@ texture = ExtResource("1_u1nxu")
 centered = false
 hframes = 5
 
+[node name="MoneyIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 25.0
+offset_right = 14.0
+offset_bottom = 35.0
+texture = ExtResource("2_hnvid")
+
+[node name="Label" type="Label" parent="MoneyIcon"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -3.0
+offset_right = 2812.0
+offset_bottom = 1331.0
+scale = Vector2(0.01, 0.01)
+theme_override_font_sizes/font_size = 1000
+text = "9999"
+horizontal_alignment = 2
+
 [node name="WeaponBackground" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -93,13 +147,86 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -11.0
-offset_right = 1.0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 3.0
 offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.605, 1.605)
-texture = ExtResource("3_e354y")
+texture = ExtResource("3_2hsei")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ItemBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -34.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_gvxld")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="ItemSprite" type="TextureRect" parent="ItemBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.605, 1.605)
+texture = ExtResource("4_yyplr")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Dialogue" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -56.0
+offset_right = 125.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("4_8djfl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Portrait" type="TextureRect" parent="Dialogue"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 39.0
+offset_bottom = 42.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="Dialogue"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 46.0
+offset_top = 11.0
+offset_right = 1986.0
+offset_bottom = 321.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 80
+autowrap_mode = 1

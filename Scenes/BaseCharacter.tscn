@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_wh17m"]
 [ext_resource type="Texture2D" uid="uid://cfbvcoxqu4o46" path="res://Assets/Actor/Characters/Skeleton/SpriteSheet.png" id="2_a3w80"]
-[ext_resource type="Texture2D" uid="uid://cybl80usdanpe" path="res://Assets/Weapons/BigSword/SpriteInHand.png" id="3_0qmxy"]
+[ext_resource type="Texture2D" uid="uid://cybl80usdanpe" path="res://Assets/Items/Weapons/BigSword/SpriteInHand.png" id="3_vdld0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rsy5n"]
-size = Vector2(15, 3)
+size = Vector2(14, 3)
 
 [sub_resource type="Animation" id="Animation_8motu"]
 length = 0.001
@@ -400,8 +400,8 @@ tracks/1/path = NodePath("Sprite2D:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.9),
-"transitions": PackedFloat32Array(1e+06, 0.38968, 1e+06),
+"times": PackedFloat32Array(0, 0.05, 0.95),
+"transitions": PackedFloat32Array(1e+06, 1, 1),
 "update": 0,
 "values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
@@ -790,8 +790,13 @@ func _set_attack(direction : Vector2, slow_attack : bool) -> float:
 		play (attack_animations[lastIndex])
 		
 	return current_animation_length
+
+func _set_special():
+	stop(false)
+	sprite.set_frame(27)
 	
 func _get_clockwhise_direction(direction : Vector2) -> float:	
+	direction.y *= 0.9
 	if abs(direction.x) < abs(direction.y): 
 		if direction.y > 0:
 			return 0
@@ -826,13 +831,15 @@ script = ExtResource("1_wh17m")
 moveSpeed = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 1
+position = Vector2(0, -6)
 texture = ExtResource("2_a3w80")
 hframes = 4
 vframes = 7
 
 [node name="WalkingCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6.5)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_rsy5n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -842,6 +849,7 @@ libraries = {
 script = SubResource("GDScript_yrumk")
 
 [node name="WeaponArea2D" type="Area2D" parent="."]
+position = Vector2(0, -6)
 collision_mask = 2
 script = SubResource("GDScript_lrqbi")
 
@@ -852,8 +860,9 @@ disabled = true
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponArea2D/WeaponCollider"]
 visible = false
+z_index = 1
 rotation = 3.14159
-texture = ExtResource("3_0qmxy")
+texture = ExtResource("3_vdld0")
 metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_body_enter"]

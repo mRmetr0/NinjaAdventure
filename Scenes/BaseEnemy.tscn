@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6l0w6xyhd0c6"]
+[gd_scene load_steps=7 format=3 uid="uid://c6l0w6xyhd0c6"]
 
 [ext_resource type="PackedScene" uid="uid://waoc5b05mji6" path="res://Scenes/BaseCharacter.tscn" id="1_fjtlr"]
 [ext_resource type="Texture2D" uid="uid://bp2qwfibe2ufe" path="res://Assets/Actor/Characters/Lion/SpriteSheet.png" id="2_3xyw3"]
 [ext_resource type="Resource" uid="uid://j8jb5anb2mnv" path="res://WeaponResources/LongSword.tres" id="2_08e5b"]
+[ext_resource type="Texture2D" uid="uid://dvugfmcxdnc3o" path="res://Assets/Actor/Characters/Lion/Faceset.png" id="2_a1ni1"]
 
 [sub_resource type="GDScript" id="GDScript_uaom6"]
 resource_name = "EnemyBehaviour"
@@ -36,7 +37,8 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = SubResource("GDScript_uaom6")
-moveSpeed = 40
+moveSpeed = 35
+portrait = ExtResource("2_a1ni1")
 weapon = ExtResource("2_08e5b")
 
 [node name="Sprite2D" parent="." index="0"]

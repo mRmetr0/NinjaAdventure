@@ -2,16 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
 [ext_resource type="FontFile" uid="uid://do5usggxcsrm2" path="res://Assets/HUD/Font/NormalFont.ttf" id="2_s5wpd"]
-[ext_resource type="Texture2D" uid="uid://b0o8b3etu82a6" path="res://Assets/Weapons/Stick/Sprite.png" id="4_6p35y"]
+[ext_resource type="Texture2D" uid="uid://b0o8b3etu82a6" path="res://Assets/Items/Weapons/Stick/Sprite.png" id="4_6p35y"]
 [ext_resource type="Texture2D" uid="uid://dej4dcpq7lnyp" path="res://Assets/HUD/Dialog/DialogueBoxSimple.png" id="4_j0n23"]
-[ext_resource type="Texture2D" uid="uid://c5mtv8pl1o8t6" path="res://Assets/Weapons/Sai/Sprite.png" id="4_jtd4i"]
+[ext_resource type="Texture2D" uid="uid://c5mtv8pl1o8t6" path="res://Assets/Items/Weapons/Sai/Sprite.png" id="4_jtd4i"]
 [ext_resource type="Texture2D" uid="uid://da0v2o61tbbke" path="res://Assets/Actor/Characters/GreenNinja/Faceset.png" id="4_ptfur"]
 [ext_resource type="Texture2D" uid="uid://bsyljp8g88uwy" path="res://Assets/Actor/Characters/EskimoNinja/Faceset.png" id="5_ihv8t"]
 [ext_resource type="Texture2D" uid="uid://c1xyfeyqjxdp8" path="res://Assets/HUD/Dialog/ChoiceBox.png" id="5_o4wgf"]
 [ext_resource type="Texture2D" uid="uid://bhb37sseoluae" path="res://Assets/Actor/Characters/RedNinja2/Faceset.png" id="6_6c4li"]
-[ext_resource type="Texture2D" uid="uid://dq3pxtjo84i26" path="res://Assets/Weapons/Lance/Sprite.png" id="6_ain7m"]
-[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Weapons/Katana/Sprite.png" id="6_qvsum"]
-[ext_resource type="Texture2D" uid="uid://chgaerhc0cqhy" path="res://Assets/Weapons/Whip/Sprite.png" id="7_eke6o"]
+[ext_resource type="Texture2D" uid="uid://dq3pxtjo84i26" path="res://Assets/Items/Weapons/Lance/Sprite.png" id="6_ain7m"]
+[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Items/Weapons/Katana/Sprite.png" id="6_qvsum"]
+[ext_resource type="Texture2D" uid="uid://chgaerhc0cqhy" path="res://Assets/Items/Weapons/Whip/Sprite.png" id="7_eke6o"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
 load_path = "res://.godot/imported/Faceset.png-420bf2d928e890058cc77f80d68415a2.ctex"
@@ -87,9 +87,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -174.295
+offset_left = -97.0
 offset_top = -25.0
-offset_right = 174.295
+offset_right = 96.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -100,30 +100,35 @@ alignment = 1
 custom_minimum_size = Vector2(8.27, 16.98)
 layout_mode = 2
 texture = ExtResource("4_6p35y")
+expand_mode = 5
 stretch_mode = 5
 
 [node name="Item1" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("4_jtd4i")
+expand_mode = 5
 stretch_mode = 5
 
 [node name="Item2" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
 custom_minimum_size = Vector2(11.095, 15)
 layout_mode = 2
 texture = ExtResource("6_ain7m")
+expand_mode = 5
 stretch_mode = 5
 
 [node name="Item3" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
 custom_minimum_size = Vector2(23.28, 15)
 layout_mode = 2
 texture = ExtResource("7_eke6o")
+expand_mode = 5
 stretch_mode = 5
 
 [node name="Item4" type="TextureRect" parent="ItemBoxBackground/ItemContainer"]
 custom_minimum_size = Vector2(17.25, 15)
 layout_mode = 2
 texture = ExtResource("6_qvsum")
+expand_mode = 5
 stretch_mode = 5
 
 [node name="ClothingBoxBackground" type="TextureRect" parent="."]

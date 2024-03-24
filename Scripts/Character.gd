@@ -9,6 +9,9 @@ signal ChangeWeapon (new_weapon : WeaponResource)
 @onready var health = max_health
 @export var moveSpeed = 40
 
+@export var portrait : Texture
+@export_multiline var default_text : String
+
 var vertDir : float
 var horiDir : float
 var moveMod : Vector2
@@ -27,15 +30,13 @@ func _physics_process(_delta):
 
 func _handle_movement(_delta):	
 	var moveDirection = Vector2(horiDir, vertDir)
-	
 	velocity = moveDirection.normalized() * moveSpeed * 100 * _delta 
-	
 	animator._set_walk_animation(moveDirection)
-	
 	move_and_slide()
 	
 func _set_weapon(newWeapon : WeaponResource):
 	if newWeapon == null:
+		emit_signal("ChangeWeapon", null)
 		return
 	weapon = newWeapon
 	weapon.character = self
