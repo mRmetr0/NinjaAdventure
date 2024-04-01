@@ -14,8 +14,6 @@ script/source = "extends Area2D
 func _ready():
 	sprite.texture = Weapon.weapon_icon
 
-
-
 func _on_body_entered(body):
 	if body.name == \"Player\":
 		var player = body as Character

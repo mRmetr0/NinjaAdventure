@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://waoc5b05mji6"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_wh17m"]
-[ext_resource type="Texture2D" uid="uid://cfbvcoxqu4o46" path="res://Assets/Actor/Characters/Skeleton/SpriteSheet.png" id="2_a3w80"]
+[ext_resource type="Texture2D" uid="uid://cfbvcoxqu4o46" path="res://Assets/Actor/Characters/Skeleton/SpriteSheet.png" id="2_vrwyu"]
 [ext_resource type="Texture2D" uid="uid://cybl80usdanpe" path="res://Assets/Items/Weapons/BigSword/SpriteInHand.png" id="3_vdld0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rsy5n"]
@@ -827,6 +827,8 @@ func _on_body_enter(body):
 size = Vector2(7.96875, 12)
 
 [node name="Character" type="CharacterBody2D" groups=["hitbox"]]
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_wh17m")
 moveSpeed = 200
 
@@ -834,7 +836,7 @@ moveSpeed = 200
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(0, -6)
-texture = ExtResource("2_a3w80")
+texture = ExtResource("2_vrwyu")
 hframes = 4
 vframes = 7
 
@@ -850,7 +852,8 @@ script = SubResource("GDScript_yrumk")
 
 [node name="WeaponArea2D" type="Area2D" parent="."]
 position = Vector2(0, -6)
-collision_mask = 2
+collision_layer = 4
+collision_mask = 15
 script = SubResource("GDScript_lrqbi")
 
 [node name="WeaponCollider" type="CollisionShape2D" parent="WeaponArea2D"]

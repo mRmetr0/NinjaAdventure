@@ -9,7 +9,8 @@ signal ChangeWeapon (new_weapon : WeaponResource)
 @onready var health = max_health
 @export var moveSpeed = 40
 
-@export var portrait : Texture
+@export var portrait : Texture		
+
 @export_multiline var default_text : String
 
 var vertDir : float
@@ -24,7 +25,10 @@ var canAct = true
 func _ready():
 	_set_weapon(weapon)
 
-func _physics_process(_delta):
+func _physics_process(_delta):	
+	if Engine.is_editor_hint():
+		return
+	
 	if canAct:
 		_handle_movement(_delta)
 
@@ -44,10 +48,13 @@ func _set_weapon(newWeapon : WeaponResource):
 	weapon_sprite.texture = weapon.weapon_sprite
 	emit_signal("ChangeWeapon", weapon)
 	
-func _take_damage(damage : int, stun_lock = 1.0):
-	health -= damage
-	stun_lock = max(stun_lock, 0.3)
+func _set_health(newHealth : int):
+	health = newHealth
 	emit_signal("ChangeHealth", health)
+	
+func _take_damage(damage : int, stun_lock = 1.0):
+	_set_health(health - damage)
+	stun_lock = max(stun_lock, 0.3)
 	canAct = false
 	if (health > 0):
 		animator.play("hurt", -1, stun_lock)

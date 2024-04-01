@@ -94,8 +94,12 @@ use_item={
 
 [layer_names]
 
+2d_physics/layer_1="Objects"
 2d_navigation/layer_1="Objects"
+2d_physics/layer_2="Characters"
 2d_navigation/layer_2="Characters"
+2d_physics/layer_3="Weapons"
+2d_physics/layer_4="Projectiles"
 
 [navigation]
 

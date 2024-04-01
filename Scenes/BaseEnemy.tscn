@@ -12,7 +12,7 @@ script/source = "extends Character
 @onready var player = get_parent().get_node(\"Player\")
 @onready var agent = get_node(\"NavigationAgent2D\")
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	if position.distance_to(agent.get_final_position()) < 5:
 		_on_timer_timeout()
 	var direction = to_local(agent.get_next_path_position()).normalized()
@@ -32,8 +32,6 @@ func _on_timer_timeout():
 [sub_resource type="CircleShape2D" id="CircleShape2D_do2nw"]
 
 [node name="Enemy" instance=ExtResource("1_fjtlr")]
-collision_layer = 2
-collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = SubResource("GDScript_uaom6")

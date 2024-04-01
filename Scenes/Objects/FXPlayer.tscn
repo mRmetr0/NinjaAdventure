@@ -13,13 +13,27 @@ script/source = "extends Node2D
 @onready var animator = get_node(\"AnimationPlayer\")
 
 func _ready():
-	sprite.texture = sprite_sheet
-	sprite.hframes = frames
-	animator.play(\"FX_\"+str(frames), -1, .1)
+	animator.play(\"FX_\"+str(frames))
 
 func _on_animation_player_animation_finished(_anim_name):
 	queue_free()
 "
+
+[sub_resource type="Animation" id="Animation_hk1vs"]
+resource_name = "FX_5"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_inq5c"]
 resource_name = "FX_6"
@@ -52,22 +66,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_hk1vs"]
-resource_name = "FX_5"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2s83x"]
 _data = {
 "FX_5": SubResource("Animation_hk1vs"),
@@ -77,6 +75,7 @@ _data = {
 
 [node name="Node2D" type="Node2D"]
 z_index = 1
+z_as_relative = false
 script = SubResource("GDScript_7eub5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

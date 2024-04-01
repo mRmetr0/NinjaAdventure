@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0s51lbml2chh"]
+
+[ext_resource type="Texture2D" uid="uid://dt4xgr6km3adq" path="res://Assets/Backgrounds/Tilesets/TilesetNature.png" id="2_addyh"]
+
+[sub_resource type="GDScript" id="GDScript_v5lgs"]
+resource_name = "BreakableObject"
+script/source = "extends StaticBody2D
+
+@export var health : int
+
+func _take_damage(damage, _stun_lock):
+	health -= damage
+	if (health <= 0):
+		queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obn16"]
+size = Vector2(10, 10)
+
+[node name="BreakableObject" type="StaticBody2D" groups=["hitbox"]]
+collision_mask = 12
+script = SubResource("GDScript_v5lgs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_obn16")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_addyh")
+hframes = 24
+vframes = 21
+frame = 269

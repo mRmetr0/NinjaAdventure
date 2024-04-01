@@ -13,7 +13,7 @@ signal Interact
 signal ChangeItem
 
 func _ready ():
-	var hud = get_viewport().get_camera_2d().get_child(0).get_child(0)
+	var hud = get_parent().get_node(\"Camera2D\").get_child(0).get_child(0)
 	if (hud != null):
 		connect(\"ChangeWeapon\", hud._update_weapon_ui)
 		connect(\"ChangeHealth\", hud._update_health_ui)
@@ -26,12 +26,10 @@ func _ready ():
 	else:
 		health = GameManager.player_health
 		weapon = GameManager.player_weapon
-		emit_signal(\"ChangeHealth\", health)
-		emit_signal(\"ChangeWeapon\", weapon)
-	
-	super._ready()
+	_set_health(health)
+	_set_weapon(weapon)
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	if (Input.is_action_just_pressed(\"interact\")):
 		emit_signal(\"Interact\")
 	if (Input.is_action_just_pressed(\"use_item\")):
@@ -65,8 +63,6 @@ func _handle_attack_input():
 load_path = "res://.godot/imported/SpriteSheet.png-c5cbbaa6ed116eeaa84f3e287f479b64.ctex"
 
 [node name="Player" instance=ExtResource("1_27kjt")]
-collision_layer = 2
-collision_mask = 3
 script = SubResource("GDScript_2uchs")
 moveSpeed = 40
 portrait = ExtResource("2_p5cuo")

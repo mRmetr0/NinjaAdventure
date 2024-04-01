@@ -24,7 +24,8 @@ func _change_scene(next_scene : String, newPos : Vector2):
 	#Make new scene
 	var next_level = load("res://Scenes/Levels/" + next_scene+".tscn").instantiate()
 	next_level.name = "Main"
-		
+	
+	#Apply old data
 	var new_player = next_level.get_node("Player")
 	new_player.global_position = newPos
 
@@ -33,6 +34,7 @@ func _change_scene(next_scene : String, newPos : Vector2):
 	current_level.call_deferred("free")
 	current_level = next_level
 	
+
 func _input(event):
 	if event.is_action_pressed("menu"):
 		get_tree().paused = !get_tree().paused

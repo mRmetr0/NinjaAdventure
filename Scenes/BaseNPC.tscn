@@ -10,12 +10,15 @@ script/source = "extends Character
 
 @export var interact_dist : float
 
-@onready var hud = get_viewport().get_camera_2d().get_child(0).get_child(0)
+@onready var hud
+@onready var player
 @onready var prompt = get_node(\"KeyPrompt\")
-@onready var player = get_parent().get_node(\"Player\")
 var rand = RandomNumberGenerator.new()
 
-func _ready():
+func _ready():		
+	hud = get_viewport().get_camera_2d().get_child(0).get_child(0)
+	player = get_parent().get_node(\"Player\")
+	
 	prompt.hide()
 	player.connect(\"Interact\", _on_player_interact)
 
@@ -43,6 +46,7 @@ func _get_player_close() -> bool:
 radius = 6.5192
 
 [node name="Character" instance=ExtResource("1_md4wr")]
+collision_mask = 3
 script = SubResource("GDScript_05daj")
 interact_dist = 20.0
 moveSpeed = 40

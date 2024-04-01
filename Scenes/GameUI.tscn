@@ -27,7 +27,7 @@ func _ready():
 		var sprite = child.get_child(0)
 		heart_sprites.append(sprite)
 	
-	_update_weapon_ui(GameManager.player_weapon)
+	#_update_weapon_ui(GameManager.player_weapon)
 
 func _update_health_ui(new_health : int):
 	new_health = max(0, new_health)
@@ -159,6 +159,7 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="ItemBackground" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

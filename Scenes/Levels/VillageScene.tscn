@@ -53,10 +53,12 @@ script = ExtResource("2_dw2li")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("4_expn1")]
-position = Vector2(640, 48)
+position = Vector2(184, 48)
 
 [node name="Character" parent="." instance=ExtResource("5_hj00q")]
 position = Vector2(383, 76)
+collision_layer = 1
+collision_mask = 1
 default_text = "Help"
 
 [node name="EnterHouseBox" parent="." instance=ExtResource("6_nhya8")]
