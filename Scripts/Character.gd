@@ -10,12 +10,13 @@ signal ChangeWeapon (new_weapon : WeaponResource)
 @export var moveSpeed = 40
 
 @export var portrait : Texture		
+@export var sprite_sheet : Texture2D
+@export var update_sprite_sheet : bool
 
 @export_multiline var default_text : String
 
 var vertDir : float
 var horiDir : float
-var moveMod : Vector2
 
 @export var weapon : WeaponResource
 var canAct = true

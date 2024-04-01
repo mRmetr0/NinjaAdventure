@@ -70,7 +70,7 @@ resource_name = "GuardScript"
 script/source = "extends Character
 
 signal close_door
-@export var enabler : Node2D
+
 @export var wait_time : float
 @export var route : Array[Vector2]
 var progress = 0
@@ -78,7 +78,6 @@ var progress = 0
 @onready var agent = get_node(\"NavigationAgent2D\")
 @onready var hud = get_parent().get_node(\"Camera2D\").get_child(0).get_child(0)
 @onready var ray = get_node(\"RayCast2D\")
-@onready var player = get_parent().get_node(\"Player\")
 
 func _ready():
 	var prompt = get_node(\"KeyPrompt\")
@@ -90,17 +89,14 @@ func _ready():
 		return
 		
 	agent.target_position = route[0]
-	enabler.connect(\"close_door\", _enable)
 	
 	await get_tree().create_timer(wait_time).timeout
 	set_physics_process(true)
 	
 func _process(delta):
 	ray.rotation = atan2(-horiDir, vertDir)
-	if ray.get_collider() == player && !player.camouflaged:
-		hud._set_text_box(portrait, default_text)
-		emit_signal(\"close_door\", true)
-		set_process(false)
+	
+	
 
 func _physics_process(delta):	
 	if position.distance_to(agent.get_final_position()) < 5:
@@ -119,10 +115,6 @@ func _get_new_route():
 	agent.target_position = route[progress]
 	await get_tree().create_timer(wait_time).timeout
 	set_physics_process(true)
-	
-func _enable(_bool : bool):
-	set_process(true)
-	
 "
 
 [node name="Main" type="Node2D"]
@@ -260,22 +252,19 @@ portrait = ExtResource("10_2gecv")
 sprite_sheet = ExtResource("11_xc0p8")
 default_text = "Try to bypass my students without being seen. A prize will wait for you at the end. And remember, your camouflaged suit allows you to hide by pressing 'Q'"
 
-[node name="Student11" parent="." node_paths=PackedStringArray("enabler") instance=ExtResource("9_bnrol")]
+[node name="Student11" parent="." instance=ExtResource("9_bnrol")]
 position = Vector2(432, -48)
 script = SubResource("GDScript_haa3h")
-enabler = NodePath("../Objects/WallOpener1")
-wait_time = 1.0
+wait_time = 0.1
 route = Array[Vector2]([Vector2(320, -48), Vector2(432, -48)])
 moveSpeed = 25
 portrait = ExtResource("13_l7qid")
 sprite_sheet = ExtResource("14_u0se4")
-default_text = "I found you! Leave this room and try again!"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Student11"]
 
 [node name="RayCast2D" type="RayCast2D" parent="Student11"]
 target_position = Vector2(0, 100)
-collision_mask = 3
 
 [connection signal="body_entered" from="Objects/WallOpener1" to="Objects/WallOpener1" method="_on_body_entered"]
 [connection signal="body_entered" from="Objects/WallOpener2" to="Objects/WallOpener2" method="_on_body_entered"]

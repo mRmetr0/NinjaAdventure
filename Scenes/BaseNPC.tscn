@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmkyqtrd8ycgq"]
 
 [ext_resource type="PackedScene" uid="uid://waoc5b05mji6" path="res://Scenes/BaseCharacter.tscn" id="1_md4wr"]
-[ext_resource type="Texture2D" uid="uid://dhcfvpat6op5u" path="res://Assets/Actor/Characters/Master/Faceset.png" id="2_h5su3"]
-[ext_resource type="Texture2D" uid="uid://6crepfxklsrj" path="res://Assets/Actor/Characters/Master/SpriteSheet.png" id="2_vrn0w"]
+[ext_resource type="Texture2D" uid="uid://b3bqjfpt22pom" path="res://Assets/Actor/Characters/Cavegirl/Faceset.png" id="2_vem8i"]
+[ext_resource type="Texture2D" uid="uid://fx4k8jlr77ad" path="res://Assets/Actor/Characters/Cavegirl/SpriteSheet.png" id="3_6ssvw"]
 
 [sub_resource type="GDScript" id="GDScript_05daj"]
 resource_name = "npc"
@@ -10,15 +10,12 @@ script/source = "extends Character
 
 @export var interact_dist : float
 
-@onready var hud
-@onready var player
+@onready var hud = get_parent().get_node(\"Camera2D\").get_child(0).get_child(0)
+@onready var player = get_parent().get_node(\"Player\")
 @onready var prompt = get_node(\"KeyPrompt\")
 var rand = RandomNumberGenerator.new()
 
 func _ready():		
-	hud = get_viewport().get_camera_2d().get_child(0).get_child(0)
-	player = get_parent().get_node(\"Player\")
-	
 	prompt.hide()
 	player.connect(\"Interact\", _on_player_interact)
 
@@ -46,14 +43,16 @@ func _get_player_close() -> bool:
 radius = 6.5192
 
 [node name="Character" instance=ExtResource("1_md4wr")]
-collision_mask = 3
+collision_layer = 1
+collision_mask = 0
 script = SubResource("GDScript_05daj")
 interact_dist = 20.0
 moveSpeed = 40
-portrait = ExtResource("2_h5su3")
+portrait = ExtResource("2_vem8i")
+sprite_sheet = ExtResource("3_6ssvw")
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_vrn0w")
+texture = ExtResource("3_6ssvw")
 
 [node name="WalkingCollider" parent="." index="1"]
 shape = SubResource("CircleShape2D_xpqn2")

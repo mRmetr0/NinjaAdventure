@@ -18,6 +18,7 @@ script/source = "extends Control
 @onready var text_box = get_node(\"Dialogue/Text\")
 
 var heart_sprites : Array
+var dialogue_count = 0
 
 func _ready():	
 	dialogue.hide()
@@ -54,21 +55,31 @@ func _update_item_ui(_newItem):
 	
 func _set_text_box(portrait: Texture = null, text : String = \"null\"):
 	if (portrait == null && text == \"null\"):
-		dialogue.hide()
-		get_tree().paused = false
-		set_process(false)
 		return
+		
+	text_box.lines_skipped = 0
 	get_tree().paused = true
 	text_box.text = text
 	portrait_box.texture = portrait
 	dialogue.show()
 	await get_tree().create_timer(0.1).timeout
 	set_process(true)
+	
+func _get_next_line():
+	dialogue_count += 1
+	if dialogue_count * 3 >= text_box.get_line_count():
+		dialogue.hide()
+		get_tree().paused = false
+		set_process(false)
+		dialogue_count = 0
+	else:
+		text_box.lines_skipped = dialogue_count * 3
 
 func _process(_delta):
 	if (get_tree().paused):
 		if Input.is_action_just_pressed(\"interact\"):
-			_set_text_box()
+			#_set_text_box()
+			_get_next_line()
 "
 
 [node name="GameUI" type="Control"]
@@ -230,4 +241,5 @@ offset_right = 1986.0
 offset_bottom = 321.0
 scale = Vector2(0.1, 0.1)
 theme_override_font_sizes/font_size = 80
-autowrap_mode = 1
+autowrap_mode = 3
+max_lines_visible = 3

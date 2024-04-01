@@ -37,6 +37,7 @@ wall_min_slide_angle = 0.0
 script = SubResource("GDScript_uaom6")
 moveSpeed = 35
 portrait = ExtResource("2_a1ni1")
+sprite_sheet = ExtResource("2_3xyw3")
 weapon = ExtResource("2_08e5b")
 
 [node name="Sprite2D" parent="." index="0"]

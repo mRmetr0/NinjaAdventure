@@ -18,6 +18,7 @@ func _take_damage(damage, _stun_lock):
 size = Vector2(10, 10)
 
 [node name="BreakableObject" type="StaticBody2D" groups=["hitbox"]]
+collision_layer = 16
 collision_mask = 12
 script = SubResource("GDScript_v5lgs")
 

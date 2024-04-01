@@ -45,6 +45,7 @@ follow_viewport_enabled = true
 y_sort_enabled = true
 position = Vector2(120, 120)
 max_health = 6
+sprite_sheet = null
 weapon = ExtResource("5_3p0u1")
 
 [node name="SceneChangeBox" parent="." instance=ExtResource("6_xofx8")]

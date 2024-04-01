@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://de42kkwptw518"]
+
+[ext_resource type="Texture2D" uid="uid://dwbnkwprqpa22" path="res://Assets/Items/Treasure/GoldCoin.png" id="1_i7q8n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxhbr"]
+
+[node name="SwitchableWalls" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.78571, 2.78571)
+texture = ExtResource("1_i7q8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vxhbr")

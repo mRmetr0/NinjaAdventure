@@ -34,6 +34,7 @@ Weapon = ExtResource("1_qi0x0")
 shape = SubResource("RectangleShape2D_tpa3s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("2_c72xj")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
