@@ -199,7 +199,7 @@ z_index = -1
 position = Vector2(384, -192)
 script = SubResource("GDScript_ks7w1")
 opener = NodePath("../WallOpener1")
-closers = [NodePath("../../Student11")]
+closers = [NodePath("../../Student11"), NodePath("../../Student12")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Wall_1"]
 shape = SubResource("RectangleShape2D_qpvgu")
@@ -212,11 +212,12 @@ scale = Vector2(2, 3.5)
 texture = ExtResource("12_fm167")
 metadata/_edit_lock_ = true
 
-[node name="Wall_2" type="StaticBody2D" parent="Objects" node_paths=PackedStringArray("opener")]
+[node name="Wall_2" type="StaticBody2D" parent="Objects" node_paths=PackedStringArray("opener", "closers")]
 z_index = -1
 position = Vector2(256, -232)
 script = SubResource("GDScript_ks7w1")
 opener = NodePath("../WallOpener2")
+closers = [NodePath("../../Student21"), NodePath("../../Student22"), NodePath("../../Student23")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Wall_2"]
 shape = SubResource("RectangleShape2D_qpvgu")
@@ -251,7 +252,7 @@ shape = SubResource("RectangleShape2D_pjy6d")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("4_s5xy5")]
-position = Vector2(272, -40)
+position = Vector2(128, -48)
 sprite_sheet = null
 
 [node name="Monk" parent="." instance=ExtResource("9_bnrol")]
@@ -276,6 +277,79 @@ default_text = "I found you! Leave this room and try again!"
 [node name="RayCast2D" type="RayCast2D" parent="Student11"]
 target_position = Vector2(0, 100)
 collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="Student12" parent="." node_paths=PackedStringArray("enabler") instance=ExtResource("9_bnrol")]
+position = Vector2(336, -120)
+script = SubResource("GDScript_haa3h")
+enabler = NodePath("../Objects/WallOpener1")
+wait_time = 0.3
+route = Array[Vector2]([Vector2(432, -88), Vector2(336, -88), Vector2(336, -120), Vector2(432, -120)])
+moveSpeed = 25
+portrait = ExtResource("13_l7qid")
+sprite_sheet = ExtResource("14_u0se4")
+default_text = "I found you! Leave this room and try again!"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Student12"]
+
+[node name="RayCast2D" type="RayCast2D" parent="Student12"]
+target_position = Vector2(0, 100)
+collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="Student21" parent="." node_paths=PackedStringArray("enabler") instance=ExtResource("9_bnrol")]
+position = Vector2(440, -264)
+script = SubResource("GDScript_haa3h")
+enabler = NodePath("../Objects/WallOpener1")
+wait_time = 0.1
+route = Array[Vector2]([Vector2(440, -264), Vector2(440, -216), Vector2(488, -216), Vector2(488, -264)])
+moveSpeed = 25
+portrait = ExtResource("13_l7qid")
+sprite_sheet = ExtResource("14_u0se4")
+default_text = "I found you! Leave this room and try again!"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Student21"]
+
+[node name="RayCast2D" type="RayCast2D" parent="Student21"]
+target_position = Vector2(0, 100)
+collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="Student22" parent="." node_paths=PackedStringArray("enabler") instance=ExtResource("9_bnrol")]
+position = Vector2(344, -360)
+script = SubResource("GDScript_haa3h")
+enabler = NodePath("../Objects/WallOpener1")
+wait_time = 0.2
+route = Array[Vector2]([Vector2(424, -360), Vector2(424, -296), Vector2(344, -296), Vector2(344, -360)])
+moveSpeed = 25
+portrait = ExtResource("13_l7qid")
+sprite_sheet = ExtResource("14_u0se4")
+default_text = "I found you! Leave this room and try again!"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Student22"]
+
+[node name="RayCast2D" type="RayCast2D" parent="Student22"]
+target_position = Vector2(0, 100)
+collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="Student23" parent="." node_paths=PackedStringArray("enabler") instance=ExtResource("9_bnrol")]
+position = Vector2(280, -312)
+script = SubResource("GDScript_haa3h")
+enabler = NodePath("../Objects/WallOpener1")
+wait_time = 0.3
+route = Array[Vector2]([Vector2(280, -312), Vector2(280, -264), Vector2(328, -264), Vector2(328, -312)])
+moveSpeed = 25
+portrait = ExtResource("13_l7qid")
+sprite_sheet = ExtResource("14_u0se4")
+default_text = "I found you! Leave this room and try again!"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Student23"]
+
+[node name="RayCast2D" type="RayCast2D" parent="Student23"]
+target_position = Vector2(0, 100)
+collision_mask = 3
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Objects/WallOpener1" to="Objects/WallOpener1" method="_on_body_entered"]
 [connection signal="body_entered" from="Objects/WallOpener2" to="Objects/WallOpener2" method="_on_body_entered"]
