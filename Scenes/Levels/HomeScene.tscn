@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_wergj"]
 [ext_resource type="PackedScene" uid="uid://b0yxyhit56ocu" path="res://Scenes/GameUI.tscn" id="3_qgl00"]
 [ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="4_p10fa"]
-[ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://WeaponResources/Whip.tres" id="5_3p0u1"]
+[ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://EquipResources/WeaponResources/Whip.tres" id="5_3p0u1"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_xofx8"]
 
 [node name="Main" type="TileMap"]

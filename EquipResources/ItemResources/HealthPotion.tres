@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://b8ds32qqqg8lc"]
+
+[ext_resource type="Script" path="res://Scripts/ItemResource.gd" id="1_3bfad"]
+[ext_resource type="Texture2D" uid="uid://c2voml7c8b5gk" path="res://Assets/Items/Potion/LifePot.png" id="1_cn1qs"]
+
+[resource]
+script = ExtResource("1_3bfad")
+name = "HealthPotion"
+item_sprite = ExtResource("1_cn1qs")
+expendable = true
+expendable_amount = 3
+effect = 0
+value = 4

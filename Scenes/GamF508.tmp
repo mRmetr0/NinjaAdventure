@@ -33,12 +33,6 @@ func _ready():
 
 func _update_health_ui(new_health : int):
 	new_health = max(0, new_health)
-	var whole_hearths = new_health % 4
-	var index = 1
-	
-	for sprite in heart_sprites:
-		sprite.set_frame(4)
-	
 	for sprite in heart_sprites:
 		if (new_health - 4 >= 0):
 			sprite.set_frame(0)
@@ -62,7 +56,7 @@ func _update_item_ui(newItem : ItemResource):
 		item_display.get_parent().hide()
 	else:
 		item_display.get_parent().show()
-		item_display.texture = newItem.item_sprite
+		item_display.texure = newItem.item_sprite
 	
 func _set_text_box(portrait: Texture = null, text : String = \"null\"):
 	if (portrait == null && text == \"null\"):
@@ -181,7 +175,6 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="ItemBackground" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

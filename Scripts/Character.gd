@@ -51,6 +51,7 @@ func _set_weapon(newWeapon : WeaponResource):
 	
 func _set_health(newHealth : int):
 	health = newHealth
+	health = clampi(health, 0, max_health)
 	emit_signal("ChangeHealth", health)
 	
 func _take_damage(damage : int, stun_lock = 1.0):

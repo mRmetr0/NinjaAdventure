@@ -8,6 +8,8 @@
 resource_name = "PlayerControls"
 script/source = "extends Character
 
+@export var item : ItemResource
+
 var smoke = preload(\"res://Scenes/Objects/FXPlayer.tscn\")
 var camouflaged = false
 
@@ -19,6 +21,7 @@ func _ready ():
 	if (hud != null):
 		connect(\"ChangeWeapon\", hud._update_weapon_ui)
 		connect(\"ChangeHealth\", hud._update_health_ui)
+		connect(\"ChangeItem\", hud._update_item_ui)
 	else:
 		print(\"NO HUD FOUND\")
 	
@@ -30,11 +33,14 @@ func _ready ():
 		weapon = GameManager.player_weapon
 	_set_health(health)
 	_set_weapon(weapon)
+	_set_item(item)
 
 func _physics_process(delta):
 	if (Input.is_action_just_pressed(\"interact\")):
 		emit_signal(\"Interact\")
 	if (Input.is_action_just_pressed(\"use_item\")):
+		_handle_item_used()
+	if (Input.is_action_just_pressed(\"use_ability\")):
 		#TODO: make this whole a green suit thing, not hardcoded
 		canAct = !canAct
 		camouflaged = !canAct
@@ -60,10 +66,17 @@ func _handle_attack_input():
 	var direction = Vector2(horiAct, vertAct)
 	if direction.length() > 0:
 		_attack (direction)
+		
+func _handle_item_used():
+	item._use_item(self)
+
+func _set_item(_item):
+	emit_signal(\"ChangeItem\", _item)
 "
 
 [node name="Player" instance=ExtResource("1_27kjt")]
 script = SubResource("GDScript_2uchs")
+item = null
 moveSpeed = 40
 portrait = ExtResource("2_p5cuo")
 sprite_sheet = ExtResource("3_gohig")
