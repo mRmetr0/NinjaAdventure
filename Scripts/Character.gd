@@ -45,8 +45,14 @@ func _set_weapon(newWeapon : WeaponResource):
 		return
 	weapon = newWeapon
 	weapon.character = self
+	var weapon_collider = get_node("WeaponArea2D/WeaponCollider")
 	var weapon_sprite = get_node ("WeaponArea2D/WeaponCollider/WeaponSprite")
 	weapon_sprite.texture = weapon.weapon_sprite
+	var texture_size = Vector2(weapon_sprite.texture.get_width(), weapon_sprite.texture.get_height())
+	print(weapon_collider.scale)
+	print(texture_size)
+	weapon_collider.shape.extents = texture_size/2 + Vector2.ONE
+	#weapon_collider.position.y = -weapon_sprite.texture.scale.y/2
 	emit_signal("ChangeWeapon", weapon)
 	
 func _set_health(newHealth : int):
