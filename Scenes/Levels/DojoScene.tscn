@@ -192,7 +192,7 @@ position = Vector2(416, -152)
 
 [node name="PickUp" parent="Objects" instance=ExtResource("7_j2vv5")]
 position = Vector2(128, -352)
-Weapon = ExtResource("8_h4xw8")
+resource = ExtResource("8_h4xw8")
 
 [node name="Wall_1" type="StaticBody2D" parent="Objects" node_paths=PackedStringArray("opener", "closers")]
 z_index = -1
@@ -253,7 +253,6 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("4_s5xy5")]
 position = Vector2(128, -328)
-item = null
 sprite_sheet = null
 
 [node name="Monk" parent="." instance=ExtResource("9_bnrol")]

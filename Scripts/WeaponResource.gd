@@ -10,7 +10,7 @@ enum effects {
 	}
 
 @export var name : String
-@export var weapon_icon : Texture2D
+@export var icon : Texture2D
 @export var weapon_sprite : Texture2D
 ## gamer
 @export var damage : int

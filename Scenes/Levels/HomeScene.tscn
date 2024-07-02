@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckrpjjbi14kov"]
+[gd_scene load_steps=6 format=3 uid="uid://ckrpjjbi14kov"]
 
 [ext_resource type="TileSet" uid="uid://duxxfmxo0ou7w" path="res://Assets/InteriorTileset.tres" id="1_gy420"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_wergj"]
 [ext_resource type="PackedScene" uid="uid://b0yxyhit56ocu" path="res://Scenes/GameUI.tscn" id="3_qgl00"]
 [ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="4_p10fa"]
-[ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://EquipResources/WeaponResources/Whip.tres" id="5_3p0u1"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_xofx8"]
 
 [node name="Main" type="TileMap"]
@@ -44,9 +43,7 @@ follow_viewport_enabled = true
 [node name="Player" parent="." instance=ExtResource("4_p10fa")]
 y_sort_enabled = true
 position = Vector2(120, 120)
-max_health = 6
 sprite_sheet = null
-weapon = ExtResource("5_3p0u1")
 
 [node name="SceneChangeBox" parent="." instance=ExtResource("6_xofx8")]
 position = Vector2(104, 192)

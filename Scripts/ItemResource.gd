@@ -8,7 +8,7 @@ enum effects {
 	}
 
 @export var name : String
-@export var item_sprite : Texture2D
+@export var icon : Texture2D
 @export var expendable : bool
 @export var expendable_amount : int
 ## gamer

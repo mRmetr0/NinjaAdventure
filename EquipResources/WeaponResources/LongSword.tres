@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_aaoqg")
 name = "LongSword"
-weapon_icon = ExtResource("2_k8dcb")
+icon = ExtResource("2_k8dcb")
 weapon_sprite = ExtResource("3_erfvt")
 damage = 2
 stun_lock = 1.0

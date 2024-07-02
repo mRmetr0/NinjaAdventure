@@ -6,7 +6,7 @@ var canvasLayer
 #PLAYER DATA
 var player_health = -1
 var player_weapon = null
-var player_item 
+var player_item = null
 
 @onready var pause_screen = preload("res://Scenes/PauseScreen.tscn").instantiate()
 
@@ -20,6 +20,7 @@ func _change_scene(next_scene : String, newPos : Vector2):
 	var old_player = current_level.get_node("Player")
 	player_health = old_player.health
 	player_weapon = old_player.weapon
+	player_item = old_player.item
 	
 	#Make new scene
 	var next_level = load("res://Scenes/Levels/" + next_scene+".tscn").instantiate()

@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_4lbua")
 name = "Sword"
-weapon_icon = ExtResource("2_27of7")
+icon = ExtResource("2_27of7")
 weapon_sprite = ExtResource("3_e2n15")
 damage = 1
 stun_lock = 1.0

@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_clo3x")
 name = "Whip"
-weapon_icon = ExtResource("2_6gkh5")
+icon = ExtResource("2_6gkh5")
 weapon_sprite = ExtResource("3_0l3ge")
 damage = 1
 stun_lock = 0.3

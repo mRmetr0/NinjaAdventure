@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_3bfad")
 name = "HealthPotion"
-item_sprite = ExtResource("1_cn1qs")
+icon = ExtResource("1_cn1qs")
 expendable = true
 expendable_amount = 3
 effect = 0

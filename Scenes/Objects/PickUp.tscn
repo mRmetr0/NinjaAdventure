@@ -1,24 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6tsu7lvspmtv"]
+[gd_scene load_steps=4 format=3 uid="uid://c6tsu7lvspmtv"]
 
-[ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://EquipResources/WeaponResources/Whip.tres" id="1_qi0x0"]
 [ext_resource type="Texture2D" uid="uid://br4gqh0aaj3cc" path="res://Assets/Items/Weapons/Club/Sprite.png" id="2_c72xj"]
 
 [sub_resource type="GDScript" id="GDScript_4foy5"]
 resource_name = "PickUpScript"
 script/source = "extends Area2D
 
-@export var Weapon : WeaponResource
+@export var resource : Resource
 
 @onready var sprite = get_node(\"Sprite2D\")
 
 func _ready():
-	sprite.texture = Weapon.weapon_icon
+	sprite.texture = resource.icon
 
 func _on_body_entered(body):
-	if body.name == \"Player\":
-		var player = body as Character
-		player._set_weapon(Weapon)
-		queue_free()
+	if body.name != \"Player\":
+		return
+	
+	var player = body as Player
+	
+	if resource is WeaponResource:
+		player._set_weapon(resource)
+	elif resource is ItemResource:
+		player._set_item(resource)
+		
+	queue_free()
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpa3s"]
@@ -28,7 +34,6 @@ size = Vector2(10, 10)
 collision_layer = 0
 collision_mask = 2
 script = SubResource("GDScript_4foy5")
-Weapon = ExtResource("1_qi0x0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tpa3s")
