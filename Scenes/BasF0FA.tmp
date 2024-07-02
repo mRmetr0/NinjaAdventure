@@ -853,12 +853,6 @@ func _on_area_entered(area):
 	if area.is_in_group(\"hitbox\") && area != character_hbox:
 		area._take_damage(character.weapon.damage, character.weapon.stun_lock)
 	character.weapon._weapon_function(area)
-
-
-func _on_body_entered(body):
-	if body.is_in_group(\"hitbox\") && body != character:
-		body._take_damage(character.weapon.damage, character.weapon.stun_lock)
-	character.weapon._weapon_function(body)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3kgy"]
@@ -928,4 +922,4 @@ texture = ExtResource("4_vsbjj")
 metadata/_edit_lock_ = true
 
 [connection signal="area_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_area_entered"]
-[connection signal="body_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_body_entered"]
+[connection signal="body_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_body_enter"]

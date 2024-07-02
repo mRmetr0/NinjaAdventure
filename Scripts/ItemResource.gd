@@ -4,7 +4,7 @@ class_name ItemResource
 
 enum effects {
 	HEAL_HEALTH,
-	RESTORE_MAGIC
+	RESTORE_ENERGY
 	}
 
 @export var name : String
@@ -16,8 +16,8 @@ enum effects {
 @export var value : int
 
 func _use_item(player):
-	if expendable_amount <= 0:
-		return
+	#if expendable_amount <= 0:
+		#return
 	
 	match effect:
 		effects.HEAL_HEALTH:

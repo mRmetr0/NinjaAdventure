@@ -49,8 +49,6 @@ func _set_weapon(newWeapon : WeaponResource):
 	var weapon_sprite = get_node ("WeaponArea2D/WeaponCollider/WeaponSprite")
 	weapon_sprite.texture = weapon.weapon_sprite
 	var texture_size = Vector2(weapon_sprite.texture.get_width(), weapon_sprite.texture.get_height())
-	print(weapon_collider.scale)
-	print(texture_size)
 	weapon_collider.shape.extents = texture_size/2 + Vector2.ONE
 	weapon_collider.position.y = -texture_size.y/2
 	emit_signal("ChangeWeapon", weapon)

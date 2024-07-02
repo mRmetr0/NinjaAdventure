@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://fa8vr88mr66r"]
+[gd_scene load_steps=10 format=3 uid="uid://fa8vr88mr66r"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_0ulul"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_0eh0v"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://EquipResources/WeaponResources/Whip.tres" id="5_3kjxa"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="5_krb3e"]
 [ext_resource type="PackedScene" uid="uid://c0s51lbml2chh" path="res://Scenes/Objects/BreakableObject.tscn" id="7_wf48q"]
+[ext_resource type="PackedScene" uid="uid://c6l0w6xyhd0c6" path="res://Scenes/BaseEnemy.tscn" id="8_ygqjy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -9, 264, -9, 264, 200, -8, 200)])
@@ -53,8 +54,10 @@ script = ExtResource("2_0eh0v")
 [node name="GameUI" parent="Camera2D/CanvasLayer" instance=ExtResource("3_aqadl")]
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("4_oiy3r")]
+[node name="Player" parent="." groups=["hitbox"] instance=ExtResource("4_oiy3r")]
 position = Vector2(128, 184)
+collision_layer = 2
+collision_mask = 29
 weapon = ExtResource("5_3kjxa")
 
 [node name="SceneChangeBox" parent="." instance=ExtResource("5_krb3e")]
@@ -74,3 +77,8 @@ position = Vector2(152, 136)
 
 [node name="BreakableObject4" parent="." instance=ExtResource("7_wf48q")]
 position = Vector2(104, 152)
+
+[node name="Enemy" parent="." groups=["hitbox"] instance=ExtResource("8_ygqjy")]
+position = Vector2(80, 112)
+collision_layer = 2
+collision_mask = 29

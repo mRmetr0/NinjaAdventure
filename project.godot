@@ -13,7 +13,7 @@ config_version=5
 config/name="NinjaAdventure"
 run/main_scene="res://Scenes/Levels/HomeScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/Items/Food/Sushi.png"
 
 [autoload]
 
@@ -106,7 +106,7 @@ use_ability={
 2d_navigation/layer_2="Characters"
 2d_physics/layer_3="Weapons"
 2d_physics/layer_4="Projectiles"
-2d_physics/layer_5="BreakableObejects"
+2d_physics/layer_5="BreakableObjects"
 
 [navigation]
 

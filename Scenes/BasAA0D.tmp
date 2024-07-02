@@ -846,19 +846,12 @@ func _get_clockwhise_direction(direction : Vector2) -> float:
 resource_name = "WeaponBox"
 script/source = "extends Area2D
 
-@onready var character = get_parent()
-@onready var character_hbox = character.get_node(\"BodyCollider\")
+@onready var character = get_parent().get_child(\"BodyCollider\")
 
 func _on_area_entered(area):
-	if area.is_in_group(\"hitbox\") && area != character_hbox:
+	if area.is_in_group(\"hitbox\") && area != character:
 		area._take_damage(character.weapon.damage, character.weapon.stun_lock)
 	character.weapon._weapon_function(area)
-
-
-func _on_body_entered(body):
-	if body.is_in_group(\"hitbox\") && body != character:
-		body._take_damage(character.weapon.damage, character.weapon.stun_lock)
-	character.weapon._weapon_function(body)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3kgy"]
@@ -928,4 +921,4 @@ texture = ExtResource("4_vsbjj")
 metadata/_edit_lock_ = true
 
 [connection signal="area_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_area_entered"]
-[connection signal="body_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_body_entered"]
+[connection signal="body_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_body_enter"]

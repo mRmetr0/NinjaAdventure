@@ -12,7 +12,7 @@ moveSpeed = 40
 portrait = ExtResource("2_p5cuo")
 sprite_sheet = ExtResource("3_gohig")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="2"]
 show_behind_parent = true
 texture = ExtResource("3_gohig")
 

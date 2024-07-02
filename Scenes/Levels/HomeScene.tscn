@@ -40,9 +40,11 @@ follow_viewport_enabled = true
 
 [node name="GameUI" parent="Camera2D/CanvasLayer" instance=ExtResource("3_qgl00")]
 
-[node name="Player" parent="." instance=ExtResource("4_p10fa")]
+[node name="Player" parent="." groups=["hitbox"] instance=ExtResource("4_p10fa")]
 y_sort_enabled = true
 position = Vector2(120, 120)
+collision_layer = 2
+collision_mask = 29
 sprite_sheet = null
 
 [node name="SceneChangeBox" parent="." instance=ExtResource("6_xofx8")]

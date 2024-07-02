@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c0s51lbml2chh" path="res://Scenes/Objects/BreakableObject.tscn" id="5_llmtq"]
 [ext_resource type="Texture2D" uid="uid://dhcfvpat6op5u" path="res://Assets/Actor/Characters/Master/Faceset.png" id="6_5at7o"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_nhya8"]
-[ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/PickUp.tscn" id="6_tmybw"]
+[ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="6_tmybw"]
 [ext_resource type="Texture2D" uid="uid://6crepfxklsrj" path="res://Assets/Actor/Characters/Master/SpriteSheet.png" id="6_w4tjq"]
 [ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://EquipResources/ItemResources/HealthPotion.tres" id="7_r5a6e"]
 [ext_resource type="Texture2D" uid="uid://p1gnbaadfcww" path="res://Assets/Actor/Characters/OldMan/Faceset.png" id="9_kq4vq"]

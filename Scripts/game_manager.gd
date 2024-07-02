@@ -1,5 +1,7 @@
 extends Node
 
+var random = RandomNumberGenerator.new()
+
 var current_level
 var canvasLayer
 

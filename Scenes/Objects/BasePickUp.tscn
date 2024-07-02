@@ -7,6 +7,7 @@ resource_name = "PickUpScript"
 script/source = "extends Area2D
 
 @export var resource : Resource
+@export var use_on_touch = false
 
 @onready var sprite = get_node(\"Sprite2D\")
 
@@ -22,7 +23,10 @@ func _on_body_entered(body):
 	if resource is WeaponResource:
 		player._set_weapon(resource)
 	elif resource is ItemResource:
-		player._set_item(resource)
+		if use_on_touch:
+			resource._use_item(player)
+		else:
+			player._set_item(resource)
 		
 	queue_free()
 "

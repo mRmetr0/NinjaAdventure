@@ -135,7 +135,7 @@ offset_right = 14.0
 offset_bottom = 35.0
 texture = ExtResource("2_hnvid")
 
-[node name="Label" type="Label" parent="MoneyIcon"]
+[node name="MoneyCounter" type="Label" parent="MoneyIcon"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = -3.0

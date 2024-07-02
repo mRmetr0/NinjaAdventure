@@ -64,6 +64,7 @@ func _handle_attack_input():
 		_attack (direction)
 		
 func _handle_item_used():
+	_take_damage(1)
 	if (item != null):
 		item._use_item(self)
 
