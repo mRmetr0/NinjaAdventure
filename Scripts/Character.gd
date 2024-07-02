@@ -52,7 +52,7 @@ func _set_weapon(newWeapon : WeaponResource):
 	print(weapon_collider.scale)
 	print(texture_size)
 	weapon_collider.shape.extents = texture_size/2 + Vector2.ONE
-	#weapon_collider.position.y = -weapon_sprite.texture.scale.y/2
+	weapon_collider.position.y = -texture_size.y/2
 	emit_signal("ChangeWeapon", weapon)
 	
 func _set_health(newHealth : int):
