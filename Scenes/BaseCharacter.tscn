@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://waoc5b05mji6"]
+[gd_scene load_steps=27 format=3 uid="uid://waoc5b05mji6"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_wh17m"]
 [ext_resource type="Texture2D" uid="uid://cfbvcoxqu4o46" path="res://Assets/Actor/Characters/Skeleton/SpriteSheet.png" id="2_vrwyu"]
 [ext_resource type="Texture2D" uid="uid://cybl80usdanpe" path="res://Assets/Items/Weapons/BigSword/SpriteInHand.png" id="3_vdld0"]
+[ext_resource type="Texture2D" uid="uid://c3cg4k2csdp2u" path="res://Assets/Actor/Characters/Shadow.png" id="4_vsbjj"]
 
 [sub_resource type="GDScript" id="GDScript_465co"]
 resource_name = "SpriteTool"
@@ -889,5 +890,11 @@ z_index = 1
 rotation = 3.14159
 texture = ExtResource("3_vdld0")
 metadata/_edit_lock_ = true
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+z_index = -1
+position = Vector2(0, 2)
+texture = ExtResource("4_vsbjj")
 
 [connection signal="body_entered" from="WeaponArea2D" to="WeaponArea2D" method="_on_body_enter"]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cbixquk7apigo" path="res://Assets/Items/Treasure/SilverCoin.png" id="2_hnvid"]
 [ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Items/Weapons/Katana/Sprite.png" id="3_2hsei"]
 [ext_resource type="Texture2D" uid="uid://w3p4f7o87xjh" path="res://Assets/HUD/Dialog/DialogBoxFaceset.png" id="4_8djfl"]
-[ext_resource type="Texture2D" uid="uid://ckolcmmlnil52" path="res://Assets/Items/Scroll/ScrollPlant.png" id="4_yyplr"]
+[ext_resource type="Texture2D" uid="uid://b4610sl2fi4qg" path="res://Assets/Items/Potion/WaterPot.png" id="5_e683n"]
 
 [sub_resource type="GDScript" id="GDScript_e2bjs"]
 resource_name = "GameUI"
@@ -109,20 +109,20 @@ offset_top = 4.0
 offset_right = 40.0
 offset_bottom = 20.0
 
-[node name="Control" type="Control" parent="HealthContainer"]
+[node name="HeartController" type="Control" parent="HealthContainer"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/HeartController"]
 texture = ExtResource("1_u1nxu")
 centered = false
 hframes = 5
 
-[node name="Control2" type="Control" parent="HealthContainer"]
+[node name="HeartController2" type="Control" parent="HealthContainer"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/Control2"]
+[node name="Sprite2D" type="Sprite2D" parent="HealthContainer/HeartController2"]
 texture = ExtResource("1_u1nxu")
 centered = false
 hframes = 5
@@ -210,7 +210,7 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.605, 1.605)
-texture = ExtResource("4_yyplr")
+texture = ExtResource("5_e683n")
 expand_mode = 2
 stretch_mode = 5
 
