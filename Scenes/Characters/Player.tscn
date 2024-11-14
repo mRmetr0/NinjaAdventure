@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c5xloiex5j5kg" path="res://Assets/Actor/Characters/GreenNinja/SpriteSheet.png" id="3_gohig"]
 
 [node name="Player" instance=ExtResource("1_27kjt")]
+collision_mask = 17
 script = ExtResource("2_hvvog")
 item = null
 moveSpeed = 40

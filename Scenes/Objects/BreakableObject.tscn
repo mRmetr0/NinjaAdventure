@@ -31,7 +31,7 @@ size = Vector2(10, 10)
 
 [node name="BreakableObject" type="StaticBody2D" groups=["hitbox"]]
 collision_layer = 16
-collision_mask = 12
+collision_mask = 14
 script = SubResource("GDScript_v5lgs")
 dropChance = 30.0
 Droppables = Array[PackedScene]([ExtResource("1_an6df")])

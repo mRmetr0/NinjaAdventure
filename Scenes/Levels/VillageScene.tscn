@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_nhya8"]
 [ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="6_tmybw"]
 [ext_resource type="Texture2D" uid="uid://6crepfxklsrj" path="res://Assets/Actor/Characters/Master/SpriteSheet.png" id="6_w4tjq"]
-[ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://EquipResources/ItemResources/HealthPotion.tres" id="7_r5a6e"]
+[ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/HealthPotion.tres" id="7_r5a6e"]
 [ext_resource type="Texture2D" uid="uid://p1gnbaadfcww" path="res://Assets/Actor/Characters/OldMan/Faceset.png" id="9_kq4vq"]
 [ext_resource type="Texture2D" uid="uid://djoeshveb5a5k" path="res://Assets/Actor/Characters/OldMan/SpriteSheet.png" id="10_tjplp"]
 [ext_resource type="Texture2D" uid="uid://dj5rpaonni5rc" path="res://Assets/Actor/Characters/Boy/Faceset.png" id="11_ott1f"]
@@ -109,7 +109,7 @@ position = Vector2(896, 280)
 resource = ExtResource("7_r5a6e")
 
 [node name="Player" parent="." instance=ExtResource("4_expn1")]
-position = Vector2(384, 8)
+position = Vector2(184, 56)
 sprite_sheet = null
 
 [node name="Master" parent="." instance=ExtResource("5_hj00q")]
@@ -130,3 +130,8 @@ position = Vector2(376, 320)
 portrait = ExtResource("11_ott1f")
 sprite_sheet = ExtResource("12_ly4lq")
 default_text = "People say you're leaving. Is that true? I wish I was strong enough to leave the village and fight evil."
+
+[node name="SceneChangeBox" parent="." instance=ExtResource("6_nhya8")]
+position = Vector2(208, 88)
+next_scene = "HouseScene"
+next_pos = Vector2(104, 176)

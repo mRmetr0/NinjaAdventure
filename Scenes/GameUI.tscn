@@ -11,6 +11,9 @@
 resource_name = "GameUI"
 script/source = "extends Control
 
+@export var weapon_list : Array[WeaponResource]
+@export var suit_list : Array[SuitResource]
+
 @onready var weapon_display = get_node(\"WeaponBackground/WeaponSprite\")
 @onready var item_display = get_node(\"ItemBackground/ItemSprite\")
 
@@ -28,8 +31,6 @@ func _ready():
 	for child in container.get_children():
 		var sprite = child.get_child(0)
 		heart_sprites.append(sprite)
-	
-	#_update_weapon_ui(GameManager.player_weapon)
 
 func _update_health_ui(new_health : int):
 	new_health = max(0, new_health)

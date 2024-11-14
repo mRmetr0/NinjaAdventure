@@ -10,6 +10,6 @@ name = "Whip"
 icon = ExtResource("2_6gkh5")
 weapon_sprite = ExtResource("3_0l3ge")
 damage = 1
-stun_lock = 0.3
+stun_lock = 0.1
 heavy_weapon = false
 effect = 2

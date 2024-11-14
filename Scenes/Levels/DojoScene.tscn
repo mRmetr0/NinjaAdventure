@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="5_wtgrs"]
 [ext_resource type="PackedScene" uid="uid://c0s51lbml2chh" path="res://Scenes/Objects/BreakableObject.tscn" id="6_pgv5g"]
 [ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="7_j2vv5"]
-[ext_resource type="Resource" uid="uid://jhta183re3kq" path="res://EquipResources/WeaponResources/Sword.tres" id="8_h4xw8"]
+[ext_resource type="Resource" uid="uid://jhta183re3kq" path="res://Resources/WeaponResources/Sword.tres" id="8_h4xw8"]
 [ext_resource type="PackedScene" uid="uid://cmkyqtrd8ycgq" path="res://Scenes/BaseNPC.tscn" id="9_bnrol"]
 [ext_resource type="Texture2D" uid="uid://bi6gmdtpn3nub" path="res://Assets/Actor/Characters/Monk2/Faceset.png" id="10_2gecv"]
 [ext_resource type="Texture2D" uid="uid://cspgfftbopyd0" path="res://Assets/Actor/Characters/Monk2/SpriteSheet.png" id="11_xc0p8"]
