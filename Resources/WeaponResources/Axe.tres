@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=4 format=3 uid="uid://b1u7qqbwosliq"]
+
+[ext_resource type="Texture2D" uid="uid://dsglg3isi72bs" path="res://Assets/Items/Weapons/AxeTool/Sprite.png" id="1_w7hj0"]
+[ext_resource type="Script" path="res://Scripts/WeaponResource.gd" id="2_yhyrd"]
+[ext_resource type="Texture2D" uid="uid://c80niu77741fa" path="res://Assets/Items/Weapons/AxeTool/SpriteInHand.png" id="3_aw2r2"]
+
+[resource]
+script = ExtResource("2_yhyrd")
+name = "Axe"
+icon = ExtResource("1_w7hj0")
+weapon_sprite = ExtResource("3_aw2r2")
+damage = 2
+stun_lock = 1.0
+heavy_weapon = true
+effect = 4

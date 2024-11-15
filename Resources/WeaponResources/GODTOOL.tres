@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=4 format=3 uid="uid://bievovl51vw3n"]
+
+[ext_resource type="Texture2D" uid="uid://br4gqh0aaj3cc" path="res://Assets/Items/Weapons/Club/Sprite.png" id="1_a5bpp"]
+[ext_resource type="Script" path="res://Scripts/WeaponResource.gd" id="2_arah2"]
+[ext_resource type="Texture2D" uid="uid://jfcpo0iorerb" path="res://Assets/Items/Weapons/Club/SpriteInHand.png" id="3_3vork"]
+
+[resource]
+script = ExtResource("2_arah2")
+name = "GODTOOL"
+icon = ExtResource("1_a5bpp")
+weapon_sprite = ExtResource("3_3vork")
+damage = 10
+stun_lock = 2.0
+heavy_weapon = false
+effect = 0

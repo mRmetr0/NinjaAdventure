@@ -8,7 +8,6 @@ script/source = "extends Area2D
 @export var next_pos : Vector2
 
 func _on_body_entered(body):
-	print(\"E\")
 	if (body.name == \"Player\"):
 		GameManager._change_scene(next_scene, next_pos)
 "

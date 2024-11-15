@@ -7,12 +7,13 @@ enum effects {
 	PUSH, #PUSHES AWAY ENEMIES
 	INTERACT, # CAN ACTIVATE OBJECTS BY HITTING THEM
 	REFLECT, # IF WEAPON HITS A PROJECTILE, WILL REFLECT IT BACK TO SENDER
+	CHOP, # ABLE TO DESTROY WOODEN STRUCTURES
 	}
 
 @export var name : String
 @export var icon : Texture2D
 @export var weapon_sprite : Texture2D
-## gamer
+
 @export var damage : int
 @export var stun_lock = 0.2
 @export var heavy_weapon : bool

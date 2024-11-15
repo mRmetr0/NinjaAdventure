@@ -38,6 +38,7 @@ func _reset():
 	set_physics_process(true)
 	var col = get_node(\"WalkingCollider\")
 	col.call_deferred(\"set_disabled\", false)
+	canAct = true
 
 func _on_screen():
 	set_physics_process(true)
