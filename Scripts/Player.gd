@@ -45,6 +45,7 @@ func _physics_process(delta):
 		inst.global_position = animator.sprite.global_position
 		get_parent().add_child(inst)
 		animator._set_special()
+		SoundManager.play_sound(SoundManager.SOUND.SMOKE)
 
 	_handle_movement_inputs(delta)
 	_handle_attack_input()

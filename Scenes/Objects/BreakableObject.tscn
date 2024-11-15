@@ -10,10 +10,13 @@ script/source = "extends StaticBody2D
 @export var health : int
 @export_range(0, 100) var dropChance : float
 @export var Droppables : Array[PackedScene]
+@export var play_sound : bool
 
 func _take_damage(damage, _stun_lock):
 	health -= damage
 	if (health <= 0):
+		if play_sound:
+			SoundManager.play_sound(SoundManager.SOUND.BREAK_BUSH)
 		_drop_item()
 		queue_free()
 
