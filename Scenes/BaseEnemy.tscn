@@ -9,8 +9,11 @@
 resource_name = "EnemyBehaviour"
 script/source = "extends Character
 
+@export var resetable : bool
+
 @onready var player = get_parent().get_node(\"Player\")
 @onready var agent = get_node(\"NavigationAgent2D\")
+@onready var base_pos = position
 
 func _physics_process(delta):	
 	if position.distance_to(agent.get_final_position()) < 5:
@@ -27,6 +30,22 @@ func _physics_process(delta):
 	
 func _on_timer_timeout():
 	agent.target_position = player.position
+
+func _reset():
+	position = base_pos
+	health = max_health
+	set_process(true)
+	set_physics_process(true)
+	var col = get_node(\"WalkingCollider\")
+	col.call_deferred(\"set_disabled\", false)
+
+func _on_screen():
+	set_physics_process(true)
+
+func _off_screen():
+	if resetable:
+		_reset()
+	set_physics_process(false)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_do2nw"]
@@ -35,21 +54,27 @@ func _on_timer_timeout():
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = SubResource("GDScript_uaom6")
+resetable = false
 moveSpeed = 35
 portrait = ExtResource("2_a1ni1")
 sprite_sheet = ExtResource("2_3xyw3")
 weapon = ExtResource("2_08e5b")
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_3xyw3")
-
 [node name="WalkingCollider" parent="." index="1"]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_do2nw")
 
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_3xyw3")
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
+debug_enabled = true
 
 [node name="Timer" type="Timer" parent="." index="5"]
 autostart = true
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." index="8"]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_screen"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_off_screen"]
