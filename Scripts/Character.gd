@@ -78,6 +78,8 @@ func _take_damage(damage : int, stun_lock = 1.0):
 func _attack(direction : Vector2):
 	if !canAct: 
 		return
+	var attack_sound = SoundManager.SOUND.H_ATTACK if weapon.heavy_weapon else SoundManager.SOUND.L_ATTACK
+	SoundManager.play_sound(attack_sound)
 	canAct = false
 	var duration = animator._set_attack(direction, weapon.heavy_weapon)
 	await get_tree().create_timer(duration).timeout
