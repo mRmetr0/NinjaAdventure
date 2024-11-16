@@ -24,7 +24,6 @@ collision_layer = 0
 collision_mask = 2
 script = SubResource("GDScript_wblga")
 next_scene = "TestScene"
-play_sound = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0ifsl")

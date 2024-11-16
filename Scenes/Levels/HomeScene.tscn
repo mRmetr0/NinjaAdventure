@@ -49,3 +49,4 @@ sprite_sheet = null
 position = Vector2(104, 192)
 next_scene = "VillageScene"
 next_pos = Vector2(184, 48)
+play_sound = true

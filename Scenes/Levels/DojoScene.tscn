@@ -171,6 +171,7 @@ metadata/_edit_lock_ = true
 position = Vector2(128, 200)
 next_scene = "VillageScene"
 next_pos = Vector2(640, 48)
+play_sound = true
 
 [node name="BreakableObject" parent="Objects" instance=ExtResource("6_pgv5g")]
 position = Vector2(120, -208)
