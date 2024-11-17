@@ -9,10 +9,10 @@ script/source = "extends BasePickUp
 @export var value: int = 1
 
 func _activate_pickup(_body):
-	PlayerInventory._add_money(value)
+	PlayerInventory._add_money(value, sprite.texture)
 "
 
-[node name="CoinPickUp" instance=ExtResource("1_2pi68")]
+[node name="GoldCOin" instance=ExtResource("1_2pi68")]
 script = SubResource("GDScript_c1vs2")
 value = 5
 

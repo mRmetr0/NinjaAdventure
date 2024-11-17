@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsqknd6gg2ia7"]
+
+[ext_resource type="PackedScene" uid="uid://bs1ex05kkc3n" path="res://Scenes/Objects/PickUpItems/CoinPickUp.tscn" id="1_v3buv"]
+[ext_resource type="Texture2D" uid="uid://cbixquk7apigo" path="res://Assets/Items/Treasure/SilverCoin.png" id="2_ryyjq"]
+
+[node name="SilverCoin" instance=ExtResource("1_v3buv")]
+value = 1
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_ryyjq")

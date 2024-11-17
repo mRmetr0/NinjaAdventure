@@ -2,8 +2,9 @@ extends Control
 
 class_name GameUI
 
-@onready var weapon_display = get_node("WeaponBackground/WeaponSprite")
-@onready var item_display = get_node("ItemBackground/ItemSprite")
+@onready var weapon_display : TextureRect = get_node("WeaponBackground/WeaponSprite")
+@onready var item_display : TextureRect = get_node("ItemBackground/ItemSprite")
+@onready var money_icon : TextureRect = get_node("MoneyIcon")
 @onready var money_display : Label = get_node("MoneyIcon/MoneyCounter")
 
 @onready var dialogue = get_node("Dialogue")
@@ -40,8 +41,10 @@ func _update_health_ui(new_health : int):
 	if (new_health > 0):
 		print("TOO MUCH HEALTH")
 
-func _update_money_ui(newValue: int):
+func _update_money_ui(newValue: int, newSprite: Texture2D = null):
 	money_display.text = str(newValue)
+	if newSprite != null:
+		money_icon.texture = newSprite
 		
 func _update_weapon_ui(newWeapon : WeaponResource):
 	if newWeapon == null:
