@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0yxyhit56ocu"]
+[gd_scene load_steps=9 format=3 uid="uid://b0yxyhit56ocu"]
 
 [ext_resource type="Script" path="res://Scripts/GameUI.tres.gd" id="1_pmpyg"]
 [ext_resource type="Texture2D" uid="uid://bp7rqgxwdh1vw" path="res://Assets/HUD/Heart.png" id="1_u1nxu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://w3p4f7o87xjh" path="res://Assets/HUD/Dialog/DialogBoxFaceset.png" id="4_8djfl"]
 [ext_resource type="Texture2D" uid="uid://b4610sl2fi4qg" path="res://Assets/Items/Potion/WaterPot.png" id="5_e683n"]
 [ext_resource type="Texture2D" uid="uid://d4nb6sn0xywmx" path="res://Assets/Items/Weapons/Sword2/Sprite.png" id="5_jiqq3"]
+[ext_resource type="PackedScene" uid="uid://13siya7oyt25" path="res://Scenes/PauseScreen.tscn" id="8_tvxln"]
 
 [node name="GameUI" type="Control"]
 process_mode = 3
@@ -168,3 +169,7 @@ scale = Vector2(0.1, 0.1)
 theme_override_font_sizes/font_size = 80
 autowrap_mode = 3
 max_lines_visible = 3
+
+[node name="PauseScreen" parent="." instance=ExtResource("8_tvxln")]
+visible = false
+layout_mode = 1

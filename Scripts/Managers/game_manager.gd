@@ -9,8 +9,7 @@ var canvasLayer
 var player_health = -1
 var player_weapon = null
 var player_item = null
-
-@onready var pause_screen = preload("res://Scenes/PauseScreen.tscn").instantiate()
+var player_suit = null
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -23,6 +22,7 @@ func _change_scene(next_scene : String, newPos : Vector2):
 	player_health = old_player.health
 	player_weapon = old_player.weapon
 	player_item = old_player.item
+	player_suit = old_player.suit
 	
 	#Make new scene
 	var next_level = load("res://Scenes/Levels/" + next_scene+".tscn").instantiate()
@@ -36,15 +36,3 @@ func _change_scene(next_scene : String, newPos : Vector2):
 	get_tree().root.call_deferred("remove_child", current_level)
 	current_level.call_deferred("free")
 	current_level = next_level
-	
-
-func _input(event):
-	if event.is_action_pressed("menu"):
-		get_tree().paused = !get_tree().paused
-		canvasLayer = current_level.get_viewport().get_camera_2d().get_child(0)
-		if get_tree().paused:
-			canvasLayer.add_child(pause_screen)
-		else:
-			canvasLayer.remove_child(pause_screen)
-			
-	

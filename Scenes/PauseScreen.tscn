@@ -1,29 +1,32 @@
-[gd_scene load_steps=19 format=3 uid="uid://13siya7oyt25"]
+[gd_scene load_steps=21 format=3 uid="uid://13siya7oyt25"]
 
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
 [ext_resource type="FontFile" uid="uid://do5usggxcsrm2" path="res://Assets/HUD/Font/NormalFont.ttf" id="2_s5wpd"]
 [ext_resource type="Texture2D" uid="uid://dej4dcpq7lnyp" path="res://Assets/HUD/Dialog/DialogueBoxSimple.png" id="4_j0n23"]
 [ext_resource type="Texture2D" uid="uid://da0v2o61tbbke" path="res://Assets/Actor/Characters/GreenNinja/Faceset.png" id="4_ptfur"]
+[ext_resource type="Texture2D" uid="uid://d4nb6sn0xywmx" path="res://Assets/Items/Weapons/Sword2/Sprite.png" id="4_xjbi5"]
 [ext_resource type="Texture2D" uid="uid://bsyljp8g88uwy" path="res://Assets/Actor/Characters/EskimoNinja/Faceset.png" id="5_ihv8t"]
 [ext_resource type="Texture2D" uid="uid://c1xyfeyqjxdp8" path="res://Assets/HUD/Dialog/ChoiceBox.png" id="5_o4wgf"]
 [ext_resource type="Resource" uid="uid://jhta183re3kq" path="res://Resources/WeaponResources/Sword.tres" id="6_0svyc"]
-[ext_resource type="Texture2D" uid="uid://bhb37sseoluae" path="res://Assets/Actor/Characters/RedNinja2/Faceset.png" id="6_6c4li"]
-[ext_resource type="Texture2D" uid="uid://dq3pxtjo84i26" path="res://Assets/Items/Weapons/Lance/Sprite.png" id="6_ain7m"]
-[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Items/Weapons/Katana/Sprite.png" id="6_qvsum"]
-[ext_resource type="Texture2D" uid="uid://chgaerhc0cqhy" path="res://Assets/Items/Weapons/Whip/Sprite.png" id="7_eke6o"]
+[ext_resource type="Texture2D" uid="uid://clvqnbwrl4psa" path="res://Assets/Actor/Characters/RedNinja/Faceset.png" id="6_isg5y"]
 [ext_resource type="Resource" uid="uid://b1u7qqbwosliq" path="res://Resources/WeaponResources/Axe.tres" id="8_81wuh"]
+[ext_resource type="Resource" uid="uid://j8jb5anb2mnv" path="res://Resources/WeaponResources/LongSword.tres" id="9_2liti"]
+[ext_resource type="Texture2D" uid="uid://b3bqjfpt22pom" path="res://Assets/Actor/Characters/Cavegirl/Faceset.png" id="10_casdk"]
 [ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://Resources/WeaponResources/Whip.tres" id="10_hmrol"]
 [ext_resource type="Script" path="res://Scripts/menu_item_ui.gd" id="10_xrnae"]
 [ext_resource type="Resource" uid="uid://d113cdmgmci35" path="res://Resources/SuitResources/GreenSuitResource.tres" id="11_lybmh"]
 [ext_resource type="Resource" uid="uid://mqr0vwph0344" path="res://Resources/SuitResources/NoSuitResource.tres" id="13_hkd2f"]
+[ext_resource type="Resource" uid="uid://dr77ofyevk2fg" path="res://Resources/SuitResources/RedSuitResource.tres" id="15_xccn1"]
+[ext_resource type="Resource" uid="uid://cswkpj4iu6hkc" path="res://Resources/SuitResources/SnowSuitResource.tres" id="17_vbssn"]
 
 [sub_resource type="GDScript" id="GDScript_4uhu3"]
 script/source = "extends Control
 #PAUSE SCREEN MANAGER
 
 @onready var profile : TextureRect = get_node(\"FacesetBox/Profile\")
-@onready var player : Player = get_node(\"/root/Main/Player\")
-@onready var hover_sprite : TextureRect = get_node(\"HoverSprite\")
+#@onready var player : Player = get_node(\"/root/Main/Player\")
+@onready var player : Player = get_parent().get_parent().get_parent().get_parent().get_node(\"Player\")
+@onready var hover_sprite : Sprite2D = get_node(\"HoverSprite\")
 
 var hovered_item : MenuItemUI
 var hovered_index = 0
@@ -34,19 +37,23 @@ var suits = []
 var selected_suit : MenuItemUI
 
 func _ready():
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.5)
 	#TODO: have data load from PlayerInventory instead
-	for child in get_node(\"ItemBoxBackground/WeaponContainer\").get_children():
+	print(\"SETTING UP MENU\")
+	print(player)
+	for child in get_node(\"ItemBoxBackground\").get_children():
 		var menu_item = child as MenuItemUI
 		weapons.append(menu_item)
-		if menu_item.item == player.weapon:
-			_select_item(menu_item)
+		if player != null:
+			if menu_item.item == player.weapon:
+				_select_item(menu_item)
 			
-	for child in get_node(\"ClothingBoxBackground/OutfitContainer\").get_children():
+	for child in get_node(\"ClothingBoxBackground\").get_children():
 		var menu_item = child as MenuItemUI
 		suits.append(menu_item)
-		if menu_item.item == player.suit:
-			_select_item(menu_item)
+		if player != null:
+			if menu_item.item == player.suit:
+				_select_item(menu_item)
 	if weapons.size() > 0:
 		hovered_list = weapons
 	else:
@@ -60,6 +67,7 @@ func _select_item(new_menu_item : MenuItemUI):
 	elif new_menu_item.item is SuitResource:
 		_deselect_item(selected_suit)
 		selected_suit = new_menu_item
+		profile.texture = new_menu_item.item_icon
 	new_menu_item.modulate = Color(0.7, 0.7, 0.7)
 	
 func _deselect_item(menu_item : MenuItemUI):
@@ -67,10 +75,14 @@ func _deselect_item(menu_item : MenuItemUI):
 		menu_item.modulate = Color.WHITE
 
 func _change_hover(menu_item : MenuItemUI):
-	hover_sprite.position = menu_item.global_position + Vector2(-4, 1)
-	
+	hover_sprite.position = menu_item.global_position
+
 func _input(event):
-	
+	#selecting items
+	if event.is_action_pressed(\"act_up\") || event.is_action_pressed(\"act_down\") ||	\\
+		event.is_action_pressed(\"act_left\") || event.is_action_pressed(\"act_right\"):
+		_select_item(hovered_list[hovered_index])
+	#Moving around the cursor
 	if event.is_action_pressed(\"left\"):
 		hovered_index -= 1
 	elif event.is_action_pressed(\"right\"):
@@ -83,12 +95,17 @@ func _input(event):
 	if hovered_list.size() == 0:
 		return 
 	
-	hovered_index = clamp(hovered_index, 0, hovered_list.size())
+	hovered_index = clamp(hovered_index, 0, hovered_list.size()-1)
 	_change_hover(hovered_list[hovered_index])
-	
 
 func _apply_changes():
-	pass
+	if is_instance_valid(player):
+		if selected_weapon != null:
+			player._set_weapon(selected_weapon.item)
+		if selected_suit != null:
+			player._set_suit(selected_suit.item)
+	else:
+		print(\"NOT VALID PLAYER\")
 "
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
@@ -154,110 +171,88 @@ metadata/_edit_lock_ = true
 layout_mode = 1
 offset_left = 20.0
 offset_top = 96.0
-offset_right = 218.0
+offset_right = 220.0
 offset_bottom = 166.0
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("4_j0n23")
 expand_mode = 1
-metadata/_edit_lock_ = true
 
-[node name="WeaponContainer" type="HBoxContainer" parent="ItemBoxBackground"]
+[node name="Weapon1" type="Sprite2D" parent="ItemBoxBackground"]
 z_index = 5
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -97.0
-offset_top = -30.0
-offset_right = 96.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Item1" type="TextureRect" parent="ItemBoxBackground/WeaponContainer"]
-custom_minimum_size = Vector2(11.095, 15)
-layout_mode = 2
-texture = ExtResource("6_ain7m")
-expand_mode = 5
-stretch_mode = 5
+position = Vector2(30, 35)
+scale = Vector2(2, 2)
+texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
 item = ExtResource("6_0svyc")
 
-[node name="Item2" type="TextureRect" parent="ItemBoxBackground/WeaponContainer"]
-custom_minimum_size = Vector2(23.28, 15)
-layout_mode = 2
-texture = ExtResource("7_eke6o")
-expand_mode = 5
-stretch_mode = 5
+[node name="Weapon2" type="Sprite2D" parent="ItemBoxBackground"]
+z_index = 5
+position = Vector2(65, 35)
+scale = Vector2(2, 2)
+texture = ExtResource("4_xjbi5")
+script = ExtResource("10_xrnae")
+item = ExtResource("10_hmrol")
+
+[node name="Weapon3" type="Sprite2D" parent="ItemBoxBackground"]
+z_index = 5
+position = Vector2(100, 35)
+scale = Vector2(2, 2)
+texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
 item = ExtResource("8_81wuh")
 
-[node name="Item3" type="TextureRect" parent="ItemBoxBackground/WeaponContainer"]
-custom_minimum_size = Vector2(17.25, 15)
-layout_mode = 2
-texture = ExtResource("6_qvsum")
-expand_mode = 5
-stretch_mode = 5
+[node name="Weapon4" type="Sprite2D" parent="ItemBoxBackground"]
+z_index = 5
+position = Vector2(135, 35)
+scale = Vector2(2, 2)
+texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
-item = ExtResource("10_hmrol")
+item = ExtResource("9_2liti")
+
+[node name="Weapon5" type="Sprite2D" parent="ItemBoxBackground"]
+z_index = 5
+position = Vector2(170, 35)
+scale = Vector2(2, 2)
+texture = ExtResource("4_xjbi5")
+script = ExtResource("10_xrnae")
 
 [node name="ClothingBoxBackground" type="TextureRect" parent="."]
 layout_mode = 1
 offset_left = 20.0
 offset_top = 128.0
-offset_right = 218.0
+offset_right = 220.0
 offset_bottom = 198.0
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("4_j0n23")
 expand_mode = 1
-metadata/_edit_lock_ = true
 
-[node name="OutfitContainer" type="HBoxContainer" parent="ClothingBoxBackground"]
+[node name="Outfit0" type="Sprite2D" parent="ClothingBoxBackground"]
 z_index = 5
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -97.0
-offset_top = -30.0
-offset_right = 96.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 25
-alignment = 1
-
-[node name="Outfit1" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = ExtResource("4_ptfur")
-stretch_mode = 3
-script = ExtResource("10_xrnae")
-item = ExtResource("11_lybmh")
-metadata/_edit_lock_ = true
-
-[node name="Outfit2" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = ExtResource("5_ihv8t")
-stretch_mode = 3
+position = Vector2(27, 35)
+texture = ExtResource("10_casdk")
 script = ExtResource("10_xrnae")
 item = ExtResource("13_hkd2f")
-metadata/_edit_lock_ = true
 
-[node name="Outfit3" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = ExtResource("6_6c4li")
-stretch_mode = 3
+[node name="Outfit1" type="Sprite2D" parent="ClothingBoxBackground"]
+z_index = 5
+position = Vector2(75, 35)
+texture = ExtResource("4_ptfur")
 script = ExtResource("10_xrnae")
-metadata/_edit_lock_ = true
+item = ExtResource("11_lybmh")
+
+[node name="Outfit2" type="Sprite2D" parent="ClothingBoxBackground"]
+z_index = 5
+position = Vector2(125, 35)
+texture = ExtResource("6_isg5y")
+script = ExtResource("10_xrnae")
+item = ExtResource("15_xccn1")
+
+[node name="Outfit3" type="Sprite2D" parent="ClothingBoxBackground"]
+z_index = 5
+position = Vector2(172, 35)
+texture = ExtResource("5_ihv8t")
+script = ExtResource("10_xrnae")
+item = ExtResource("17_vbssn")
 
 [node name="LeaveButton" type="TextureRect" parent="."]
 layout_mode = 1
@@ -297,11 +292,7 @@ theme_override_font_sizes/font_size = 200
 text = "QUIT"
 metadata/_edit_lock_ = true
 
-[node name="HoverSprite" type="TextureRect" parent="."]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 131.0
-offset_right = 45.0
-offset_bottom = 153.0
+[node name="HoverSprite" type="Sprite2D" parent="."]
+position = Vector2(12, 170)
+scale = Vector2(0.416667, 0.416667)
 texture = ExtResource("1_5g772")
-expand_mode = 1

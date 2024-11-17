@@ -1,7 +1,6 @@
 extends Camera2D
 
 @onready var player = get_parent().get_node("Player")
-
 @onready var resolution = get_viewport().get_visible_rect().size
 
 func _ready():

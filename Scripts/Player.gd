@@ -24,10 +24,12 @@ func _ready ():
 		GameManager.player_health = health
 		GameManager.player_weapon = weapon
 		GameManager.player_item = item
+		GameManager.player_suit = suit
 	else:
 		health = GameManager.player_health
 		weapon = GameManager.player_weapon
 		item = GameManager.player_item
+		suit = GameManager.player_suit
 	_set_health(health)
 	_set_weapon(weapon)
 	_set_item(item)
@@ -65,6 +67,11 @@ func _handle_item_used():
 	if (item != null):
 		item._use_item(self)
 
-func _set_item(_item):
+func _set_item(_item : ItemResource):
 	item = _item
 	emit_signal("ChangeItem", _item)
+	
+func _set_suit(_suit : SuitResource):
+	if _suit != null:
+		suit = _suit
+		suit._set_suit(self)
