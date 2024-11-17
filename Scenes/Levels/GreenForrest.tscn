@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fa8vr88mr66r"]
+[gd_scene load_steps=11 format=3 uid="uid://fa8vr88mr66r"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_0ulul"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_0eh0v"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="5_krb3e"]
 [ext_resource type="PackedScene" uid="uid://c0s51lbml2chh" path="res://Scenes/Objects/BreakableObject.tscn" id="7_o36od"]
 [ext_resource type="PackedScene" uid="uid://c6l0w6xyhd0c6" path="res://Scenes/BaseEnemy.tscn" id="8_48c5j"]
+[ext_resource type="PackedScene" uid="uid://bs1ex05kkc3n" path="res://Scenes/Objects/PickUpItems/GoldPickUp.tscn" id="9_s8kqn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 vertices = PackedVector2Array(-89, 103, -55, 87, -15, 87, -15, 169, -185, 167, -121, 119, -89, 73, -55, 23, -233, 23, -135, 73, -233, 121, -167, 89, -135, 89, -185, 121, -167, 119, -121, 103, -233, 169, -233, 167)
@@ -85,3 +86,7 @@ resetable = true
 [node name="Enemy2" parent="." instance=ExtResource("8_48c5j")]
 position = Vector2(-168, 64)
 resetable = true
+
+[node name="GoldCOin" parent="." instance=ExtResource("9_s8kqn")]
+position = Vector2(120, 120)
+despawn_timer = 0.0

@@ -8,8 +8,13 @@ class_name BasePickUp
 @onready var sprite : Sprite2D = get_node("Sprite2D")
 
 func _ready():
-	timer.wait_time = despawn_timer
-	timer.start()
+	if despawn_timer > 0.0:
+		timer.wait_time = despawn_timer
+		timer.start()
+	else:
+		set_process(false)
+		timer.queue_free()
+		
 	
 func _process(delta):
 	# blink when the timer runs out:
