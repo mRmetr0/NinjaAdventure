@@ -20,34 +20,24 @@ script/source = "extends Control
 
 @onready var profile : TextureRect = get_node(\"FacesetBox/Profile\")
 @onready var player : Player = get_node(\"/root/Main/Player\")
-@onready var hover_sprite : TextureRect = get_node(\"HoverSprite\")
 
 var hovered_item : MenuItemUI
-var hovered_index = 0
-var hovered_list = []
 var weapons = []
 var selected_weapon : MenuItemUI
 var suits = []
 var selected_suit : MenuItemUI
 
 func _ready():
-	await get_tree().create_timer(0.1).timeout
 	#TODO: have data load from PlayerInventory instead
 	for child in get_node(\"ItemBoxBackground/WeaponContainer\").get_children():
 		var menu_item = child as MenuItemUI
-		weapons.append(menu_item)
 		if menu_item.item == player.weapon:
-			_select_item(menu_item)
+			_select_item(menu_item.item)
 			
 	for child in get_node(\"ClothingBoxBackground/OutfitContainer\").get_children():
 		var menu_item = child as MenuItemUI
-		suits.append(menu_item)
 		if menu_item.item == player.suit:
-			_select_item(menu_item)
-	if weapons.size() > 0:
-		hovered_list = weapons
-	else:
-		hovered_list = suits
+			_select_item(menu_item.item)
 
 func _select_item(new_menu_item : MenuItemUI):
 	if new_menu_item.item is WeaponResource:
@@ -62,28 +52,7 @@ func _deselect_item(menu_item : MenuItemUI):
 	if menu_item != null:
 		menu_item.modulate = Color.WHITE
 
-func _change_hover(menu_item : MenuItemUI):
-	hover_sprite.position = menu_item.global_position + Vector2(-4, 1)
-	
-func _input(event):
-	
-	if event.is_action_pressed(\"left\"):
-		hovered_index -= 1
-	elif event.is_action_pressed(\"right\"):
-		hovered_index += 1
-	elif event.is_action_pressed(\"up\") || event.is_action_pressed(\"down\"):
-		if weapons.size() > 0 && suits.size() > 0:
-			var is_weapons = hovered_list == weapons
-			hovered_list = suits if is_weapons else weapons
-	
-	if hovered_list.size() == 0:
-		return 
-	
-	hovered_index = clamp(hovered_index, 0, hovered_list.size())
-	_change_hover(hovered_list[hovered_index])
-	
-
-func _apply_changes():
+func _change_hover(menu_item : MenuItemUI:
 	pass
 "
 
@@ -99,7 +68,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_4uhu3")
-metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
@@ -149,16 +117,14 @@ metadata/_edit_lock_ = true
 [node name="ItemBoxBackground" type="TextureRect" parent="."]
 layout_mode = 1
 offset_left = 20.0
-offset_top = 96.0
+offset_top = 100.0
 offset_right = 218.0
-offset_bottom = 166.0
+offset_bottom = 160.0
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("4_j0n23")
 expand_mode = 1
-metadata/_edit_lock_ = true
 
 [node name="WeaponContainer" type="HBoxContainer" parent="ItemBoxBackground"]
-z_index = 5
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -166,9 +132,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -97.0
-offset_top = -30.0
+offset_top = -25.0
 offset_right = 96.0
-offset_bottom = 34.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -201,16 +167,14 @@ script = ExtResource("10_xrnae")
 [node name="ClothingBoxBackground" type="TextureRect" parent="."]
 layout_mode = 1
 offset_left = 20.0
-offset_top = 128.0
+offset_top = 130.0
 offset_right = 218.0
-offset_bottom = 198.0
+offset_bottom = 190.0
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("4_j0n23")
 expand_mode = 1
-metadata/_edit_lock_ = true
 
 [node name="OutfitContainer" type="HBoxContainer" parent="ClothingBoxBackground"]
-z_index = 5
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -218,13 +182,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -97.0
-offset_top = -30.0
+offset_top = -25.0
 offset_right = 96.0
-offset_bottom = 34.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 25
 alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="Outfit1" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
 custom_minimum_size = Vector2(20, 20)
@@ -267,7 +232,6 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("5_o4wgf")
-metadata/_edit_lock_ = true
 
 [node name="lable" type="Label" parent="LeaveButton"]
 modulate = Color(0, 0, 0, 1)
@@ -289,12 +253,3 @@ theme_override_fonts/font = ExtResource("2_s5wpd")
 theme_override_font_sizes/font_size = 200
 text = "QUIT"
 metadata/_edit_lock_ = true
-
-[node name="HoverSprite" type="TextureRect" parent="."]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 131.0
-offset_right = 45.0
-offset_bottom = 153.0
-texture = ExtResource("1_5g772")
-expand_mode = 1

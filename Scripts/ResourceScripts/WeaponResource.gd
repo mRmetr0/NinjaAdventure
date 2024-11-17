@@ -1,4 +1,4 @@
-extends Resource
+extends BaseResource
 
 class_name WeaponResource
 
