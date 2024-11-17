@@ -4,8 +4,8 @@ class_name BasePickUp
 
 @export var despawn_timer: float = 10.0
 
-@onready var timer = get_node("Timer") as Timer
-@onready var sprite = get_node("Sprite2D")
+@onready var timer : Timer = get_node("Timer")
+@onready var sprite : Sprite2D = get_node("Sprite2D")
 
 func _ready():
 	timer.wait_time = despawn_timer
