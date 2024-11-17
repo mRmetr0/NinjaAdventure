@@ -1,8 +1,10 @@
 extends BasePickUp
 
 @export var resource : Resource
+@export var use_on_touch = false
 
 func _ready():
+	super._ready()
 	sprite.texture = resource.icon
 
 func _activate_pickup(body):
