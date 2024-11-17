@@ -38,12 +38,15 @@ func _physics_process(delta):
 		_handle_item_used()
 	if (Input.is_action_just_pressed("use_ability")):
 		#TODO: make this whole a green suit thing, not hardcoded
+		#Set mechanics
 		canAct = !canAct
 		camouflaged = !canAct
+		#Set visuals
 		animator.sprite.modulate = Color("Gray") if !canAct else Color("White")
 		var inst = smoke.instantiate()
 		inst.global_position = animator.sprite.global_position
 		get_parent().add_child(inst)
+		SoundManager.play_sound(SoundManager.SOUND.SMOKE)
 		animator._set_special()
 
 	_handle_movement_inputs(delta)
@@ -64,7 +67,6 @@ func _handle_attack_input():
 		_attack (direction)
 		
 func _handle_item_used():
-	_take_damage(1)
 	if (item != null):
 		item._use_item(self)
 

@@ -68,6 +68,7 @@ metadata/_edit_lock_ = true
 position = Vector2(184, 32)
 next_scene = "HomeScene"
 next_pos = Vector2(104, 176)
+play_sound = true
 
 [node name="EndRegionBox" parent="Objects" instance=ExtResource("6_nhya8")]
 position = Vector2(384, -8)
@@ -79,6 +80,7 @@ next_pos = Vector2(128, 184)
 position = Vector2(640, 32)
 next_scene = "DojoScene"
 next_pos = Vector2(128, 184)
+play_sound = true
 
 [node name="BreakableObject" parent="Objects" instance=ExtResource("5_llmtq")]
 position = Vector2(24, 88)

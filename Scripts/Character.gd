@@ -63,10 +63,12 @@ func _take_damage(damage : int, stun_lock = 1.0):
 	stun_lock = max(stun_lock, 0.3)
 	canAct = false
 	if (health > 0):
+		SoundManager.play_sound(SoundManager.SOUND.HURT)
 		animator.play("hurt", -1, stun_lock)
 		await get_tree().create_timer(stun_lock).timeout
 		canAct = true
 	else:
+		SoundManager.play_sound(SoundManager.SOUND.DIE)
 		set_process(false)
 		set_physics_process(false)
 		var col = get_node("WalkingCollider")
@@ -76,6 +78,8 @@ func _take_damage(damage : int, stun_lock = 1.0):
 func _attack(direction : Vector2):
 	if !canAct: 
 		return
+	var attack_sound = SoundManager.SOUND.H_ATTACK if weapon.heavy_weapon else SoundManager.SOUND.L_ATTACK
+	SoundManager.play_sound(attack_sound)
 	canAct = false
 	var duration = animator._set_attack(direction, weapon.heavy_weapon)
 	await get_tree().create_timer(duration).timeout

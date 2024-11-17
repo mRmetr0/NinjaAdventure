@@ -6,10 +6,13 @@ script/source = "extends Area2D
 
 @export var next_scene : String 
 @export var next_pos : Vector2
+@export var play_sound : bool
 
 func _on_body_entered(body):
 	if (body.name == \"Player\"):
 		GameManager._change_scene(next_scene, next_pos)
+		if play_sound:
+			SoundManager.play_sound(SoundManager.SOUND.DOOR)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ifsl"]

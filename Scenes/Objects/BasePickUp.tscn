@@ -18,6 +18,8 @@ func _on_body_entered(body):
 	if body.name != \"Player\":
 		return
 	
+	SoundManager.play_sound(SoundManager.SOUND.PICK_UP)
+	
 	var player = body as Player
 	
 	if resource is WeaponResource:

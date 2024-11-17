@@ -19,6 +19,7 @@ config/icon="res://Assets/Items/Food/Sushi.png"
 
 GameManager="*res://Scripts/game_manager.gd"
 PlayerInventory="*res://Scripts/player_inventory.gd"
+SoundManager="*res://Scripts/sound_manager.gd"
 
 [display]
 
