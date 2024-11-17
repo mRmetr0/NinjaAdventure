@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dqxpboiqpichx"]
+[gd_scene load_steps=22 format=3 uid="uid://dqxpboiqpichx"]
 
 [ext_resource type="TileSet" uid="uid://duxxfmxo0ou7w" path="res://Assets/InteriorTileset.tres" id="1_vxxd5"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_fy8br"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="5_wtgrs"]
 [ext_resource type="PackedScene" uid="uid://c0s51lbml2chh" path="res://Scenes/Objects/BreakableObject.tscn" id="6_pgv5g"]
 [ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="7_j2vv5"]
+[ext_resource type="Script" path="res://Scripts/item_pickup.gd" id="7_sp1oi"]
 [ext_resource type="Resource" uid="uid://jhta183re3kq" path="res://Resources/WeaponResources/Sword.tres" id="8_h4xw8"]
 [ext_resource type="PackedScene" uid="uid://cmkyqtrd8ycgq" path="res://Scenes/BaseNPC.tscn" id="9_bnrol"]
 [ext_resource type="Texture2D" uid="uid://bi6gmdtpn3nub" path="res://Assets/Actor/Characters/Monk2/Faceset.png" id="10_2gecv"]
@@ -193,6 +194,7 @@ position = Vector2(416, -152)
 
 [node name="PickUp" parent="Objects" instance=ExtResource("7_j2vv5")]
 position = Vector2(128, -352)
+script = ExtResource("7_sp1oi")
 resource = ExtResource("8_h4xw8")
 
 [node name="Wall_1" type="StaticBody2D" parent="Objects" node_paths=PackedStringArray("opener", "closers")]
