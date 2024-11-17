@@ -33,8 +33,7 @@ func _ready ():
 	_set_health(health)
 	_set_weapon(weapon)
 	_set_item(item)
-	if suit != null:
-		suit._set_suit(self)
+	_set_suit(suit)
 
 func _physics_process(delta):
 	if (Input.is_action_just_pressed("interact")):
