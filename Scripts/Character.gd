@@ -5,8 +5,8 @@ class_name Character
 signal ChangeHealth(new_health : int)
 signal ChangeWeapon (new_weapon : WeaponResource)
 
-@export var max_health = 8
-@onready var health = max_health
+@export var max_health : int = 8
+@onready var health : int = max_health
 @export var moveSpeed = 40
 
 @export var portrait : Texture		
@@ -21,7 +21,7 @@ var horiDir : float
 @export var weapon : WeaponResource
 var canAct = true
 
-@onready var animator = get_node("AnimationPlayer")
+@onready var animator : AnimationPlayer = get_node("AnimationPlayer")
 
 func _ready():
 	_set_weapon(weapon)
