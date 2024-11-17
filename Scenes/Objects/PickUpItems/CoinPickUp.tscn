@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs1ex05kkc3n"]
+
+[ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="1_2pi68"]
+[ext_resource type="Texture2D" uid="uid://dwbnkwprqpa22" path="res://Assets/Items/Treasure/GoldCoin.png" id="2_qvs4u"]
+
+[sub_resource type="GDScript" id="GDScript_c1vs2"]
+script/source = "extends BasePickUp
+
+@export var value: int = 1
+
+func _activate_pickup(_body):
+	PlayerInventory._add_money(value)
+"
+
+[node name="CoinPickUp" instance=ExtResource("1_2pi68")]
+script = SubResource("GDScript_c1vs2")
+value = 5
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_qvs4u")

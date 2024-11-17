@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://b8ds32qqqg8lc"]
 
-[ext_resource type="Script" path="res://Scripts/ItemResource.gd" id="1_3bfad"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/ItemResource.gd" id="1_3bfad"]
 [ext_resource type="Texture2D" uid="uid://c2voml7c8b5gk" path="res://Assets/Items/Potion/LifePot.png" id="1_cn1qs"]
 
 [resource]

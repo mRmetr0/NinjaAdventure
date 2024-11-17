@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://u87b5rn465pc"]
+[gd_scene load_steps=16 format=3 uid="uid://u87b5rn465pc"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_ow033"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_dw2li"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_nhya8"]
 [ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="6_tmybw"]
 [ext_resource type="Texture2D" uid="uid://6crepfxklsrj" path="res://Assets/Actor/Characters/Master/SpriteSheet.png" id="6_w4tjq"]
-[ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/HealthPotion.tres" id="7_r5a6e"]
 [ext_resource type="Texture2D" uid="uid://p1gnbaadfcww" path="res://Assets/Actor/Characters/OldMan/Faceset.png" id="9_kq4vq"]
 [ext_resource type="Texture2D" uid="uid://djoeshveb5a5k" path="res://Assets/Actor/Characters/OldMan/SpriteSheet.png" id="10_tjplp"]
 [ext_resource type="Texture2D" uid="uid://dj5rpaonni5rc" path="res://Assets/Actor/Characters/Boy/Faceset.png" id="11_ott1f"]
@@ -108,7 +107,6 @@ position = Vector2(296, 16)
 
 [node name="PickUp" parent="Objects" instance=ExtResource("6_tmybw")]
 position = Vector2(896, 280)
-resource = ExtResource("7_r5a6e")
 
 [node name="Master" parent="." instance=ExtResource("5_hj00q")]
 position = Vector2(384, 64)
