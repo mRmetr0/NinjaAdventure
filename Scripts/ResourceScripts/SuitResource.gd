@@ -19,6 +19,7 @@ func _set_suit(p_player : Player):
 	player = p_player
 	player.portrait = portrait
 	player.sprite_sheet = sprite_sheet
+	player.animator.sprite.texture = sprite_sheet
 	
 func suit_ability():
 	match ability:

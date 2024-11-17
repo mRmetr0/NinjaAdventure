@@ -3,6 +3,7 @@ extends Character
 class_name Player
 
 @export var item : ItemResource
+@export var suit : SuitResource
 
 var smoke = preload("res://Scenes/Objects/FXPlayer.tscn")
 var camouflaged = false
@@ -30,6 +31,8 @@ func _ready ():
 	_set_health(health)
 	_set_weapon(weapon)
 	_set_item(item)
+	if suit != null:
+		suit._set_suit(self)
 
 func _physics_process(delta):
 	if (Input.is_action_just_pressed("interact")):
@@ -37,17 +40,8 @@ func _physics_process(delta):
 	if (Input.is_action_just_pressed("use_item")):
 		_handle_item_used()
 	if (Input.is_action_just_pressed("use_ability")):
-		#TODO: make this whole a green suit thing, not hardcoded
-		#Set mechanics
-		canAct = !canAct
-		camouflaged = !canAct
-		#Set visuals
-		animator.sprite.modulate = Color("Gray") if !canAct else Color("White")
-		var inst = smoke.instantiate()
-		inst.global_position = animator.sprite.global_position
-		get_parent().add_child(inst)
-		SoundManager.play_sound(SoundManager.SOUND.SMOKE)
-		animator._set_special()
+		if suit != null:
+			suit.suit_ability()
 
 	_handle_movement_inputs(delta)
 	_handle_attack_input()
