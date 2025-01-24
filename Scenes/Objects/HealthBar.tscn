@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://5ajxbqp55g16"]
+
+[ext_resource type="Texture2D" uid="uid://f57lnjop7htt" path="res://Assets/HUD/LifeBarMiniUnder.png" id="1_vxrrk"]
+[ext_resource type="Texture2D" uid="uid://bixilmkosbsv0" path="res://Assets/HUD/LifeBarMiniProgress.png" id="2_g6u4g"]
+
+[sub_resource type="GDScript" id="GDScript_osbxb"]
+resource_name = "healthbar"
+script/source = "extends Node2D
+
+@onready var character : EnemyBehaviour = get_parent()
+@onready var health_sprite : Sprite2D = get_node(\"HealthProgress\")
+@onready var max_health : int = character.max_health
+
+func _ready():
+	character.ChangeHealth.connect(_on_health_update)
+	
+func _on_health_update(new_health : int):
+	if new_health == 0:
+		hide()
+	else:
+		show()
+	var ratio : float = float(new_health) / float(max_health)
+	health_sprite.scale.x = ratio
+"
+
+[node name="Healthbar" type="Node2D"]
+script = SubResource("GDScript_osbxb")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = 17
+position = Vector2(0, -17)
+texture = ExtResource("1_vxrrk")
+
+[node name="HealthProgress" type="Sprite2D" parent="."]
+z_index = 17
+position = Vector2(-9, -17)
+texture = ExtResource("2_g6u4g")
+offset = Vector2(9, 0)
