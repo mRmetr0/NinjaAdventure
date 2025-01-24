@@ -12,6 +12,7 @@ enum ABILITY{
 @export var portrait : Texture2D
 @export var sprite_sheet : Texture2D
 @export var ability : ABILITY
+@export_multiline var descripton : String
 
 var player : Player
 

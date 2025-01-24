@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://13siya7oyt25"]
+[gd_scene load_steps=22 format=3 uid="uid://13siya7oyt25"]
 
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
 [ext_resource type="FontFile" uid="uid://do5usggxcsrm2" path="res://Assets/HUD/Font/NormalFont.ttf" id="2_s5wpd"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://clvqnbwrl4psa" path="res://Assets/Actor/Characters/RedNinja/Faceset.png" id="6_isg5y"]
 [ext_resource type="Resource" uid="uid://b1u7qqbwosliq" path="res://Resources/WeaponResources/Axe.tres" id="8_81wuh"]
 [ext_resource type="Resource" uid="uid://j8jb5anb2mnv" path="res://Resources/WeaponResources/LongSword.tres" id="9_2liti"]
+[ext_resource type="Resource" uid="uid://bievovl51vw3n" path="res://Resources/WeaponResources/GODTOOL.tres" id="10_8e367"]
 [ext_resource type="Texture2D" uid="uid://b3bqjfpt22pom" path="res://Assets/Actor/Characters/Cavegirl/Faceset.png" id="10_casdk"]
 [ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://Resources/WeaponResources/Whip.tres" id="10_hmrol"]
 [ext_resource type="Script" path="res://Scripts/menu_item_ui.gd" id="10_xrnae"]
@@ -39,8 +40,6 @@ var selected_suit : MenuItemUI
 func _ready():
 	await get_tree().create_timer(0.5)
 	#TODO: have data load from PlayerInventory instead
-	print(\"SETTING UP MENU\")
-	print(player)
 	for child in get_node(\"ItemBoxBackground\").get_children():
 		var menu_item = child as MenuItemUI
 		weapons.append(menu_item)
@@ -215,6 +214,7 @@ position = Vector2(170, 35)
 scale = Vector2(2, 2)
 texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
+item = ExtResource("10_8e367")
 
 [node name="ClothingBoxBackground" type="TextureRect" parent="."]
 layout_mode = 1

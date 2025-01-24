@@ -28,6 +28,10 @@ window/size/viewport_height=192
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://Assets/HUD/Kunai.png"
 
+[editor]
+
+movie_writer/movie_file="C:/Personal/Games/NinjaAdventure/NinjaAdventure/Recordings/Footage.png"
+
 [filesystem]
 
 import/fbx/enabled=false

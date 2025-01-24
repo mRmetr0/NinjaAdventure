@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_0eh0v"]
 [ext_resource type="PackedScene" uid="uid://b0yxyhit56ocu" path="res://Scenes/GameUI.tscn" id="3_aqadl"]
 [ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="4_oiy3r"]
-[ext_resource type="Resource" uid="uid://bievovl51vw3n" path="res://Resources/WeaponResources/GODTOOL.tres" id="5_h1isu"]
+[ext_resource type="Resource" uid="uid://jhta183re3kq" path="res://Resources/WeaponResources/Sword.tres" id="5_6kg3h"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="5_krb3e"]
 [ext_resource type="PackedScene" uid="uid://c0s51lbml2chh" path="res://Scenes/Objects/BreakableObject.tscn" id="7_o36od"]
 [ext_resource type="PackedScene" uid="uid://c6l0w6xyhd0c6" path="res://Scenes/BaseEnemy.tscn" id="8_48c5j"]
@@ -57,8 +57,8 @@ script = ExtResource("2_0eh0v")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." groups=["hitbox"] instance=ExtResource("4_oiy3r")]
-position = Vector2(128, 184)
-weapon = ExtResource("5_h1isu")
+position = Vector2(-48, 120)
+weapon = ExtResource("5_6kg3h")
 
 [node name="SceneChangeBox" parent="." instance=ExtResource("5_krb3e")]
 position = Vector2(128, 208)
