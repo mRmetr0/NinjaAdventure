@@ -9,3 +9,5 @@ script = ExtResource("2_5c84r")
 portrait = ExtResource("1_5g2qc")
 sprite_sheet = ExtResource("3_e32uv")
 ability = 1
+item_name = "Rage suit"
+descripton = "Can enter a raging state by pressing Q at the cost of some health."

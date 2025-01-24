@@ -25,9 +25,10 @@ script/source = "extends Control
 #PAUSE SCREEN MANAGER
 
 @onready var profile : TextureRect = get_node(\"FacesetBox/Profile\")
-#@onready var player : Player = get_node(\"/root/Main/Player\")
 @onready var player : Player = get_parent().get_parent().get_parent().get_parent().get_node(\"Player\")
 @onready var hover_sprite : Sprite2D = get_node(\"HoverSprite\")
+@onready var hovered_title : Label = get_node(\"ItemTextBackground/SelectedItemTitle\")
+@onready var hovered_desc : Label = get_node(\"ItemTextBackground/SelectedItemDesc\")
 
 var hovered_item : MenuItemUI
 var hovered_index = 0
@@ -75,6 +76,8 @@ func _deselect_item(menu_item : MenuItemUI):
 
 func _change_hover(menu_item : MenuItemUI):
 	hover_sprite.position = menu_item.global_position
+	hovered_title.text = menu_item.item.item_name
+	hovered_desc.text = menu_item.item.descripton
 
 func _input(event):
 	#selecting items
@@ -98,6 +101,7 @@ func _input(event):
 	_change_hover(hovered_list[hovered_index])
 
 func _apply_changes():
+	player.reset_state()
 	if is_instance_valid(player):
 		if selected_weapon != null:
 			player._set_weapon(selected_weapon.item)
@@ -139,6 +143,40 @@ scale = Vector2(0.1, 0.1)
 theme_override_fonts/font = ExtResource("2_s5wpd")
 theme_override_font_sizes/font_size = 200
 text = "PAUSED"
+metadata/_edit_lock_ = true
+
+[node name="ItemTextBackground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 69.0
+offset_right = 236.0
+offset_bottom = 156.0
+texture = ExtResource("4_j0n23")
+expand_mode = 2
+
+[node name="SelectedItemTitle" type="Label" parent="ItemTextBackground"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 12.0
+offset_right = 1220.0
+offset_bottom = 156.0
+scale = Vector2(0.1, 0.1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "Item title"
+metadata/_edit_lock_ = true
+
+[node name="SelectedItemDesc" type="Label" parent="ItemTextBackground"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 1220.0
+offset_bottom = 525.0
+scale = Vector2(0.1, 0.1)
+theme_override_colors/font_color = Color(0.247059, 0.247059, 0.247059, 1)
+theme_override_font_sizes/font_size = 65
+text = "item "
+autowrap_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="FacesetBox" type="TextureRect" parent="."]

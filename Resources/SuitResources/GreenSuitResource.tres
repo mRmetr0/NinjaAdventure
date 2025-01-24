@@ -9,3 +9,5 @@ script = ExtResource("1_40s1k")
 portrait = ExtResource("1_vo781")
 sprite_sheet = ExtResource("3_vc646")
 ability = 0
+item_name = "Camouflage suit"
+descripton = "Makes the wearer invisible by pressing Q."

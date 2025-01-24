@@ -12,7 +12,6 @@ enum ABILITY{
 @export var portrait : Texture2D
 @export var sprite_sheet : Texture2D
 @export var ability : ABILITY
-@export_multiline var descripton : String
 
 var player : Player
 
@@ -22,6 +21,19 @@ func _set_suit(p_player : Player):
 	player.sprite_sheet = sprite_sheet
 	player.animator.sprite.texture = sprite_sheet
 	
+func _reset_suit_ability():
+	match ability:
+		ABILITY.CAMOUFLAGE:
+			if !player.canAct:
+				player.canAct = true
+				player.camouflaged = false
+				player.animator.sprite.modulate = Color("White")
+			return
+		ABILITY.RAGE:
+			return
+		ABILITY.COUNTER:
+			return
+
 func suit_ability():
 	match ability:
 		ABILITY.CAMOUFLAGE:

@@ -9,3 +9,5 @@ script = ExtResource("2_0a43p")
 portrait = ExtResource("1_nfilb")
 sprite_sheet = ExtResource("3_1luje")
 ability = 2
+item_name = "Snow suit"
+descripton = "besides resistance against the cold. Can parry enemy attacks by pressing Q."

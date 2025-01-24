@@ -13,3 +13,5 @@ damage = 4
 stun_lock = 1.0
 heavy_weapon = true
 effect = 0
+item_name = "Longsword"
+descripton = "Heavy weapon that hits hard but is slow to attack."

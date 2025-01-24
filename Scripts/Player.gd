@@ -74,3 +74,9 @@ func _set_suit(_suit : SuitResource):
 	if _suit != null:
 		suit = _suit
 		suit._set_suit(self)
+		
+func reset_state():
+	suit._reset_suit_ability()
+	animator.stop()
+	animator.play("RESET")
+	animator.play("idle")

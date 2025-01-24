@@ -13,3 +13,5 @@ damage = 10
 stun_lock = 2.0
 heavy_weapon = false
 effect = 0
+item_name = "GODTOOL"
+descripton = "[debugging tool to sweep enemies during testing]"

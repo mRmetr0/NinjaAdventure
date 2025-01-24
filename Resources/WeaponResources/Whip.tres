@@ -13,3 +13,5 @@ damage = 1
 stun_lock = 0.1
 heavy_weapon = false
 effect = 2
+item_name = "Whip"
+descripton = "Long range hitter with the ability to interact with things from a distance."

@@ -9,3 +9,5 @@ script = ExtResource("2_edljd")
 portrait = ExtResource("1_fonck")
 sprite_sheet = ExtResource("3_ivdpw")
 ability = 3
+item_name = "Its you!"
+descripton = "Set on your journey to find the root of this evil that is attacking your village. "
