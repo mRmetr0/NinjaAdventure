@@ -91,10 +91,8 @@ func _attack(direction : Vector2):
 	canAct = true
 
 func _color_hurt():
-	print("COLORING HURT")
 	animator.sprite.modulate = Color.RED
 	await get_tree().create_timer(0.3).timeout
-	print("DONE COLOR")
 	animator.sprite.modulate = current_color_state
 
 func _handle_rage(apply : bool, duration = -1):
