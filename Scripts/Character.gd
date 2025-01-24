@@ -22,6 +22,7 @@ var canAct = true
 #status effects:
 var raged = false;
 var frozen = false;
+@onready var rage_component : StatusComponent = get_node("RageComponent")
 
 #Private variables
 var vertDir : float
@@ -95,3 +96,6 @@ func _color_hurt():
 	await get_tree().create_timer(0.3).timeout
 	print("DONE COLOR")
 	animator.sprite.modulate = current_color_state
+
+func _handle_rage(apply : bool, duration = -1):
+	rage_component._handle_status(apply, duration)

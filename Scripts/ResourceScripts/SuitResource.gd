@@ -30,6 +30,7 @@ func _reset_suit_ability():
 				player.animator.sprite.modulate = Color("White")
 			return
 		ABILITY.RAGE:
+			player._handle_rage(false)
 			return
 		ABILITY.COUNTER:
 			return
@@ -40,6 +41,8 @@ func suit_ability():
 			_camouflage()
 			return
 		ABILITY.RAGE:
+			player._take_damage(1)
+			player._handle_rage(true, 10.0)
 			return
 		ABILITY.COUNTER:
 			return
