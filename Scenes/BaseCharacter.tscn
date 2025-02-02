@@ -811,7 +811,6 @@ func _on_area_entered(area):
 		area._take_damage(_calculate_damage(), character.weapon.stun_lock)
 	character.weapon._weapon_function(area)
 
-
 func _on_body_entered(body):
 	if body.is_in_group(\"hitbox\") && body != character:
 		body._take_damage(_calculate_damage(), character.weapon.stun_lock)

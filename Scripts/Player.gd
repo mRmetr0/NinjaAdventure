@@ -9,6 +9,7 @@ var smoke = preload("res://Scenes/Objects/Effects/smoke_effect.tscn")
 var counter = preload("res://Scenes/Objects/Effects/single_particle.tscn")
 var camouflaged = false
 var parrying = false
+@onready var parry_hitbox : CollisionShape2D = get_node("ParryHitbox/CollisionShape2D")
 
 signal Interact
 signal ChangeItem
@@ -51,7 +52,10 @@ func _physics_process(delta):
 	
 func _take_damage(damage : int, stun_lock = 1.0):
 	if parrying:
-		#parry_hitbox.
+		print("parrying")
+		parry_hitbox.set_deferred("disabled", false)
+		await get_tree().create_timer(0.2).timeout
+		parry_hitbox.set_deferred("disabled", true)
 		return
 	super._take_damage(damage, stun_lock)
 	
