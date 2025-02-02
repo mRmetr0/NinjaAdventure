@@ -5,7 +5,8 @@ class_name Player
 @export var item : ItemResource
 @export var suit : SuitResource
 
-var smoke = preload("res://Scenes/Objects/FXPlayer.tscn")
+var smoke = preload("res://Scenes/Objects/Effects/smoke_effect.tscn")
+var counter = preload("res://Scenes/Objects/Effects/single_particle.tscn")
 var camouflaged = false
 var parrying = false
 
@@ -48,6 +49,12 @@ func _physics_process(delta):
 	_handle_movement_inputs(delta)
 	_handle_attack_input()
 	
+func _take_damage(damage : int, stun_lock = 1.0):
+	if parrying:
+		#parry_hitbox.
+		return
+	super._take_damage(damage, stun_lock)
+	
 func _handle_movement_inputs(delta):
 	vertDir = Input.get_axis("up", "down")
 	horiDir = Input.get_axis("left", "right")
@@ -62,8 +69,7 @@ func _handle_attack_input():
 	if direction.length() > 0:
 		_attack (direction)
 		
-func _handle_item_used(): #TODO: REMOVE DAMAGE TAKEN AND IMPLEMENT ITEM USAGE
-	_take_damage(1)
+func _handle_item_used():
 	if (item != null):
 		item._use_item(self)
 

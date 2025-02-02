@@ -5,7 +5,7 @@ class_name SuitResource
 enum ABILITY{
 	CAMOUFLAGE,
 	RAGE,
-	COUNTER,
+	PARRY,
 	NULL,
 }
 
@@ -32,7 +32,8 @@ func _reset_suit_ability():
 		ABILITY.RAGE:
 			player._handle_rage(false)
 			return
-		ABILITY.COUNTER:
+		ABILITY.PARRY:
+			player.canAct = true
 			return
 
 func suit_ability():
@@ -44,7 +45,8 @@ func suit_ability():
 			player._take_damage(1)
 			player._handle_rage(true, 10.0)
 			return
-		ABILITY.COUNTER:
+		ABILITY.PARRY:
+			_parry()
 			return
 
 func _camouflage():
@@ -58,3 +60,15 @@ func _camouflage():
 	player.get_parent().add_child(inst)
 	SoundManager.play_sound(SoundManager.SOUND.SMOKE)
 	player.animator._set_special()
+	
+func _parry():
+	if !player.canAct:
+		return
+	player.canAct = false
+	player.parrying = true
+	player.animator._set_special()
+	ParticleManager._play_particle(ParticleManager.parry_prepare, player.global_position, 10, Vector2(0.6, 0.7))
+	await player.get_tree().create_timer(1.0).timeout
+	player.parrying = false
+	await player.get_tree().create_timer(0.2).timeout
+	player.canAct = true

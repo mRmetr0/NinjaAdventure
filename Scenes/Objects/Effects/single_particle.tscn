@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtw6sfhg5tqih"]
+
+[ext_resource type="Texture2D" uid="uid://cxbp3bsugqqnl" path="res://Assets/FX/Elemental/Ice/SpriteSheet.png" id="1_v8q77"]
+[ext_resource type="Script" path="res://Scripts/single_particle.tres.gd" id="2_gwwtu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vn46k"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e86ed"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="SingleParticle" type="GPUParticles2D"]
+z_index = 1
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_vn46k")
+emitting = false
+amount = 1
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_e86ed")
+texture = ExtResource("1_v8q77")
+one_shot = true
+script = ExtResource("2_gwwtu")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
