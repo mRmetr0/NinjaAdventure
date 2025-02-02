@@ -4,24 +4,29 @@ class_name Character
 
 signal ChangeHealth(new_health : int)
 signal ChangeWeapon (new_weapon : WeaponResource)
-
-@export var max_health = 8
-@onready var health = max_health
+#Default variabels
+@export var max_health : int = 8
+@onready var health : int = max_health
 @export var moveSpeed = 40
-
+#Sprite variables
 @export var portrait : Texture		
 @export var sprite_sheet : Texture2D
 @export var update_sprite_sheet : bool
-
+var current_color_state = Color.WHITE
+#TODO: remove default_text and move it to an 
+#	"interactable component" to apply on anything interactable
 @export_multiline var default_text : String
-
-var vertDir : float
-var horiDir : float
-
 @export var weapon : WeaponResource
 var canAct = true
+@onready var animator : BaseAnimator = get_node("AnimationPlayer")
+#status effects:
+var raged = false;
+var frozen = false;
+@onready var rage_component : StatusComponent = get_node("RageComponent")
 
-@onready var animator = get_node("AnimationPlayer")
+#Private variables
+var vertDir : float
+var horiDir : float
 
 func _ready():
 	_set_weapon(weapon)
@@ -84,3 +89,11 @@ func _attack(direction : Vector2):
 	var duration = animator._set_attack(direction, weapon.heavy_weapon)
 	await get_tree().create_timer(duration).timeout
 	canAct = true
+
+func _color_hurt():
+	animator.sprite.modulate = Color.RED
+	await get_tree().create_timer(0.3).timeout
+	animator.sprite.modulate = current_color_state
+
+func _handle_rage(apply : bool, duration = -1):
+	rage_component._handle_status(apply, duration)

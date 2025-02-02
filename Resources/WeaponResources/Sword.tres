@@ -13,3 +13,5 @@ damage = 2
 stun_lock = 1.0
 heavy_weapon = false
 effect = 0
+item_name = "Sword"
+descripton = "Your trusty blade. reliably quick to use with average damage."

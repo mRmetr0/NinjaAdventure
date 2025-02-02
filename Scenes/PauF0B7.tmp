@@ -1,0 +1,255 @@
+[gd_scene load_steps=16 format=3 uid="uid://13siya7oyt25"]
+
+[ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
+[ext_resource type="FontFile" uid="uid://do5usggxcsrm2" path="res://Assets/HUD/Font/NormalFont.ttf" id="2_s5wpd"]
+[ext_resource type="Texture2D" uid="uid://dej4dcpq7lnyp" path="res://Assets/HUD/Dialog/DialogueBoxSimple.png" id="4_j0n23"]
+[ext_resource type="Texture2D" uid="uid://da0v2o61tbbke" path="res://Assets/Actor/Characters/GreenNinja/Faceset.png" id="4_ptfur"]
+[ext_resource type="Texture2D" uid="uid://bsyljp8g88uwy" path="res://Assets/Actor/Characters/EskimoNinja/Faceset.png" id="5_ihv8t"]
+[ext_resource type="Texture2D" uid="uid://c1xyfeyqjxdp8" path="res://Assets/HUD/Dialog/ChoiceBox.png" id="5_o4wgf"]
+[ext_resource type="Texture2D" uid="uid://bhb37sseoluae" path="res://Assets/Actor/Characters/RedNinja2/Faceset.png" id="6_6c4li"]
+[ext_resource type="Texture2D" uid="uid://dq3pxtjo84i26" path="res://Assets/Items/Weapons/Lance/Sprite.png" id="6_ain7m"]
+[ext_resource type="Texture2D" uid="uid://bjae2hmvdixl6" path="res://Assets/Items/Weapons/Katana/Sprite.png" id="6_qvsum"]
+[ext_resource type="Texture2D" uid="uid://chgaerhc0cqhy" path="res://Assets/Items/Weapons/Whip/Sprite.png" id="7_eke6o"]
+[ext_resource type="Script" path="res://Scripts/menu_item_ui.gd" id="10_xrnae"]
+[ext_resource type="Resource" uid="uid://d113cdmgmci35" path="res://Resources/SuitResources/GreenSuitResource.tres" id="11_lybmh"]
+[ext_resource type="Resource" uid="uid://mqr0vwph0344" path="res://Resources/SuitResources/NoSuitResource.tres" id="13_hkd2f"]
+
+[sub_resource type="GDScript" id="GDScript_4uhu3"]
+script/source = "extends Control
+#PAUSE SCREEN MANAGER
+
+@onready var profile : TextureRect = get_node(\"FacesetBox/Profile\")
+@onready var player : Player = get_node(\"/root/Main/Player\")
+
+var hovered_item : MenuItemUI
+var weapons = []
+var selected_weapon : MenuItemUI
+var suits = []
+var selected_suit : MenuItemUI
+
+func _ready():
+	#TODO: have data load from PlayerInventory instead
+	for child in get_node(\"ItemBoxBackground/WeaponContainer\").get_children():
+		var menu_item = child as MenuItemUI
+		if menu_item.item == player.weapon:
+			_select_item(menu_item.item)
+			
+	for child in get_node(\"ClothingBoxBackground/OutfitContainer\").get_children():
+		var menu_item = child as MenuItemUI
+		if menu_item.item == player.suit:
+			_select_item(menu_item.item)
+
+func _select_item(new_menu_item : MenuItemUI):
+	if new_menu_item.item is WeaponResource:
+		_deselect_item(selected_weapon)
+		selected_weapon = new_menu_item
+	elif new_menu_item.item is SuitResource:
+		_deselect_item(selected_suit)
+		selected_suit = new_menu_item
+	new_menu_item.modulate = Color(0.7, 0.7, 0.7)
+	
+func _deselect_item(menu_item : MenuItemUI):
+	if menu_item != null:
+		menu_item.modulate = Color.WHITE
+
+func _change_hover(menu_item : MenuItemUI:
+	pass
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
+load_path = "res://.godot/imported/Faceset.png-420bf2d928e890058cc77f80d68415a2.ctex"
+
+[node name="PauseScreen" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_4uhu3")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 192.0
+color = Color(0.368627, 0.368627, 0.368627, 1)
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 950.0
+offset_bottom = 273.0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/font = ExtResource("2_s5wpd")
+theme_override_font_sizes/font_size = 200
+text = "PAUSED"
+metadata/_edit_lock_ = true
+
+[node name="FacesetBox" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 68.0
+offset_bottom = 88.0
+texture = ExtResource("1_5g772")
+metadata/_edit_lock_ = true
+
+[node name="Profile" type="TextureRect" parent="FacesetBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_ynomg")
+metadata/_edit_lock_ = true
+
+[node name="ItemBoxBackground" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 218.0
+offset_bottom = 160.0
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("4_j0n23")
+expand_mode = 1
+
+[node name="WeaponContainer" type="HBoxContainer" parent="ItemBoxBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -25.0
+offset_right = 96.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Item1" type="TextureRect" parent="ItemBoxBackground/WeaponContainer"]
+custom_minimum_size = Vector2(11.095, 15)
+layout_mode = 2
+texture = ExtResource("6_ain7m")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("10_xrnae")
+
+[node name="Item2" type="TextureRect" parent="ItemBoxBackground/WeaponContainer"]
+custom_minimum_size = Vector2(23.28, 15)
+layout_mode = 2
+texture = ExtResource("7_eke6o")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("10_xrnae")
+
+[node name="Item3" type="TextureRect" parent="ItemBoxBackground/WeaponContainer"]
+custom_minimum_size = Vector2(17.25, 15)
+layout_mode = 2
+texture = ExtResource("6_qvsum")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("10_xrnae")
+
+[node name="ClothingBoxBackground" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 130.0
+offset_right = 218.0
+offset_bottom = 190.0
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("4_j0n23")
+expand_mode = 1
+
+[node name="OutfitContainer" type="HBoxContainer" parent="ClothingBoxBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -25.0
+offset_right = 96.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Outfit1" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("4_ptfur")
+stretch_mode = 3
+script = ExtResource("10_xrnae")
+item = ExtResource("11_lybmh")
+metadata/_edit_lock_ = true
+
+[node name="Outfit2" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("5_ihv8t")
+stretch_mode = 3
+script = ExtResource("10_xrnae")
+item = ExtResource("13_hkd2f")
+metadata/_edit_lock_ = true
+
+[node name="Outfit3" type="TextureRect" parent="ClothingBoxBackground/OutfitContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("6_6c4li")
+stretch_mode = 3
+script = ExtResource("10_xrnae")
+metadata/_edit_lock_ = true
+
+[node name="LeaveButton" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -29.0
+offset_right = 46.0
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("5_o4wgf")
+
+[node name="lable" type="Label" parent="LeaveButton"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.8086
+offset_top = -16.0926
+offset_right = 612.191
+offset_bottom = 251.907
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/font = ExtResource("2_s5wpd")
+theme_override_font_sizes/font_size = 200
+text = "QUIT"
+metadata/_edit_lock_ = true

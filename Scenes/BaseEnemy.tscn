@@ -1,60 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6l0w6xyhd0c6"]
+[gd_scene load_steps=8 format=3 uid="uid://c6l0w6xyhd0c6"]
 
 [ext_resource type="PackedScene" uid="uid://waoc5b05mji6" path="res://Scenes/BaseCharacter.tscn" id="1_fjtlr"]
 [ext_resource type="Texture2D" uid="uid://bp2qwfibe2ufe" path="res://Assets/Actor/Characters/Lion/SpriteSheet.png" id="2_3xyw3"]
 [ext_resource type="Resource" uid="uid://j8jb5anb2mnv" path="res://Resources/WeaponResources/LongSword.tres" id="2_08e5b"]
 [ext_resource type="Texture2D" uid="uid://dvugfmcxdnc3o" path="res://Assets/Actor/Characters/Lion/Faceset.png" id="2_a1ni1"]
-
-[sub_resource type="GDScript" id="GDScript_uaom6"]
-resource_name = "EnemyBehaviour"
-script/source = "extends Character
-
-@export var resetable : bool
-
-@onready var player = get_parent().get_node(\"Player\")
-@onready var agent = get_node(\"NavigationAgent2D\")
-@onready var base_pos = position
-
-func _physics_process(delta):	
-	if position.distance_to(agent.get_final_position()) < 5:
-		_on_timer_timeout()
-	var direction = to_local(agent.get_next_path_position()).normalized()
-	vertDir = direction.y
-	horiDir = direction.x	
-	
-	var toPlayer = global_position - player.global_position
-	if position.distance_to(player.position) < 20:
-		_attack(toPlayer * -1)
-	
-	super._physics_process(delta)
-	
-func _on_timer_timeout():
-	agent.target_position = player.position
-
-func _reset():
-	position = base_pos
-	health = max_health
-	set_process(true)
-	set_physics_process(true)
-	var col = get_node(\"WalkingCollider\")
-	col.call_deferred(\"set_disabled\", false)
-	canAct = true
-
-func _on_screen():
-	set_physics_process(true)
-
-func _off_screen():
-	if resetable:
-		_reset()
-	set_physics_process(false)
-"
+[ext_resource type="Script" path="res://Scripts/BaseScripts/EnemyBehaviour.gd" id="2_qbym1"]
+[ext_resource type="PackedScene" uid="uid://5ajxbqp55g16" path="res://Scenes/Objects/HealthBar.tscn" id="5_t7chy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_do2nw"]
 
 [node name="Enemy" instance=ExtResource("1_fjtlr")]
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = SubResource("GDScript_uaom6")
+script = ExtResource("2_qbym1")
 resetable = false
 moveSpeed = 35
 portrait = ExtResource("2_a1ni1")
@@ -69,12 +27,13 @@ shape = SubResource("CircleShape2D_do2nw")
 texture = ExtResource("2_3xyw3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="." index="5"]
 autostart = true
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." index="8"]
+
+[node name="Healthbar" parent="." index="10" instance=ExtResource("5_t7chy")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_screen"]

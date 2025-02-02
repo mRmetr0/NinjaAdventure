@@ -11,11 +11,14 @@ class_name GameUI
 @onready var portrait_box = get_node("Dialogue/Portrait")
 @onready var text_box = get_node("Dialogue/Text")
 
+@onready var pause_menu = get_node("PauseScreen")
+
 var heart_sprites : Array
 var dialogue_count = 0
 
 func _ready():	
 	dialogue.hide()
+	pause_menu.hide()
 	set_process(false)
 	# get all heart sprites
 	var container = get_node("HealthContainer")
@@ -87,3 +90,12 @@ func _process(_delta):
 		if Input.is_action_just_pressed("interact"):
 			#_set_text_box()
 			_get_next_line()
+			
+func _input(event):
+	if Input.is_action_just_pressed("menu"):
+		get_tree().paused = !get_tree().paused
+		if get_tree().paused:
+			pause_menu.show()
+		else:
+			pause_menu._apply_changes()
+			pause_menu.hide()

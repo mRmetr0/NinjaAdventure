@@ -1,15 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsm3d6r5brn16"]
+[gd_scene load_steps=8 format=3 uid="uid://dsm3d6r5brn16"]
 
 [ext_resource type="PackedScene" uid="uid://waoc5b05mji6" path="res://Scenes/BaseCharacter.tscn" id="1_27kjt"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2_hvvog"]
 [ext_resource type="Texture2D" uid="uid://da0v2o61tbbke" path="res://Assets/Actor/Characters/GreenNinja/Faceset.png" id="2_p5cuo"]
 [ext_resource type="Texture2D" uid="uid://c5xloiex5j5kg" path="res://Assets/Actor/Characters/GreenNinja/SpriteSheet.png" id="3_gohig"]
+[ext_resource type="Resource" uid="uid://d113cdmgmci35" path="res://Resources/SuitResources/GreenSuitResource.tres" id="3_vw83s"]
+
+[sub_resource type="GDScript" id="GDScript_ntleg"]
+resource_name = "parry_hitbox"
+script/source = "extends Area2D
+
+@onready var character : Character = get_parent()
+@onready var character_hbox = character.get_node(\"BodyCollider\")
+
+func _on_area_entered(area):
+	if area.is_in_group(\"hitbox\") && area != character_hbox:
+		area._take_damage(character.weapon.damage, character.weapon.stun_lock)
+
+func _on_body_entered(body):
+	if body.is_in_group(\"hitbox\") && body != character:
+		body._take_damage(character.weapon.damage, character.weapon.stun_lock)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y4alc"]
+radius = 18.0
 
 [node name="Player" instance=ExtResource("1_27kjt")]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("2_hvvog")
 item = null
+suit = ExtResource("3_vw83s")
 moveSpeed = 40
 portrait = ExtResource("2_p5cuo")
 sprite_sheet = ExtResource("3_gohig")
@@ -21,3 +42,17 @@ texture = ExtResource("3_gohig")
 [node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." index="4"]
 position = Vector2(0, -2.38419e-07)
 scale = Vector2(0.1, 0.1)
+
+[node name="ParryHitbox" type="Area2D" parent="." index="8"]
+collision_layer = 4
+collision_mask = 30
+script = SubResource("GDScript_ntleg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParryHitbox" index="0"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_y4alc")
+disabled = true
+debug_color = Color(0.921569, 0, 0.694118, 0.419608)
+
+[connection signal="area_entered" from="ParryHitbox" to="ParryHitbox" method="_on_area_entered"]
+[connection signal="body_entered" from="ParryHitbox" to="ParryHitbox" method="_on_body_entered"]

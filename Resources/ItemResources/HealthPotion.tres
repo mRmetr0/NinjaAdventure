@@ -11,3 +11,5 @@ expendable = true
 expendable_amount = 3
 effect = 0
 value = 4
+item_name = "Health Potion"
+descripton = "Heals an entire heart on use"
