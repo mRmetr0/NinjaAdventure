@@ -10,6 +10,7 @@ const sound_paths = [
 	"door_sound.wav", 
 	"pick_up_sound.wav", 
 	"smoke_sound.wav",
+	"parry_sound.wav",
 	"break_bush_sound.wav"]
 
 var sound_list = []
@@ -24,6 +25,7 @@ enum SOUND {
 	DOOR,
 	PICK_UP,
 	SMOKE,
+	PARRY,
 	BREAK_BUSH,
 	
 	NULL,

@@ -68,9 +68,12 @@ func _parry():
 		return
 	player.canAct = false
 	player.parrying = true
+	#visuals
+	SoundManager.play_sound(SoundManager.SOUND.PARRY)
 	player.animator._set_special()
 	ParticleManager._play_particle(ParticleManager.parry_prepare, \
 		player.animator.sprite.global_position, 10, Vector2(0.6, 0.7), 1.2)
+		
 	await player.get_tree().create_timer(1.0).timeout
 	player.parrying = false
 	await player.get_tree().create_timer(0.2).timeout
