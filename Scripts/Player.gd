@@ -7,6 +7,7 @@ class_name Player
 
 var smoke = preload("res://Scenes/Objects/FXPlayer.tscn")
 var camouflaged = false
+var parrying = false
 
 signal Interact
 signal ChangeItem
@@ -61,7 +62,7 @@ func _handle_attack_input():
 	if direction.length() > 0:
 		_attack (direction)
 		
-func _handle_item_used():
+func _handle_item_used(): #TODO: REMOVE DAMAGE TAKEN AND IMPLEMENT ITEM USAGE
 	_take_damage(1)
 	if (item != null):
 		item._use_item(self)
