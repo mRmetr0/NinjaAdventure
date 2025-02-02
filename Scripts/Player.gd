@@ -52,7 +52,10 @@ func _physics_process(delta):
 	
 func _take_damage(damage : int, stun_lock = 1.0):
 	if parrying:
-		print("parrying")
+		SoundManager.play_sound(SoundManager.SOUND.H_ATTACK)
+		ParticleManager._play_particle(ParticleManager.parry_counter, \
+			animator.sprite.global_position + Vector2(0, 3), \
+			9, Vector2(1.1, 1.2), 1.5)
 		parry_hitbox.set_deferred("disabled", false)
 		await get_tree().create_timer(0.2).timeout
 		parry_hitbox.set_deferred("disabled", true)
@@ -74,6 +77,7 @@ func _handle_attack_input():
 		_attack (direction)
 		
 func _handle_item_used():
+	_take_damage(1)
 	if (item != null):
 		item._use_item(self)
 

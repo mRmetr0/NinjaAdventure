@@ -55,9 +55,11 @@ func _camouflage():
 	player.camouflaged = !player.canAct
 	#Set visuals
 	player.animator.sprite.modulate = Color("Gray") if !player.canAct else Color("White")
-	var inst = player.smoke.instantiate()
-	inst.global_position = player.animator.sprite.global_position
-	player.get_parent().add_child(inst)
+	ParticleManager._play_particle(ParticleManager.smoke, \
+		player.animator.sprite.global_position, 6, Vector2(0.9, 1.1), 2)
+	#var inst = player.smoke.instantiate()
+	#inst.global_position = player.animator.sprite.global_position
+	#player.get_parent().add_child(inst)
 	SoundManager.play_sound(SoundManager.SOUND.SMOKE)
 	player.animator._set_special()
 	
@@ -68,7 +70,7 @@ func _parry():
 	player.parrying = true
 	player.animator._set_special()
 	ParticleManager._play_particle(ParticleManager.parry_prepare, \
-		player.animator.sprite.global_position, 10, Vector2(0.6, 0.7))
+		player.animator.sprite.global_position, 10, Vector2(0.6, 0.7), 1.2)
 	await player.get_tree().create_timer(1.0).timeout
 	player.parrying = false
 	await player.get_tree().create_timer(0.2).timeout
