@@ -59,7 +59,7 @@ func _camouflage():
 	#Set visuals
 	player.animator.sprite.modulate = Color("Gray") if !player.canAct else Color("White")
 	ParticleManager._play_particle(ParticleManager.smoke, \
-		player.animator.sprite.global_position, 6, Vector2(0.9, 1.1), 2)
+		player.animator.sprite.global_position, 6, Vector2(0.8, 0.9), 2)
 	#var inst = player.smoke.instantiate()
 	#inst.global_position = player.animator.sprite.global_position
 	#player.get_parent().add_child(inst)
