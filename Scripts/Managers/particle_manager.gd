@@ -3,6 +3,7 @@ extends Node
 @onready var particle_obj = preload("res://Scenes/Objects/Effects/single_particle.tscn")
 #Spritesheets:
 @onready var smoke = preload("res://Assets/FX/Smoke/Smoke/SpriteSheet.png")
+@onready var floor_smoke = preload("res://Assets/FX/Smoke/SmokeCircular/SpriteSheet.png")
 @onready var parry_prepare = preload("res://Assets/FX/Elemental/Ice/SpriteSheet.png")
 @onready var parry_counter = preload("res://Assets/FX/Elemental/Ice/SpriteSheetB.png")
 

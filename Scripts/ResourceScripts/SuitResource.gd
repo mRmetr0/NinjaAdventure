@@ -44,6 +44,9 @@ func suit_ability():
 		ABILITY.RAGE:
 			player._take_damage(1)
 			player._handle_rage(true, 10.0)
+			ParticleManager._play_particle(ParticleManager.floor_smoke, \
+				player.animator.sprite.global_position + Vector2(0, 6), \
+				8, Vector2(0.8, 0.9), 1.3)
 			return
 		ABILITY.PARRY:
 			_parry()
