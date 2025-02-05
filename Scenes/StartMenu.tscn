@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf710tm3ps2rl"]
+
+[sub_resource type="GDScript" id="GDScript_ubr51"]
+resource_name = "start_menu_script"
+script/source = "extends Control
+
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()
+"
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_ubr51")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 31.0
+offset_top = 20.0
+offset_right = 1971.0
+offset_bottom = 740.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 150
+text = "Ninja Adventure"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 98.0
+offset_right = 339.0
+offset_bottom = 225.0
+scale = Vector2(0.2, 0.2)
+alignment = 1
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Play"
+metadata/_edit_lock_ = true
+
+[node name="StartButton2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Play"
+metadata/_edit_lock_ = true
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Quit"
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

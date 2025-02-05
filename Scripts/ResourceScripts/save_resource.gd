@@ -2,6 +2,7 @@ extends Resource
 
 class_name SaveResource
 
+var save_file_name : String
 var current_scene : String
 
 var coins : int
