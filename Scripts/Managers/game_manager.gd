@@ -4,6 +4,7 @@ var random = RandomNumberGenerator.new()
 
 var current_level
 var canvasLayer
+var current_level_name
 
 #PLAYER DATA
 var player_health = -1
@@ -36,3 +37,6 @@ func _change_scene(next_scene : String, newPos : Vector2):
 	get_tree().root.call_deferred("remove_child", current_level)
 	current_level.call_deferred("free")
 	current_level = next_level
+	
+func get_current_level_name():
+	return current_level.name

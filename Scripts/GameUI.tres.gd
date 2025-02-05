@@ -25,7 +25,6 @@ func _ready():
 	for child in container.get_children():
 		var sprite = child.get_child(0)
 		heart_sprites.append(sprite)
-	_update_money_ui(PlayerInventory.money)
 
 func _update_health_ui(new_health : int):
 	new_health = max(0, new_health)
@@ -44,7 +43,7 @@ func _update_health_ui(new_health : int):
 	if (new_health > 0):
 		print("TOO MUCH HEALTH")
 
-func _update_money_ui(newValue: int, newSprite: Texture2D = null):
+func update_money_ui(newValue: int, newSprite: Texture2D = null):
 	money_display.text = str(newValue)
 	if newSprite != null:
 		money_icon.texture = newSprite

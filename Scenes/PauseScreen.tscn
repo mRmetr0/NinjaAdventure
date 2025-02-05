@@ -39,7 +39,7 @@ var suits = []
 var selected_suit : MenuItemUI
 
 func _ready():
-	await get_tree().create_timer(0.5)
+	await get_tree().create_timer(0.5).timeout
 	#TODO: have data load from PlayerInventory instead
 	for child in get_node(\"ItemBoxBackground\").get_children():
 		var menu_item = child as MenuItemUI
