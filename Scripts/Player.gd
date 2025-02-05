@@ -17,29 +17,23 @@ signal ChangeItem
 signal ChangeCoins
 
 func _ready ():
-	var hud = get_parent().get_node("Camera2D").get_child(0).get_child(0)
-	if (hud != null):
-		connect("ChangeWeapon", hud._update_weapon_ui)
-		connect("ChangeHealth", hud._update_health_ui)
-		connect("ChangeItem", hud._update_item_ui)
-		connect("ChangeCoins", hud.update_money_ui)
+	setup_ui()
+	
+func setup_ui(game_ui : GameUI = null):
+	if game_ui == null:
+		game_ui = get_parent().get_node("Camera2D").get_child(0).get_child(0)
+	if (game_ui != null):
+		connect("ChangeWeapon", game_ui._update_weapon_ui)
+		connect("ChangeHealth", game_ui._update_health_ui)
+		connect("ChangeItem", game_ui._update_item_ui)
+		connect("ChangeCoins", game_ui.update_money_ui)
 	else:
 		print("NO HUD FOUND")
-	
-	if (GameManager.player_health == -1):
-		GameManager.player_health = health
-		GameManager.player_weapon = weapon
-		GameManager.player_item = item
-		GameManager.player_suit = suit
-	else:
-		health = GameManager.player_health
-		weapon = GameManager.player_weapon
-		item = GameManager.player_item
-		suit = GameManager.player_suit
 	_set_health(health)
 	_set_weapon(weapon)
 	_set_item(item)
 	_set_suit(suit)
+	set_coins(coins)
 
 func _physics_process(delta):
 	if (Input.is_action_just_pressed("interact")):
