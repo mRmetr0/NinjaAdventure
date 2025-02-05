@@ -1,6 +1,7 @@
 extends Node
 
 var random = RandomNumberGenerator.new()
+var current_save_data : SaveResource
 
 var current_level
 var main_player : Player
