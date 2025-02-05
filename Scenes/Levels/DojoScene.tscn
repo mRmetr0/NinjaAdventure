@@ -126,7 +126,7 @@ func _enable(_bool : bool):
 	
 "
 
-[node name="Main" type="Node2D"]
+[node name="DojoScene" type="Node2D"]
 y_sort_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]

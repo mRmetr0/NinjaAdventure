@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="4_p10fa"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_xofx8"]
 
-[node name="Main" type="TileMap"]
+[node name="HomeScene" type="TileMap"]
 y_sort_enabled = true
 texture_filter = 1
 tile_set = ExtResource("1_gy420")

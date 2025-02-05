@@ -21,7 +21,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -9, 264, -9, 273, 4
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 7.0
 
-[node name="Main" type="Node2D"]
+[node name="VillageScene" type="Node2D"]
 y_sort_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
