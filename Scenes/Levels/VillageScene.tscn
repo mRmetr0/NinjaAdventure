@@ -110,6 +110,7 @@ position = Vector2(296, 16)
 
 [node name="PickUp" parent="Objects" instance=ExtResource("6_tmybw")]
 position = Vector2(896, 280)
+despawn_timer = -1.0
 
 [node name="Master" parent="." instance=ExtResource("5_hj00q")]
 position = Vector2(384, 64)
@@ -131,4 +132,4 @@ sprite_sheet = ExtResource("12_ly4lq")
 default_text = "People say you're leaving. Is that true? I wish I was strong enough to leave the village and fight evil."
 
 [node name="Player" parent="." instance=ExtResource("4_expn1")]
-position = Vector2(184, 64)
+position = Vector2(680, 128)
