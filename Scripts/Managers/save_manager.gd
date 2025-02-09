@@ -11,7 +11,6 @@ func _ready():
 	
 func verify_save_dir(path : String):
 	DirAccess.make_dir_absolute(path)
-	
 
 func save_data(file_name : String):
 	var path = SAVE_PATH + file_name
@@ -24,7 +23,7 @@ func save_data(file_name : String):
 	var data = {
 		"current_level": GameManager.get_current_level_name(),
 		"player_data":{
-			"coins": save_resource.coins,
+			"coins": save_resource.coins, #TODO: FIX WEAPON AND SUIT SAVING
 			#"weapons": save_resource.convert_collection(save_resource._get_weapons()),
 			#"suits": save_resource.convert_collection(save_resource._get_suits())
 		}

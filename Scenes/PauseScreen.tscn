@@ -29,10 +29,14 @@ script/source = "extends Control
 @onready var hover_sprite : Sprite2D = get_node(\"HoverSprite\")
 @onready var hovered_title : Label = get_node(\"ItemTextBackground/SelectedItemTitle\")
 @onready var hovered_desc : Label = get_node(\"ItemTextBackground/SelectedItemDesc\")
+@onready var quit_button : MenuItemUI = get_node(\"QuitButton\")
 
 var hovered_item : MenuItemUI
-var hovered_index = 0
-var hovered_list = []
+var hovered_index = 0 # index of current item in list player is hovering over
+var hovered_list = [] # current list the player can select items from
+var list_index = 0 # index of current list player is selecting
+var list_layers = [] # amount of lists the player can chose between
+
 var weapons = []
 var selected_weapon : MenuItemUI
 var suits = []
@@ -58,9 +62,13 @@ func _ready():
 		hovered_list = weapons
 	else:
 		hovered_list = suits
+	list_layers = [weapons, suits, [quit_button]]
 	_change_hover(hovered_list[hovered_index])
 
 func _select_item(new_menu_item : MenuItemUI):
+	if new_menu_item.can_quit:
+		quit_button.on_select_quit()
+		return
 	if new_menu_item.item is WeaponResource:
 		_deselect_item(selected_weapon)
 		selected_weapon = new_menu_item
@@ -75,9 +83,10 @@ func _deselect_item(menu_item : MenuItemUI):
 		menu_item.modulate = Color.WHITE
 
 func _change_hover(menu_item : MenuItemUI):
+	quit_button.on_hover_quit(menu_item.can_quit)
+	hovered_title.text = menu_item.item_title
+	hovered_desc.text = menu_item.item_desc
 	hover_sprite.position = menu_item.global_position
-	hovered_title.text = menu_item.item.item_name
-	hovered_desc.text = menu_item.item.descripton
 
 func _input(event):
 	#selecting items
@@ -89,10 +98,12 @@ func _input(event):
 		hovered_index -= 1
 	elif event.is_action_pressed(\"right\"):
 		hovered_index += 1
-	elif event.is_action_pressed(\"up\") || event.is_action_pressed(\"down\"):
-		if weapons.size() > 0 && suits.size() > 0:
-			var is_weapons = hovered_list == weapons
-			hovered_list = suits if is_weapons else weapons
+	elif event.is_action_pressed(\"up\"): 
+		list_index = clamp(list_index - 1, 0, list_layers.size()-1)
+	elif event.is_action_pressed(\"down\"):
+		list_index = clamp(list_index + 1, 0, list_layers.size()-1)
+		
+	hovered_list = list_layers[list_index]
 	
 	if hovered_list.size() == 0:
 		return 
@@ -292,43 +303,36 @@ texture = ExtResource("5_ihv8t")
 script = ExtResource("10_xrnae")
 item = ExtResource("17_vbssn")
 
-[node name="LeaveButton" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = -29.0
-offset_right = 46.0
-offset_bottom = 18.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.405, 0.405)
+[node name="QuitButton" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(193, 173)
+scale = Vector2(1.34766, 1.4375)
 texture = ExtResource("5_o4wgf")
-metadata/_edit_lock_ = true
+script = ExtResource("10_xrnae")
+can_quit = true
+item_title = "Quit "
+item_desc = "Save and quit the game"
 
-[node name="lable" type="Label" parent="LeaveButton"]
+[node name="Label" type="Label" parent="QuitButton"]
 modulate = Color(0, 0, 0, 1)
 texture_filter = 1
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -30.8086
-offset_top = -16.0926
-offset_right = 612.191
-offset_bottom = 251.907
+offset_left = -64.0
+offset_top = -20.0
+offset_right = 575.0
+offset_bottom = 163.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.1, 0.1)
 theme_override_fonts/font = ExtResource("2_s5wpd")
-theme_override_font_sizes/font_size = 200
+theme_override_font_sizes/font_size = 100
 text = "QUIT"
-metadata/_edit_lock_ = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HoverSprite" type="Sprite2D" parent="."]
 position = Vector2(12, 170)
