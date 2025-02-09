@@ -132,4 +132,4 @@ sprite_sheet = ExtResource("12_ly4lq")
 default_text = "People say you're leaving. Is that true? I wish I was strong enough to leave the village and fight evil."
 
 [node name="Player" parent="." instance=ExtResource("4_expn1")]
-position = Vector2(680, 128)
+position = Vector2(184, 56)

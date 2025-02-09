@@ -1,9 +1,10 @@
 extends Node
-class_name SaveManager
 
 const SAVE_PATH = "user://saves/"
 const GLOBAL_DATA_FILE_NAME = "global.json"
 const SAVE_FILE_NAME = "save.json"
+var current_save_file : String
+var current_save_resource : SaveResource
 #const SECURITY_KEY = "0923874590"
 
 func _ready():
@@ -12,17 +13,22 @@ func _ready():
 func verify_save_dir(path : String):
 	DirAccess.make_dir_absolute(path)
 
-func save_data(file_name : String):
+func check_save_exist(file_name):
+	return FileAccess.file_exists(SAVE_PATH + file_name)
+
+func save_data(file_name : String, save_resource : SaveResource = null):
 	var path = SAVE_PATH + file_name
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
 		print(FileAccess.get_open_error())
 		return
 	
-	var save_resource = SaveResource.new()
+	if save_resource == null:
+		save_resource = current_save_resource
 	var data = {
 		"current_level": GameManager.get_current_level_name(),
 		"player_data":{
+			"name": save_resource.player_name,
 			"coins": save_resource.coins, #TODO: FIX WEAPON AND SUIT SAVING
 			#"weapons": save_resource.convert_collection(save_resource._get_weapons()),
 			#"suits": save_resource.convert_collection(save_resource._get_suits())
@@ -41,11 +47,15 @@ func load_data(file_name : String):
 		return
 	#Load data:
 	var save_resource = SaveResource.new()
+	save_resource.player_name = data.player_data.name
 	save_resource.current_scene = data.current_level
 	save_resource.coins = data.player_data.coins
 	#save_resource._revert_collection(data.player_data.weapons, save_resource._get_weapons())
 	#save_resource._revert_collection(data.player_data.suits, save_resource._get_suits())
-	save_resource.apply_data()
+	
+	#current_save_resource = save_resource
+	#save_resource.apply_data()
+	return save_resource
 
 func _load_global_data():	
 	var data = _load_file(GLOBAL_DATA_FILE_NAME)

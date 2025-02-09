@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bf710tm3ps2rl"]
+[gd_scene load_steps=10 format=3 uid="uid://bf710tm3ps2rl"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_aoi1f"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_d53qs"]
@@ -22,7 +22,6 @@ enum SelectState{
 @onready var difficulties_container = get_node(\"Camera2D/CanvasLayer/StartMenu/DifficultiesContainer\")
 @onready var difficulties_box = get_node(\"Camera2D/CanvasLayer/StartMenu/DescBox\")
 @onready var difficulties_desc = get_node(\"Camera2D/CanvasLayer/StartMenu/DescBox/Label\")
-@onready var name_edit = get_node(\"Camera2D/CanvasLayer/StartMenu/DescBox/NameEdit\")
 
 var select_state : SelectState = SelectState.Null
 var selected_save : String
@@ -40,6 +39,11 @@ func _ready():
 func _on_start_button_pressed():
 	select_state = SelectState.NewSave
 	_show_saves(true)
+	
+	#player.set_process(true)
+	#player.set_physics_process(true)
+	#GameManager.current_save_data = SaveResource.new()
+	#GameManager._change_scene(\"HomeScene\")
 
 func _on_continue_button_pressed():
 	pass # TODO: ADD PREVIOUS GAME SHOWS ON GAME LOAD
@@ -57,27 +61,10 @@ func on_save_press(save_name : String):
 		selected_save = save_name
 		_show_difficulties()
 	elif select_state == SelectState.LoadSave:
-		SaveManager.current_save_file = save_name
-		player.set_process(true)
-		player.set_physics_process(true)
-		var save_data : SaveResource = SaveManager.load_data(save_name)
-		SaveManager.current_save_resource = save_data
-		save_data.apply_data()
-
-#difficulty logic
-func on_difficulty_lock(title : String, desc : String):
-	difficulties_desc = title + \"\\n\" + desc
-
-func on_new_game_start():
-	player.set_process(true)
-	player.set_physics_process(true)
-	SaveManager.current_save_file = selected_save
-	SaveManager.current_save_resource = SaveResource.new()
-	SaveManager.current_save_resource.player_name = name_edit.text
-	GameManager._change_scene(\"HomeScene\")
-	
+		pass #TODO LOAD SAVE
+		
 #Remaining logic
-func _show_saves(enable_empty : bool = true):
+func _show_saves(enable_empty : bool):
 	options_container.hide()
 	saves_container.show()
 	difficulties_container.hide()
@@ -117,9 +104,6 @@ func _ready():
 	if !save_name.ends_with(\".json\"):
 		save_name += \".json\"
 	has_data = SaveManager.check_save_exist(save_name)
-	if has_data:
-		var data = SaveManager.load_data(save_name)
-		text = data.player_name
 
 func set_up(show_all : bool):
 	if show_all:
@@ -129,22 +113,6 @@ func set_up(show_all : bool):
 
 func _on_save_button_press():
 	start_manager.on_save_press(save_name)
-"
-
-[sub_resource type="GDScript" id="GDScript_0k21y"]
-script/source = "extends Button
-
-@onready var manager = get_tree().root.get_child(GameManager.AUTOLOAD_AMOUNT)
-
-var title : String
-@export_multiline var desc : String
-@export var default_difficulty : bool
-
-func _ready():
-	title = text
-
-func _on_difficulty_press():
-	manager.on_difficulty_lock(title, desc)
 "
 
 [node name="StartScene" type="Node2D"]
@@ -230,6 +198,7 @@ text = "continue"
 metadata/_edit_lock_ = true
 
 [node name="LoadButton" type="Button" parent="Camera2D/CanvasLayer/StartMenu/StartMenuContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Load
@@ -243,7 +212,6 @@ text = "Quit"
 metadata/_edit_lock_ = true
 
 [node name="SavesContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/StartMenu"]
-visible = false
 layout_mode = 0
 offset_left = 31.0
 offset_top = 117.0
@@ -282,6 +250,7 @@ text = "Back"
 metadata/_edit_lock_ = true
 
 [node name="DifficultiesContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/StartMenu"]
+visible = false
 layout_mode = 0
 offset_left = 31.0
 offset_top = 100.0
@@ -294,16 +263,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 disabled = true
 text = "Apprentice"
-script = SubResource("GDScript_0k21y")
 metadata/_edit_lock_ = true
 
 [node name="Difficulty2" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Student"
-script = SubResource("GDScript_0k21y")
-desc = "Recommended settings for first playthrough. All settings are balanced around this option."
-default_difficulty = true
 metadata/_edit_lock_ = true
 
 [node name="Difficulty3" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
@@ -311,7 +276,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 disabled = true
 text = "Master"
-script = SubResource("GDScript_0k21y")
 metadata/_edit_lock_ = true
 
 [node name="Difficulty4" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
@@ -319,7 +283,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 disabled = true
 text = "GrandMaster"
-script = SubResource("GDScript_0k21y")
 metadata/_edit_lock_ = true
 
 [node name="BackButton" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
@@ -329,12 +292,13 @@ text = "Back"
 metadata/_edit_lock_ = true
 
 [node name="DescBox" type="ColorRect" parent="Camera2D/CanvasLayer/StartMenu"]
+visible = false
 self_modulate = Color(0, 0, 0, 0.694118)
 layout_mode = 0
 offset_left = 150.0
 offset_top = 117.0
 offset_right = 243.0
-offset_bottom = 167.0
+offset_bottom = 183.0
 
 [node name="Label" type="Label" parent="Camera2D/CanvasLayer/StartMenu/DescBox"]
 layout_mode = 0
@@ -352,26 +316,6 @@ text = "Difficulty description"
 autowrap_mode = 3
 clip_text = true
 
-[node name="StartButton" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DescBox"]
-layout_mode = 0
-offset_top = 51.0
-offset_right = 930.0
-offset_bottom = 203.0
-scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/font_size = 120
-text = "Start"
-
-[node name="NameEdit" type="LineEdit" parent="Camera2D/CanvasLayer/StartMenu/DescBox"]
-layout_mode = 0
-offset_top = -17.0
-offset_right = 930.0
-offset_bottom = 143.0
-scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/font_size = 120
-text = "Suki"
-placeholder_text = "name..."
-max_length = 9
-
 [node name="Player" parent="." instance=ExtResource("4_ul05u")]
 position = Vector2(128, 96)
 
@@ -381,13 +325,5 @@ position = Vector2(128, 96)
 [connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/StartMenuContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/StartMenuContainer/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/StartMenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/SavesContainer/SaveButton1" to="Camera2D/CanvasLayer/StartMenu/SavesContainer/SaveButton1" method="_on_save_button_press"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/SavesContainer/SaveButton2" to="Camera2D/CanvasLayer/StartMenu/SavesContainer/SaveButton2" method="_on_save_button_press"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/SavesContainer/SaveButton3" to="Camera2D/CanvasLayer/StartMenu/SavesContainer/SaveButton3" method="_on_save_button_press"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/SavesContainer/BackButton" to="." method="_show_options"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty1" to="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty1" method="_on_difficulty_press"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty2" to="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty2" method="_on_difficulty_press"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty3" to="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty3" method="_on_difficulty_press"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty4" to="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/Difficulty4" method="_on_difficulty_press"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer/BackButton" to="." method="_show_saves"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/DescBox/StartButton" to="." method="on_new_game_start"]

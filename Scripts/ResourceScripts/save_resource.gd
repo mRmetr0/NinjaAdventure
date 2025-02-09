@@ -3,7 +3,8 @@ extends Resource
 class_name SaveResource
 
 var save_file_name : String
-var current_scene : String
+var current_scene : String = "HomeScene"
+var player_name : String = "Suki"
 
 var coins : int
 #Collected weapons check:

@@ -45,6 +45,7 @@ func on_hover_quit(hovering = false):
 func on_select_quit():
 	if lock_quit:
 		item_text.text = "SAVING"
+		SaveManager.save_data(SaveManager.current_save_file)
 		await get_tree().create_timer(0.1).timeout
 		get_tree().quit()
 		pass #TODO SAVE AND QUIT

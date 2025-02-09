@@ -20,6 +20,7 @@ config/icon="res://Assets/Items/Food/Sushi.png"
 GameManager="*res://Scripts/Managers/game_manager.gd"
 SoundManager="*res://Scripts/Managers/sound_manager.gd"
 ParticleManager="*res://Scripts/Managers/particle_manager.gd"
+SaveManager="*res://Scripts/Managers/save_manager.gd"
 
 [display]
 

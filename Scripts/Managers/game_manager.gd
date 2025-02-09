@@ -1,15 +1,14 @@
 extends Node
 
 var random = RandomNumberGenerator.new()
-var current_save_data : SaveResource
 
 var current_level
 var main_player : Player
-var autoload_amount = 3
+const AUTOLOAD_AMOUNT = 4
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	current_level = get_tree().root.get_child(autoload_amount)
+	current_level = get_tree().root.get_child(AUTOLOAD_AMOUNT)
 	main_player = current_level.get_node("Player")
 
 func _change_scene(next_scene : String, newPos = null):
@@ -47,10 +46,8 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_8:
 			print("SAVING GAME")
-			var game_save = SaveManager.new()
-			game_save.save_data(game_save.SAVE_FILE_NAME)
+			SaveManager.save_data(SaveManager.SAVE_FILE_NAME)
 		if event.keycode == KEY_9:
 			print("LOADING GAME")
-			var game_save = SaveManager.new()
-			game_save.load_data(game_save.SAVE_FILE_NAME)
+			SaveManager.load_data(SaveManager.SAVE_FILE_NAME)
 	
