@@ -26,6 +26,22 @@ func _ready():
 		var sprite = child.get_child(0)
 		heart_sprites.append(sprite)
 
+func _process(_delta):
+	if (get_tree().paused):
+		if Input.is_action_just_pressed("interact"):
+			#_set_text_box()
+			_get_next_line()
+			
+func _input(event):
+	if Input.is_action_just_pressed("menu"):
+		get_tree().paused = !get_tree().paused
+		if get_tree().paused:
+			pause_menu.on_show()
+			pause_menu.show()
+		else:
+			pause_menu._apply_changes()
+			pause_menu.hide()
+
 func _update_health_ui(new_health : int):
 	new_health = max(0, new_health)
 	
@@ -84,18 +100,3 @@ func _get_next_line():
 	else:
 		text_box.lines_skipped = dialogue_count * 3
 
-func _process(_delta):
-	if (get_tree().paused):
-		if Input.is_action_just_pressed("interact"):
-			#_set_text_box()
-			_get_next_line()
-			
-func _input(event):
-	if Input.is_action_just_pressed("menu"):
-		get_tree().paused = !get_tree().paused
-		if get_tree().paused:
-			pause_menu.on_show()
-			pause_menu.show()
-		else:
-			pause_menu._apply_changes()
-			pause_menu.hide()

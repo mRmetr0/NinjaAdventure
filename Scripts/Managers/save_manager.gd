@@ -29,7 +29,7 @@ func save_data(file_name : String, save_resource : SaveResource = null):
 		"current_level": GameManager.get_current_level_name(),
 		"player_data":{
 			"name": save_resource.player_name,
-			"coins": save_resource.coins, #TODO: FIX WEAPON AND SUIT SAVING
+			"coins": GameManager.main_player.coins, 
 			"weapons":{
 				"sword": save_resource.has_sword,
 				"whip": save_resource.has_whip,

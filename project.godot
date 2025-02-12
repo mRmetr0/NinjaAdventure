@@ -113,6 +113,7 @@ use_ability={
 2d_physics/layer_3="Weapons"
 2d_physics/layer_4="Projectiles"
 2d_physics/layer_5="BreakableObjects"
+2d_physics/layer_9="Player"
 
 [navigation]
 

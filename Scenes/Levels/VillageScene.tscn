@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://u87b5rn465pc"]
+[gd_scene load_steps=19 format=3 uid="uid://u87b5rn465pc"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_ow033"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_dw2li"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://djoeshveb5a5k" path="res://Assets/Actor/Characters/OldMan/SpriteSheet.png" id="10_tjplp"]
 [ext_resource type="Texture2D" uid="uid://dj5rpaonni5rc" path="res://Assets/Actor/Characters/Boy/Faceset.png" id="11_ott1f"]
 [ext_resource type="Texture2D" uid="uid://b08cf0j7vmcx8" path="res://Assets/Actor/Characters/Boy/SpriteSheet.png" id="12_ly4lq"]
+[ext_resource type="Texture2D" uid="uid://c2voml7c8b5gk" path="res://Assets/Items/Potion/LifePot.png" id="16_nux3x"]
+[ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/HealthPotion.tres" id="17_vvmar"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -9, 264, -9, 273, 400, -20, 399)])
@@ -108,10 +110,6 @@ position = Vector2(456, 16)
 [node name="BreakableObject5" parent="Objects" instance=ExtResource("5_llmtq")]
 position = Vector2(296, 16)
 
-[node name="PickUp" parent="Objects" instance=ExtResource("6_tmybw")]
-position = Vector2(896, 280)
-despawn_timer = -1.0
-
 [node name="Master" parent="." instance=ExtResource("5_hj00q")]
 position = Vector2(384, 64)
 collision_mask = 1
@@ -133,3 +131,8 @@ default_text = "People say you're leaving. Is that true? I wish I was strong eno
 
 [node name="Player" parent="." instance=ExtResource("4_expn1")]
 position = Vector2(184, 56)
+
+[node name="PickUp" parent="." instance=ExtResource("6_tmybw")]
+position = Vector2(896, 280)
+texture = ExtResource("16_nux3x")
+resource = ExtResource("17_vvmar")

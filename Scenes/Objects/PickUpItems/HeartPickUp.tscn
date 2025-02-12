@@ -1,14 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsqrq5pryofpa"]
+[gd_scene load_steps=4 format=3 uid="uid://b8pg5ggepc8vn"]
 
-[ext_resource type="Texture2D" uid="uid://bmqru0568d6ts" path="res://Assets/Items/Potion/Hear.png" id="1_lulae"]
-[ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="1_twvm7"]
-[ext_resource type="Script" path="res://Scripts/item_pickup.gd" id="2_erxp5"]
-[ext_resource type="Resource" uid="uid://cl5bgjglbp0bj" path="res://Resources/ItemResources/Heart.tres" id="2_kmxc1"]
+[ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="1_ujn4e"]
+[ext_resource type="Texture2D" uid="uid://bmqru0568d6ts" path="res://Assets/Items/Potion/Hear.png" id="2_debtd"]
+[ext_resource type="Resource" uid="uid://cl5bgjglbp0bj" path="res://Resources/ItemResources/Heart.tres" id="3_oitxt"]
 
-[node name="PickUp" instance=ExtResource("1_twvm7")]
-script = ExtResource("2_erxp5")
-resource = ExtResource("2_kmxc1")
-use_on_touch = true
-
-[node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("1_lulae")
+[node name="HeartPickUp" instance=ExtResource("1_ujn4e")]
+texture = ExtResource("2_debtd")
+resource = ExtResource("3_oitxt")
+use_resource_on_touch = true
+despawn_timer = 10.0

@@ -33,7 +33,7 @@ func setup_ui(game_ui : GameUI = null):
 	_set_weapon(weapon)
 	_set_item(item)
 	_set_suit(suit)
-	set_coins(coins)
+	set_coins(0)
 
 func _physics_process(delta):
 	if (Input.is_action_just_pressed("interact")):
@@ -74,7 +74,6 @@ func _handle_attack_input():
 		_attack (direction)
 		
 func _handle_item_used():
-	_take_damage(1)
 	if (item != null):
 		item._use_item(self)
 
@@ -83,14 +82,13 @@ func _set_item(_item : ItemResource):
 	emit_signal("ChangeItem", _item)
 	
 func _set_suit(_suit : SuitResource):
-	print(_suit.item_name)
 	if _suit != null:
 		suit = _suit
 		suit._set_suit(self)
 		
 func set_coins(value_change : int, new_text : Texture2D = null):
 	coins += value_change
-	emit_signal("ChangeCoins", coins)
+	emit_signal("ChangeCoins", coins, new_text)
 		
 func reset_state():
 	suit._reset_suit_ability()
