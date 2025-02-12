@@ -51,4 +51,14 @@ func _input(event):
 		if event.keycode == KEY_9:
 			print("LOADING GAME")
 			SaveManager.load_data(SaveManager.SAVE_FILE_NAME)
+		#if event.keycode == KEY_P:	#TODO: ADD GODMODE (for testing :)
+			#GODMODE:
+			#var god_resource = SaveResource.new()
+			#god_resource.save_file_name = SaveManager.SAVE_FILE_NAME
+			#god_resource.coins = 999
+			#god_resource.current_scene = GameManager.get_current_level_name()
+			#god_resource.set_weapons(true, true, true, true)
+			#god_resource.set_suits(true, true, true)
+			#
+			#god_resource.apply_data()
 	
