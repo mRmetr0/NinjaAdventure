@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://13siya7oyt25"]
+[gd_scene load_steps=23 format=3 uid="uid://13siya7oyt25"]
 
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
+[ext_resource type="Texture2D" uid="uid://ciy7ahh1on7mx" path="res://Assets/HUD/Dialog/WeaponBox.png" id="1_xv58y"]
 [ext_resource type="FontFile" uid="uid://do5usggxcsrm2" path="res://Assets/HUD/Font/NormalFont.ttf" id="2_s5wpd"]
 [ext_resource type="Texture2D" uid="uid://dej4dcpq7lnyp" path="res://Assets/HUD/Dialog/DialogueBoxSimple.png" id="4_j0n23"]
 [ext_resource type="Texture2D" uid="uid://da0v2o61tbbke" path="res://Assets/Actor/Characters/GreenNinja/Faceset.png" id="4_ptfur"]
@@ -23,6 +24,10 @@
 [sub_resource type="GDScript" id="GDScript_4uhu3"]
 script/source = "extends Control
 #PAUSE SCREEN MANAGER
+
+@export var weapon_box : Texture2D
+@export var suit_box : Texture2D
+@export var item_box : Texture2D
 
 @onready var profile : TextureRect = get_node(\"FacesetBox/Profile\")
 @onready var player : Player = get_parent().get_parent().get_parent().get_parent().get_node(\"Player\")
@@ -83,6 +88,7 @@ func _deselect_item(menu_item : MenuItemUI):
 		menu_item.modulate = Color.WHITE
 
 func _change_hover(menu_item : MenuItemUI):
+	_change_box_sprite(menu_item)
 	quit_button.on_hover_quit(menu_item.can_quit)
 	hovered_title.text = menu_item.item_title
 	hovered_desc.text = menu_item.item_desc
@@ -120,6 +126,14 @@ func _apply_changes():
 			player._set_suit(selected_suit.item)
 	else:
 		print(\"NOT VALID PLAYER\")
+
+func _change_box_sprite(hover_item : MenuItemUI):
+	if hover_item.item is WeaponResource:
+		hover_sprite.texture = weapon_box
+	elif hover_item.item is SuitResource:
+		hover_sprite.texture = suit_box
+	else:
+		hover_sprite.texture = item_box
 "
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
@@ -134,6 +148,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_4uhu3")
+weapon_box = ExtResource("1_xv58y")
+suit_box = ExtResource("1_5g772")
+item_box = ExtResource("1_5g772")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="."]
