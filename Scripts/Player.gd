@@ -83,6 +83,7 @@ func _set_item(_item : ItemResource):
 	emit_signal("ChangeItem", _item)
 	
 func _set_suit(_suit : SuitResource):
+	print(_suit.item_name)
 	if _suit != null:
 		suit = _suit
 		suit._set_suit(self)

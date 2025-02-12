@@ -197,6 +197,7 @@ position = Vector2(128, -352)
 script = ExtResource("7_sp1oi")
 resource = ExtResource("8_h4xw8")
 use_on_touch = true
+unlock_item_index = 0
 despawn_timer = 0.0
 
 [node name="Wall_1" type="StaticBody2D" parent="Objects" node_paths=PackedStringArray("opener", "closers")]

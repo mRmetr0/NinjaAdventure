@@ -46,19 +46,18 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_8:
 			print("SAVING GAME")
-			SaveManager.current_save_resource = SaveResource.new()
-			SaveManager.save_data(SaveManager.SAVE_FILE_NAME)
+			SaveManager.save_data(SaveManager.current_save_file)
 		if event.keycode == KEY_9:
 			print("LOADING GAME")
-			SaveManager.load_data(SaveManager.SAVE_FILE_NAME)
-		#if event.keycode == KEY_P:	#TODO: ADD GODMODE (for testing :)
+			var data = SaveManager.load_data(SaveManager.current_save_file)
+			data.apply_data()
+		if event.keycode == KEY_P:	#TODO: ADD GODMODE (for testing :)
 			#GODMODE:
-			#var god_resource = SaveResource.new()
-			#god_resource.save_file_name = SaveManager.SAVE_FILE_NAME
-			#god_resource.coins = 999
-			#god_resource.current_scene = GameManager.get_current_level_name()
-			#god_resource.set_weapons(true, true, true, true)
-			#god_resource.set_suits(true, true, true)
-			#
-			#god_resource.apply_data()
+			var god_resource = SaveManager.current_save_resource
+			god_resource.player_name = "GOD"
+			god_resource.coins = 999
+			god_resource.set_weapons(true, true, true, true)
+			god_resource.set_suits(true, true, true)
+			
+			SaveManager.current_save_resource = god_resource
 	

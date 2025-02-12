@@ -26,7 +26,8 @@ enum SelectState{
 
 var select_state : SelectState = SelectState.Null
 var selected_save : String
-var player
+var player : Player
+@onready var start_suit = preload(\"res://Resources/SuitResources/NoSuitResource.tres\")
 
 func _ready():
 	_show_options()
@@ -71,6 +72,7 @@ func on_difficulty_lock(title : String, desc : String):
 func on_new_game_start():
 	player.set_process(true)
 	player.set_physics_process(true)
+	player._set_suit(start_suit)
 	SaveManager.current_save_file = selected_save
 	SaveManager.current_save_resource = SaveResource.new()
 	SaveManager.current_save_resource.player_name = name_edit.text
