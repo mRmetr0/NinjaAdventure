@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://13siya7oyt25"]
+[gd_scene load_steps=22 format=3 uid="uid://13siya7oyt25"]
 
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
 [ext_resource type="Texture2D" uid="uid://ciy7ahh1on7mx" path="res://Assets/HUD/Dialog/WeaponBox.png" id="1_xv58y"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://clvqnbwrl4psa" path="res://Assets/Actor/Characters/RedNinja/Faceset.png" id="6_isg5y"]
 [ext_resource type="Resource" uid="uid://b1u7qqbwosliq" path="res://Resources/WeaponResources/Axe.tres" id="8_81wuh"]
 [ext_resource type="Resource" uid="uid://j8jb5anb2mnv" path="res://Resources/WeaponResources/LongSword.tres" id="9_2liti"]
-[ext_resource type="Resource" uid="uid://bievovl51vw3n" path="res://Resources/WeaponResources/GODTOOL.tres" id="10_8e367"]
 [ext_resource type="Texture2D" uid="uid://b3bqjfpt22pom" path="res://Assets/Actor/Characters/Cavegirl/Faceset.png" id="10_casdk"]
 [ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://Resources/WeaponResources/Whip.tres" id="10_hmrol"]
 [ext_resource type="Script" path="res://Scripts/menu_item_ui.gd" id="10_xrnae"]
@@ -41,29 +40,37 @@ var hovered_index = 0 # index of current item in list player is hovering over
 var list_index = 0 # index of current list player is selecting
 var list_layers = [] # amount of lists the player can chose between
 
-var weapons = []
+var all_weapons = []
+var available_weapons = []
 var selected_weapon : MenuItemUI
-var suits = []
+var all_suits = []
+var available_suits = []
 var selected_suit : MenuItemUI
 
 func _ready():
 	await get_tree().create_timer(0.5).timeout
 	#TODO: have data load from PlayerInventory instead
-	for child in get_node(\"ItemBoxBackground\").get_children():
-		var menu_item = child as MenuItemUI
-		weapons.append(menu_item)
+	for child in get_node(\"ItemBoxBackground/HBoxContainer\").get_children():
+		var menu_item = child.get_child(0) as MenuItemUI
+		all_weapons.append(menu_item)
 		if player != null:
 			if menu_item.item == player.weapon:
 				_select_item(menu_item)
 			
-	for child in get_node(\"ClothingBoxBackground\").get_children():
-		var menu_item = child as MenuItemUI
-		suits.append(menu_item)
+	for child in get_node(\"ClothingBoxBackground/HBoxContainer\").get_children():
+		var menu_item = child.get_child(0) as MenuItemUI
+		all_suits.append(menu_item)
 		if player != null:
 			if menu_item.item == player.suit:
 				_select_item(menu_item)
-	list_index = 0 if weapons.size() > 0 else 1
-	list_layers = [weapons, suits, [quit_button]]
+	available_suits.append(all_suits[0]) #saves the no-suit
+	list_index = 0 if available_weapons.size() > 0 else 1
+	list_layers = [available_weapons, available_suits, [quit_button]]
+	_change_hover(list_layers[list_index][hovered_index])
+
+func on_show():
+	_set_item_show()
+	list_index = 0 if available_weapons.size() > 0 else 1
 	_change_hover(list_layers[list_index][hovered_index])
 
 func _select_item(new_menu_item : MenuItemUI):
@@ -105,8 +112,8 @@ func _input(event):
 	elif event.is_action_pressed(\"down\"):
 		list_index = clamp(list_index + 1, 0, list_layers.size()-1)
 	
-	if list_layers[list_index].size() == 0:
-		return 
+	while list_layers[list_index].size() == 0:
+		list_index += 1 
 	
 	hovered_index = clamp(hovered_index, 0, list_layers[list_index].size()-1)
 	_change_hover(list_layers[list_index][hovered_index])
@@ -130,7 +137,33 @@ func _change_box_sprite(hover_item : MenuItemUI):
 		hover_sprite.texture = item_box
 		
 func _set_item_show():
-	pass
+	var data : SaveResource = SaveManager.current_save_resource
+	var counter = 0
+	#set weapons:
+	available_weapons.clear()
+	var has_weapon = data._get_weapons()
+	for weapon in all_weapons:
+		if has_weapon[counter]:
+			available_weapons.append(weapon)
+			weapon.get_parent().show() 
+		else:
+			weapon.get_parent().hide()
+		counter += 1
+	counter = -1
+	#set suits:
+	while available_suits.size() > 1:
+		available_suits.remove_at(1)
+	var has_suit = data._get_suits()
+	for suit in all_suits:
+		if counter < 0:
+			counter += 1
+			continue
+		if has_suit[counter]:
+			available_suits.append(suit)
+			suit.get_parent().show()
+		else:
+			suit.get_parent().hide()
+		counter +=1
 "
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
@@ -239,45 +272,60 @@ scale = Vector2(0.405, 0.405)
 texture = ExtResource("4_j0n23")
 expand_mode = 1
 
-[node name="Weapon1" type="Sprite2D" parent="ItemBoxBackground"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemBoxBackground"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 69.0
+theme_override_constants/separation = 35
+alignment = 1
+
+[node name="WeaponControl1" type="Control" parent="ItemBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Weapon1" type="Sprite2D" parent="ItemBoxBackground/HBoxContainer/WeaponControl1"]
 z_index = 5
-position = Vector2(30, 35)
 scale = Vector2(2, 2)
 texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
 item = ExtResource("6_0svyc")
 
-[node name="Weapon2" type="Sprite2D" parent="ItemBoxBackground"]
+[node name="WeaponControl2" type="Control" parent="ItemBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Weapon2" type="Sprite2D" parent="ItemBoxBackground/HBoxContainer/WeaponControl2"]
 z_index = 5
-position = Vector2(65, 35)
 scale = Vector2(2, 2)
 texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
 item = ExtResource("10_hmrol")
 
-[node name="Weapon3" type="Sprite2D" parent="ItemBoxBackground"]
+[node name="WeaponControl3" type="Control" parent="ItemBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Weapon3" type="Sprite2D" parent="ItemBoxBackground/HBoxContainer/WeaponControl3"]
 z_index = 5
-position = Vector2(100, 35)
 scale = Vector2(2, 2)
 texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
 item = ExtResource("8_81wuh")
 
-[node name="Weapon4" type="Sprite2D" parent="ItemBoxBackground"]
+[node name="WeaponControl4" type="Control" parent="ItemBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Weapon4" type="Sprite2D" parent="ItemBoxBackground/HBoxContainer/WeaponControl4"]
 z_index = 5
-position = Vector2(135, 35)
 scale = Vector2(2, 2)
 texture = ExtResource("4_xjbi5")
 script = ExtResource("10_xrnae")
 item = ExtResource("9_2liti")
-
-[node name="Weapon5" type="Sprite2D" parent="ItemBoxBackground"]
-z_index = 5
-position = Vector2(170, 35)
-scale = Vector2(2, 2)
-texture = ExtResource("4_xjbi5")
-script = ExtResource("10_xrnae")
-item = ExtResource("10_8e367")
 
 [node name="ClothingBoxBackground" type="TextureRect" parent="."]
 layout_mode = 1
@@ -289,30 +337,57 @@ scale = Vector2(0.405, 0.405)
 texture = ExtResource("4_j0n23")
 expand_mode = 1
 
-[node name="Outfit0" type="Sprite2D" parent="ClothingBoxBackground"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ClothingBoxBackground"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 69.0
+theme_override_constants/separation = 45
+alignment = 1
+
+[node name="SuitControl1" type="Control" parent="ClothingBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Outfit0" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl1"]
 z_index = 5
-position = Vector2(27, 35)
+scale = Vector2(1, 1)
 texture = ExtResource("10_casdk")
 script = ExtResource("10_xrnae")
 item = ExtResource("13_hkd2f")
 
-[node name="Outfit1" type="Sprite2D" parent="ClothingBoxBackground"]
+[node name="SuitControl2" type="Control" parent="ClothingBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Outfit1" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl2"]
 z_index = 5
-position = Vector2(75, 35)
+scale = Vector2(1, 1)
 texture = ExtResource("4_ptfur")
 script = ExtResource("10_xrnae")
 item = ExtResource("11_lybmh")
 
-[node name="Outfit2" type="Sprite2D" parent="ClothingBoxBackground"]
+[node name="SuitControl3" type="Control" parent="ClothingBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Outfit2" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl3"]
 z_index = 5
-position = Vector2(125, 35)
+scale = Vector2(1, 1)
 texture = ExtResource("6_isg5y")
 script = ExtResource("10_xrnae")
 item = ExtResource("15_xccn1")
 
-[node name="Outfit3" type="Sprite2D" parent="ClothingBoxBackground"]
+[node name="SuitControl4" type="Control" parent="ClothingBoxBackground/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Outfit3" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl4"]
 z_index = 5
-position = Vector2(172, 35)
+scale = Vector2(1, 1)
 texture = ExtResource("5_ihv8t")
 script = ExtResource("10_xrnae")
 item = ExtResource("17_vbssn")

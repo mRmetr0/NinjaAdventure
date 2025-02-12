@@ -94,6 +94,7 @@ func _input(event):
 	if Input.is_action_just_pressed("menu"):
 		get_tree().paused = !get_tree().paused
 		if get_tree().paused:
+			pause_menu.on_show()
 			pause_menu.show()
 		else:
 			pause_menu._apply_changes()
