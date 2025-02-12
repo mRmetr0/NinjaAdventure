@@ -4,7 +4,7 @@ const SAVE_PATH = "user://saves/"
 const GLOBAL_DATA_FILE_NAME = "global.json"
 const SAVE_FILE_NAME = "save.json"
 var current_save_file : String
-var current_save_resource : SaveResource
+var current_save_resource : SaveResource = SaveResource.new() # for testing purposes
 #const SECURITY_KEY = "0923874590"
 
 func _ready():

@@ -351,7 +351,6 @@ size_flags_vertical = 4
 
 [node name="Outfit0" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl1"]
 z_index = 5
-scale = Vector2(1, 1)
 texture = ExtResource("10_casdk")
 script = ExtResource("10_xrnae")
 item = ExtResource("13_hkd2f")
@@ -363,7 +362,6 @@ size_flags_vertical = 4
 
 [node name="Outfit1" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl2"]
 z_index = 5
-scale = Vector2(1, 1)
 texture = ExtResource("4_ptfur")
 script = ExtResource("10_xrnae")
 item = ExtResource("11_lybmh")
@@ -375,7 +373,6 @@ size_flags_vertical = 4
 
 [node name="Outfit2" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl3"]
 z_index = 5
-scale = Vector2(1, 1)
 texture = ExtResource("6_isg5y")
 script = ExtResource("10_xrnae")
 item = ExtResource("15_xccn1")
@@ -387,7 +384,6 @@ size_flags_vertical = 4
 
 [node name="Outfit3" type="Sprite2D" parent="ClothingBoxBackground/HBoxContainer/SuitControl4"]
 z_index = 5
-scale = Vector2(1, 1)
 texture = ExtResource("5_ihv8t")
 script = ExtResource("10_xrnae")
 item = ExtResource("17_vbssn")
