@@ -49,7 +49,6 @@ var selected_suit : MenuItemUI
 
 func _ready():
 	await get_tree().create_timer(0.0001).timeout
-	#TODO: have data load from PlayerInventory instead
 	for child in get_node(\"ItemBoxBackground/HBoxContainer\").get_children():
 		var menu_item = child.get_child(0) as MenuItemUI
 		all_weapons.append(menu_item)
@@ -420,7 +419,7 @@ grow_vertical = 2
 scale = Vector2(0.1, 0.1)
 theme_override_fonts/font = ExtResource("2_s5wpd")
 theme_override_font_sizes/font_size = 100
-text = "QUIT"
+text = "SAVE?"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://bf710tm3ps2rl"]
 
-[ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_aoi1f"]
-[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_d53qs"]
-[ext_resource type="PackedScene" uid="uid://b0yxyhit56ocu" path="res://Scenes/GameUI.tscn" id="3_115gr"]
-[ext_resource type="FontFile" uid="uid://ccvvahdhn6tgi" path="res://Assets/HUD/Font/joystix monospace.otf" id="4_6wb1q"]
-[ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="4_ul05u"]
-[ext_resource type="PackedScene" uid="uid://cxgfgvjdjnfe0" path="res://Scenes/Objects/Effects/full_screen_particles.tscn" id="5_j84rr"]
+[ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_qb6xd"]
+[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_72anh"]
+[ext_resource type="PackedScene" uid="uid://b0yxyhit56ocu" path="res://Scenes/GameUI.tscn" id="3_17ux6"]
+[ext_resource type="FontFile" uid="uid://ccvvahdhn6tgi" path="res://Assets/HUD/Font/joystix monospace.otf" id="4_bbpdp"]
+[ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="5_8s5nt"]
+[ext_resource type="PackedScene" uid="uid://cxgfgvjdjnfe0" path="res://Scenes/Objects/Effects/full_screen_particles.tscn" id="6_yppdw"]
 
 [sub_resource type="GDScript" id="GDScript_iedsq"]
 resource_name = "start_menu"
@@ -160,7 +160,7 @@ metadata/_edit_lock_ = true
 [node name="TileMap" type="TileMap" parent="NavigationRegion2D"]
 y_sort_enabled = true
 texture_filter = 1
-tile_set = ExtResource("1_aoi1f")
+tile_set = ExtResource("1_qb6xd")
 format = 2
 layer_0/name = "Ground decoration1"
 layer_0/y_sort_enabled = true
@@ -181,11 +181,11 @@ layer_4/tile_data = PackedInt32Array(0, 262144, 0, 65536, 196608, 1, 131072, 196
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-script = ExtResource("2_d53qs")
+script = ExtResource("2_72anh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="GameUI" parent="Camera2D/CanvasLayer" instance=ExtResource("3_115gr")]
+[node name="GameUI" parent="Camera2D/CanvasLayer" instance=ExtResource("3_17ux6")]
 visible = false
 metadata/_edit_lock_ = true
 
@@ -348,7 +348,7 @@ scale = Vector2(0.1, 0.1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_6wb1q")
+theme_override_fonts/font = ExtResource("4_bbpdp")
 theme_override_font_sizes/font_size = 50
 text = "Difficulty description"
 autowrap_mode = 3
@@ -374,10 +374,10 @@ text = "Suki"
 placeholder_text = "name..."
 max_length = 9
 
-[node name="Player" parent="." instance=ExtResource("4_ul05u")]
+[node name="Player" parent="." instance=ExtResource("5_8s5nt")]
 position = Vector2(128, 96)
 
-[node name="FullScreenParticle" parent="." instance=ExtResource("5_j84rr")]
+[node name="FullScreenParticle" parent="." instance=ExtResource("6_yppdw")]
 
 [connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/StartMenuContainer/NewGameButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/StartMenu/StartMenuContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

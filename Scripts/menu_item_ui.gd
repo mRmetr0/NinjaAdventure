@@ -39,16 +39,16 @@ func on_hover_quit(hovering = false):
 		item_text.modulate = Color.WHITE
 	else:
 		lock_quit = false
-		item_text.text = "QUIT"
+		item_text.text = "SAVE?"
 		item_text.modulate = Color.BLACK 
 
 func on_select_quit():
 	if lock_quit:
+		item_text.text = "QUITTING"
+		get_tree().quit() #TODO: RETURN TO TITLE SCREEN
+	else:
 		item_text.text = "SAVING"
 		SaveManager.save_data(SaveManager.current_save_file)
-		await get_tree().create_timer(0.1).timeout
-		get_tree().quit()
-		pass
-	else:
-		item_text.text = "SURE?"
+		await get_tree().create_timer(0.2).timeout
+		item_text.text = "QUIT?"
 		lock_quit = true
