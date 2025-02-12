@@ -4,6 +4,7 @@ class_name Player
 
 @export var item : ItemResource
 @export var suit : SuitResource
+var coins : int = 0
 
 var smoke = preload("res://Scenes/Objects/Effects/smoke_effect.tscn")
 var counter = preload("res://Scenes/Objects/Effects/single_particle.tscn")
@@ -13,30 +14,26 @@ var parrying = false
 
 signal Interact
 signal ChangeItem
+signal ChangeCoins
 
 func _ready ():
-	var hud = get_parent().get_node("Camera2D").get_child(0).get_child(0)
-	if (hud != null):
-		connect("ChangeWeapon", hud._update_weapon_ui)
-		connect("ChangeHealth", hud._update_health_ui)
-		connect("ChangeItem", hud._update_item_ui)
+	setup_ui()
+	
+func setup_ui(game_ui : GameUI = null):
+	if game_ui == null:
+		game_ui = get_parent().get_node("Camera2D").get_child(0).get_child(0)
+	if (game_ui != null):
+		connect("ChangeWeapon", game_ui._update_weapon_ui)
+		connect("ChangeHealth", game_ui._update_health_ui)
+		connect("ChangeItem", game_ui._update_item_ui)
+		connect("ChangeCoins", game_ui.update_money_ui)
 	else:
 		print("NO HUD FOUND")
-	
-	if (GameManager.player_health == -1):
-		GameManager.player_health = health
-		GameManager.player_weapon = weapon
-		GameManager.player_item = item
-		GameManager.player_suit = suit
-	else:
-		health = GameManager.player_health
-		weapon = GameManager.player_weapon
-		item = GameManager.player_item
-		suit = GameManager.player_suit
 	_set_health(health)
 	_set_weapon(weapon)
 	_set_item(item)
 	_set_suit(suit)
+	set_coins(coins)
 
 func _physics_process(delta):
 	if (Input.is_action_just_pressed("interact")):
@@ -86,9 +83,14 @@ func _set_item(_item : ItemResource):
 	emit_signal("ChangeItem", _item)
 	
 func _set_suit(_suit : SuitResource):
+	print(_suit.item_name)
 	if _suit != null:
 		suit = _suit
 		suit._set_suit(self)
+		
+func set_coins(value_change : int, new_text : Texture2D = null):
+	coins += value_change
+	emit_signal("ChangeCoins", coins)
 		
 func reset_state():
 	suit._reset_suit_ability()

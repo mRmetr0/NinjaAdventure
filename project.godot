@@ -11,16 +11,16 @@ config_version=5
 [application]
 
 config/name="NinjaAdventure"
-run/main_scene="res://Scenes/Levels/HomeScene.tscn"
+run/main_scene="res://Scenes/Levels/StartScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Assets/Items/Food/Sushi.png"
 
 [autoload]
 
 GameManager="*res://Scripts/Managers/game_manager.gd"
-PlayerInventory="*res://Scripts/Managers/player_inventory.gd"
 SoundManager="*res://Scripts/Managers/sound_manager.gd"
 ParticleManager="*res://Scripts/Managers/particle_manager.gd"
+SaveManager="*res://Scripts/Managers/save_manager.gd"
 
 [display]
 

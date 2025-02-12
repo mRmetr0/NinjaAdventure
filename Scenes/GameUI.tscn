@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0yxyhit56ocu"]
+[gd_scene load_steps=10 format=3 uid="uid://b0yxyhit56ocu"]
 
 [ext_resource type="Script" path="res://Scripts/GameUI.tres.gd" id="1_pmpyg"]
 [ext_resource type="Texture2D" uid="uid://bp7rqgxwdh1vw" path="res://Assets/HUD/Heart.png" id="1_u1nxu"]
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="2_gvxld"]
 [ext_resource type="Texture2D" uid="uid://cbixquk7apigo" path="res://Assets/Items/Treasure/SilverCoin.png" id="2_hnvid"]
+[ext_resource type="Texture2D" uid="uid://ciy7ahh1on7mx" path="res://Assets/HUD/Dialog/WeaponBox.png" id="4_1wwtk"]
 [ext_resource type="Texture2D" uid="uid://w3p4f7o87xjh" path="res://Assets/HUD/Dialog/DialogBoxFaceset.png" id="4_8djfl"]
 [ext_resource type="Texture2D" uid="uid://b4610sl2fi4qg" path="res://Assets/Items/Potion/WaterPot.png" id="5_e683n"]
 [ext_resource type="Texture2D" uid="uid://d4nb6sn0xywmx" path="res://Assets/Items/Weapons/Sword2/Sprite.png" id="5_jiqq3"]
@@ -73,7 +74,7 @@ offset_top = -34.0
 offset_right = 34.0
 offset_bottom = -4.0
 grow_vertical = 0
-texture = ExtResource("2_gvxld")
+texture = ExtResource("4_1wwtk")
 expand_mode = 1
 stretch_mode = 5
 

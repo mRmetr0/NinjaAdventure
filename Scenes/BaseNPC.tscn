@@ -51,11 +51,11 @@ moveSpeed = 40
 portrait = ExtResource("2_vem8i")
 sprite_sheet = ExtResource("3_6ssvw")
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_6ssvw")
-
 [node name="WalkingCollider" parent="." index="1"]
 shape = SubResource("CircleShape2D_xpqn2")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_6ssvw")
 
 [node name="Timer" type="Timer" parent="." index="4"]
 autostart = true
