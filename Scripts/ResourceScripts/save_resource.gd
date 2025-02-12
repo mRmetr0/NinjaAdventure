@@ -13,7 +13,6 @@ var has_sword = false
 var has_whip = false
 var has_axe = false
 var has_great_sword = false
-var has_god_tool = false
 #Collected suits check:
 var current_suit_equip = -1
 var has_green_suit = false
@@ -24,25 +23,19 @@ func apply_data():
 	GameManager._change_scene(current_scene)
 	GameManager.main_player.coins = coins
 
-func convert_collection(list : Array):
-	var string = ""
-	for weapon in list:
-		if weapon:
-			string += "1"
-		else:
-			string +="0"
+func set_weapons(_has_sword : bool, _has_whip : bool, _has_axe : bool, _has_g_sword : bool):
+	has_sword = _has_sword
+	has_whip = _has_whip
+	has_axe = _has_axe
+	has_great_sword = _has_g_sword
 
-func _revert_collection(input : String, list : Array):
-	if list == null:
-		print("List is null")
-		return
-	var counter = 0
-	for bit in input:
-		list[0] = int(bit) == 0
-		counter += 1
+func set_suits(_has_green : bool, _has_rage : bool, has_snow : bool):
+	has_great_sword = _has_green
+	has_rage_suit = _has_rage
+	has_snow_suit = has_snow
 	
 func _get_weapons():
-	return [has_sword, has_whip, has_axe, has_great_sword, has_god_tool]
+	return [has_sword, has_whip, has_axe, has_great_sword]
 	
 func _get_suits():
 	return[has_great_sword, has_rage_suit, has_snow_suit]

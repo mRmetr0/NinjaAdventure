@@ -46,6 +46,7 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_8:
 			print("SAVING GAME")
+			SaveManager.current_save_resource = SaveResource.new()
 			SaveManager.save_data(SaveManager.SAVE_FILE_NAME)
 		if event.keycode == KEY_9:
 			print("LOADING GAME")

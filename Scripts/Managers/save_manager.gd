@@ -30,8 +30,17 @@ func save_data(file_name : String, save_resource : SaveResource = null):
 		"player_data":{
 			"name": save_resource.player_name,
 			"coins": save_resource.coins, #TODO: FIX WEAPON AND SUIT SAVING
-			#"weapons": save_resource.convert_collection(save_resource._get_weapons()),
-			#"suits": save_resource.convert_collection(save_resource._get_suits())
+			"weapons":{
+				"sword": save_resource.has_sword,
+				"whip": save_resource.has_whip,
+				"axe": save_resource.has_axe,
+				"great_sword": save_resource.has_great_sword
+			},
+			"suits": {
+				"green": save_resource.has_green_suit,
+				"rage": save_resource.has_rage_suit,
+				"snow": save_resource.has_snow_suit
+			}
 		}
 	}
 	print(data)
@@ -50,11 +59,13 @@ func load_data(file_name : String):
 	save_resource.player_name = data.player_data.name
 	save_resource.current_scene = data.current_level
 	save_resource.coins = data.player_data.coins
-	#save_resource._revert_collection(data.player_data.weapons, save_resource._get_weapons())
-	#save_resource._revert_collection(data.player_data.suits, save_resource._get_suits())
-	
-	#current_save_resource = save_resource
-	#save_resource.apply_data()
+	var weapons = data.player_data.weapons
+	if weapons != null:
+		save_resource.set_weapons(weapons.sword, weapons.whip, weapons.axe, weapons.great_sword)
+	var suits = data.player_data.suits
+	if suits != null:
+		save_resource.set_suits(suits.green, suits.rage, suits.snow)
+
 	return save_resource
 
 func _load_global_data():	

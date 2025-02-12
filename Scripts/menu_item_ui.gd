@@ -48,7 +48,7 @@ func on_select_quit():
 		SaveManager.save_data(SaveManager.current_save_file)
 		await get_tree().create_timer(0.1).timeout
 		get_tree().quit()
-		pass #TODO SAVE AND QUIT
+		pass
 	else:
 		item_text.text = "SURE?"
 		lock_quit = true
