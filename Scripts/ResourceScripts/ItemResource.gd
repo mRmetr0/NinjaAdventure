@@ -4,20 +4,24 @@ class_name ItemResource
 
 enum effects {
 	HEAL_HEALTH,
-	RESTORE_ENERGY
+	RESTORE_ENERGY,
+	NULL
 	}
 
 @export var name : String
 @export var icon : Texture2D
 @export var expendable : bool
 @export var expendable_amount : int
-## gamer
+# on use data
 @export var effect : effects
 @export var value : int
+@export var use_sound = SoundManager.SOUND.NULL
 
 func _use_item(player):
 	#if expendable_amount <= 0:
 		#return
+	
+	SoundManager.play_sound(use_sound)
 	
 	match effect:
 		effects.HEAL_HEALTH:

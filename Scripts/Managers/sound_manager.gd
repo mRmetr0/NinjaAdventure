@@ -3,10 +3,13 @@ extends AudioStreamPlayer
 const PATH = "res://Sounds/SFX/"
 
 const sound_paths = [
+	# Sounds for characters
 	"hurt_sound.wav", 
 	"lose_sound.wav", 
 	"light_attack_sound.wav", 
 	"heavy_attack_sound.wav", 
+	"use_healing.wav",
+	# Misc sounds
 	"door_sound.wav", 
 	"pick_up_sound.wav", 
 	"smoke_sound.wav",
@@ -21,6 +24,7 @@ enum SOUND {
 	DIE,
 	L_ATTACK,
 	H_ATTACK,
+	HEAL,
 	# Misc sounds
 	DOOR,
 	PICK_UP,
@@ -42,5 +46,7 @@ func _get_sound(sound_name : SOUND):
 
 
 func play_sound(sound_name : SOUND):
+	if sound_name == SOUND.NULL:
+		return
 	stream = _get_sound(sound_name)
 	play()
