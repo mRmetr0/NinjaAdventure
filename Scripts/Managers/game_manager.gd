@@ -4,6 +4,7 @@ var random = RandomNumberGenerator.new()
 
 var current_level
 var main_player : Player
+var main_hud : GameUI
 const AUTOLOAD_AMOUNT = 4
 
 func _ready():

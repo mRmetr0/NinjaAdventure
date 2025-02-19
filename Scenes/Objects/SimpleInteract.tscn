@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://boj2yua2rwd2t"]
+
+[ext_resource type="Texture2D" uid="uid://ddqu5a75ibif7" path="res://Assets/FX/Particle/Spark.png" id="1_tlnl4"]
+[ext_resource type="Script" path="res://Scripts/ComponentScripts/InteractComponent.gd" id="2_wf84b"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ia5b"]
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y0jmh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(7, 7, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="SimpleInteract" type="Node2D"]
+script = ExtResource("2_wf84b")
+interact_dist = 20.0
+interact_text = "[INTERACT_TEXT]"
+
+[node name="Node2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4ia5b")
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_y0jmh")
+texture = ExtResource("1_tlnl4")
+
+[node name="KeyPrompt" type="Label" parent="."]
+offset_left = -3.0
+offset_top = -22.0
+offset_right = 75.0
+offset_bottom = 113.0
+scale = Vector2(0.1, 0.1)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 100
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
