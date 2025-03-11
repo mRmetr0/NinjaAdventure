@@ -26,7 +26,7 @@ func _process(_delta):
 		
 func _on_player_interact():
 	if _get_player_close():
-		hud._set_text_box(default_text, portrait)
+		hud._set_text_box(portrait, default_text)
 
 func _on_timer_timeout():
 	if (_get_player_close()):

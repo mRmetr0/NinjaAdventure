@@ -54,14 +54,14 @@ func _ready():
 		all_weapons.append(menu_item)
 		if player != null:
 			if menu_item.item == player.weapon:
-				_select_item(menu_item)
+				_select_item(menu_item, false)
 			
 	for child in get_node(\"ClothingBoxBackground/HBoxContainer\").get_children():
 		var menu_item = child.get_child(0) as MenuItemUI
 		all_suits.append(menu_item)
 		if player != null:
 			if menu_item.item == player.suit:
-				_select_item(menu_item)
+				_select_item(menu_item, false)
 	available_suits.append(all_suits[0]) #saves the no-suit
 	list_index = 0 if available_weapons.size() > 0 else 1
 	list_layers = [available_weapons, available_suits, [quit_button]]
@@ -73,7 +73,9 @@ func on_show():
 	hovered_index = clamp(hovered_index, 0, list_layers[list_index].size())
 	_change_hover(list_layers[list_index][hovered_index])
 
-func _select_item(new_menu_item : MenuItemUI):
+func _select_item(new_menu_item : MenuItemUI, play_sound = true):
+	if play_sound:
+		SoundManager.play_sound(SoundManager.SOUND.L_ATTACK)
 	if new_menu_item.can_quit:
 		quit_button.on_select_quit()
 		return

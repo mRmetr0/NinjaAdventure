@@ -45,6 +45,7 @@ func on_hover_quit(hovering = false):
 func on_select_quit():
 	if lock_quit:
 		item_text.text = "QUITTING"
+		await get_tree().create_timer(0.2).timeout
 		get_tree().quit() #TODO: RETURN TO TITLE SCREEN
 	else:
 		item_text.text = "SAVING"

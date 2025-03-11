@@ -30,12 +30,14 @@ func save_data(file_name : String, save_resource : SaveResource = null):
 		"player_data":{
 			"name": save_resource.player_name,
 			"coins": GameManager.main_player.coins, 
+			"current_weapon": 0,
 			"weapons":{
 				"sword": save_resource.has_sword,
 				"whip": save_resource.has_whip,
 				"axe": save_resource.has_axe,
 				"great_sword": save_resource.has_great_sword
 			},
+			"current_suit": 0,
 			"suits": {
 				"green": save_resource.has_green_suit,
 				"rage": save_resource.has_rage_suit,
