@@ -15,9 +15,6 @@ var parrying = false
 signal Interact
 signal ChangeItem
 signal ChangeCoins
-
-func _ready ():
-	setup_ui()
 	
 func setup_ui(game_ui : GameUI = null):
 	if game_ui == null:
