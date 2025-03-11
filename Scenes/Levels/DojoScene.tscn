@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dqxpboiqpichx"]
+[gd_scene load_steps=22 format=3 uid="uid://dqxpboiqpichx"]
 
 [ext_resource type="TileSet" uid="uid://duxxfmxo0ou7w" path="res://Assets/InteriorTileset.tres" id="1_vxxd5"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_fy8br"]
@@ -15,8 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://bmyqrdbhbba2l" path="res://Assets/Actor/Characters/EggGirl/Faceset.png" id="13_l7qid"]
 [ext_resource type="Texture2D" uid="uid://d4nb6sn0xywmx" path="res://Assets/Items/Weapons/Sword2/Sprite.png" id="14_5q2wg"]
 [ext_resource type="Texture2D" uid="uid://cvbw4h8k7ls8k" path="res://Assets/Actor/Characters/EggGirl/SpriteSheet.png" id="14_u0se4"]
-[ext_resource type="PackedScene" uid="uid://bw4j3e7mcbda2" path="res://Scenes/Objects/PickUpItems/GoldPickUp.tscn" id="16_lfaxr"]
-[ext_resource type="PackedScene" uid="uid://duoqbsj0kmmrp" path="res://Scenes/Objects/PickUpItems/SilverPickUp.tscn" id="17_0xxgi"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 vertices = PackedVector2Array(487, -265, 489, -361, 489, -215, 487, -263, 487, -311, 487, -313, 487, -359, 327, -265, 327, -311, 329, -295, 329, -215, 423, -89, 441, -87, 279, -87, 345, -89, 423, -297, 439, -295, 345, -297, 487, -217, 439, -215, 441, -217, 439, -231, 441, -263, 279, -361, 441, -359, 345, -359, 327, -313, 327, -359, 441, -119, 423, -119, 441, -311, 441, -313, 393, -169, 489, -169, 489, -151, 297, -151, 279, -39, 263, -39, 263, -57, 281, -57, 281, -25, 279, -23, 329, -23, 311, -25, 329, -39, 311, -57, 329, -57, 329, -41, 423, -39, 423, -41, 423, -57, 441, -57, 441, -25, 423, -23, 489, -23, 471, -25, 489, -121, 471, -119, 327, -121, 345, -119, 327, -89, 297, -89, 279, -169, 375, -169, 393, -231, 375, -249, 439, -249, 441, -265, 281, -313, 281, -311, 279, -215, 279, -231, 311, -233, 263, -231, 263, -233, 311, -263, 281, -265, 279, -263, 281, -359, 423, -359)
@@ -252,7 +250,7 @@ shape = SubResource("RectangleShape2D_pjy6d")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("4_s5xy5")]
-position = Vector2(128, -328)
+position = Vector2(128, 88)
 sprite_sheet = null
 
 [node name="Monk" parent="." instance=ExtResource("9_bnrol")]
@@ -356,12 +354,6 @@ position = Vector2(128, -352)
 texture = ExtResource("14_5q2wg")
 resource = ExtResource("8_h4xw8")
 unlock_item_index = 0
-
-[node name="SilverPickUp" parent="." instance=ExtResource("17_0xxgi")]
-position = Vector2(88, -320)
-
-[node name="GoldPickUp" parent="." instance=ExtResource("16_lfaxr")]
-position = Vector2(80, -336)
 
 [connection signal="body_entered" from="Objects/WallOpener1" to="Objects/WallOpener1" method="_on_body_entered"]
 [connection signal="body_entered" from="Objects/WallOpener2" to="Objects/WallOpener2" method="_on_body_entered"]

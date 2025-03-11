@@ -20,7 +20,7 @@ enum SelectState{
 @onready var saves_container = get_node(\"Camera2D/CanvasLayer/StartMenu/SavesContainer\")
 @onready var difficulties_container = get_node(\"Camera2D/CanvasLayer/StartMenu/DifficultiesContainer\")
 @onready var difficulties_box = get_node(\"Camera2D/CanvasLayer/StartMenu/DescBox\")
-@onready var difficulties_desc = get_node(\"Camera2D/CanvasLayer/StartMenu/DescBox/Label\")
+@onready var difficulties_desc = get_node(\"Camera2D/CanvasLayer/StartMenu/DescBox/DifficultyDesc\")
 @onready var name_edit = get_node(\"Camera2D/CanvasLayer/StartMenu/DescBox/NameEdit\")
 
 var select_state : SelectState = SelectState.Null
@@ -64,7 +64,7 @@ func on_save_press(save_name : String):
 
 #difficulty logic
 func on_difficulty_lock(title : String, desc : String):
-	difficulties_desc = title + \"\\n\" + desc
+	difficulties_desc.text = title + \"\\n\" + desc
 
 func on_new_game_start():
 	player.set_process(true)
@@ -96,6 +96,10 @@ func _show_difficulties():
 	saves_container.hide()
 	difficulties_container.show()
 	difficulties_box.show()
+	for child in difficulties_container.get_children():
+		if child.default_difficulty:
+			child._on_difficulty_press()
+			return
 
 "
 
@@ -278,9 +282,9 @@ scale = Vector2(0.2, 0.2)
 [node name="Difficulty1" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-disabled = true
 text = "Apprentice"
 script = SubResource("GDScript_0k21y")
+desc = "For newer players, enemies have fewer health and the player starts with more. Cannot unlock achievements with this option."
 metadata/_edit_lock_ = true
 
 [node name="Difficulty2" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
@@ -295,17 +299,17 @@ metadata/_edit_lock_ = true
 [node name="Difficulty3" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-disabled = true
 text = "Master"
 script = SubResource("GDScript_0k21y")
+desc = "For those seeking a challange. Player starts out weaker and enemies are faster."
 metadata/_edit_lock_ = true
 
 [node name="Difficulty4" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-disabled = true
 text = "GrandMaster"
 script = SubResource("GDScript_0k21y")
+desc = "Final difficulty. Player starts out weakest, enemies are faster and health is harder to find. But all items seem different..."
 metadata/_edit_lock_ = true
 
 [node name="BackButton" type="Button" parent="Camera2D/CanvasLayer/StartMenu/DifficultiesContainer"]
@@ -322,7 +326,7 @@ offset_top = 117.0
 offset_right = 243.0
 offset_bottom = 167.0
 
-[node name="Label" type="Label" parent="Camera2D/CanvasLayer/StartMenu/DescBox"]
+[node name="DifficultyDesc" type="Label" parent="Camera2D/CanvasLayer/StartMenu/DescBox"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
