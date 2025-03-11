@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckrpjjbi14kov"]
+[gd_scene load_steps=8 format=3 uid="uid://ckrpjjbi14kov"]
 
 [ext_resource type="TileSet" uid="uid://duxxfmxo0ou7w" path="res://Assets/InteriorTileset.tres" id="1_gy420"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_wergj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="4_p10fa"]
 [ext_resource type="PackedScene" uid="uid://boj2yua2rwd2t" path="res://Scenes/Objects/SimpleInteract.tscn" id="6_ex5fq"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_xofx8"]
+[ext_resource type="PackedScene" uid="uid://dqqvy88qirldk" path="res://Scenes/Objects/Effects/curio_particle.tscn" id="7_cf13x"]
 
 [node name="HomeScene" type="TileMap"]
 y_sort_enabled = true
@@ -58,3 +59,6 @@ interact_text = "My old stuff!
 
 
 There is nothing inside that is worth bringing..."
+
+[node name="Node2D" parent="." instance=ExtResource("7_cf13x")]
+position = Vector2(136, 96)
