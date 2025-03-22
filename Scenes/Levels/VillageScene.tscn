@@ -140,7 +140,7 @@ interact_dist = 15.0
 interact_text = "Is it true that you're leaving the village? I wish I could get out of here and fight evil too..."
 
 [node name="Player" parent="." instance=ExtResource("4_expn1")]
-position = Vector2(136, 312)
+position = Vector2(184, 56)
 
 [node name="PickUp" parent="." instance=ExtResource("6_tmybw")]
 position = Vector2(896, 280)

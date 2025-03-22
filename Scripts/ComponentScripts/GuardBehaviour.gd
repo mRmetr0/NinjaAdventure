@@ -26,28 +26,27 @@ func _process(_delta):
 	ray.rotation = atan2(-character.horiDir, character.vertDir)
 	if ray.get_collider() == player && !player.camouflaged:
 		#hud._set_text_box(portrait, default_text)
-		emit_signal("close_door", true)
+		emit_signal("OnNotice", true)
 		#set_process(false)
 		# TODO: Make guards call out player before closing door
 
-func _physics_process(delta):	
-	if position.distance_to(agent.get_final_position()) < 5:
+func _physics_process(delta):
+	if character.global_position.distance_to(agent.get_final_position()) < 5:
 		_get_new_route()
 	var direction = to_local(agent.get_next_path_position()).normalized()
 	character.vertDir = direction.y
 	character.horiDir = direction.x	
 	
-	character.super._physics_process(delta)
-	
 func _get_new_route():
 	set_physics_process(false)
+	character.set_physics_process(false)
 	progress += 1
 	if progress >= route.size():
 		progress = 0
 	agent.target_position = route[progress]
 	await get_tree().create_timer(wait_time).timeout
 	set_physics_process(true)
+	character.set_physics_process(true)
 	
 func _enable(_bool : bool):
 	set_process(true)
-	
