@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fa8vr88mr66r"]
+[gd_scene load_steps=11 format=3 uid="uid://fa8vr88mr66r"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_0ulul"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_0eh0v"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bievovl51vw3n" path="res://Resources/WeaponResources/GODTOOL.tres" id="6_b2o7k"]
 [ext_resource type="PackedScene" uid="uid://c0s51lbml2chh" path="res://Scenes/Objects/BreakableObject.tscn" id="7_o36od"]
 [ext_resource type="PackedScene" uid="uid://c6l0w6xyhd0c6" path="res://Scenes/BaseEnemy.tscn" id="8_48c5j"]
+[ext_resource type="Resource" uid="uid://qush0f74vgxp" path="res://Resources/WeaponResources/Whip.tres" id="9_ia78w"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 vertices = PackedVector2Array(-89, 103, -55, 87, -15, 87, -15, 169, -185, 167, -121, 119, -89, 73, -55, 23, -233, 23, -135, 73, -233, 121, -167, 89, -135, 89, -185, 121, -167, 119, -121, 103, -233, 169, -233, 167)
@@ -57,7 +58,7 @@ script = ExtResource("2_0eh0v")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." groups=["hitbox"] instance=ExtResource("4_oiy3r")]
-position = Vector2(128, 168)
+position = Vector2(-90, 143)
 weapon = ExtResource("6_b2o7k")
 
 [node name="SceneChangeBox" parent="." instance=ExtResource("5_krb3e")]
@@ -81,7 +82,9 @@ position = Vector2(-56, 24)
 [node name="Enemy" parent="." instance=ExtResource("8_48c5j")]
 position = Vector2(-72, 120)
 resetable = true
+weapon = ExtResource("9_ia78w")
 
 [node name="Enemy2" parent="." instance=ExtResource("8_48c5j")]
+visible = false
 position = Vector2(-168, 64)
 resetable = true

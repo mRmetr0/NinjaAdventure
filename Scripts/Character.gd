@@ -18,6 +18,8 @@ var current_color_state = Color.WHITE
 var canAct = true
 @onready var animator : BaseAnimator = get_node("AnimationPlayer")
 #status effects:
+@export var invincibility_duration : float = 0.1
+var invincibility_counter : float = 0.0
 var raged = false;
 var frozen = false;
 @onready var rage_component : StatusComponent = get_node("RageComponent")
@@ -35,6 +37,10 @@ func _physics_process(_delta):
 	
 	if canAct:
 		_handle_movement(_delta)
+
+	if invincibility_counter > 0:
+		invincibility_counter -= _delta
+		
 
 func _handle_movement(_delta):	
 	var moveDirection = Vector2(horiDir, vertDir)
@@ -62,8 +68,12 @@ func _set_health(newHealth : int):
 	emit_signal("ChangeHealth", health)
 	
 func _take_damage(damage : int, stun_lock = 1.0):
+	if invincibility_counter > 0:
+		return
+	print(name, "Took " + str(damage))
 	_set_health(health - damage)
 	stun_lock = max(stun_lock, 0.3)
+	invincibility_counter = invincibility_duration
 	canAct = false
 	if (health > 0):
 		SoundManager.play_sound(SoundManager.SOUND.HURT)
@@ -92,7 +102,7 @@ func _attack(direction : Vector2):
 
 func _color_hurt():
 	animator.sprite.modulate = Color.RED
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(invincibility_duration).timeout
 	animator.sprite.modulate = current_color_state
 
 func _handle_rage(apply : bool, duration = -1):
