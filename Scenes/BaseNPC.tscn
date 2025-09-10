@@ -10,23 +10,13 @@ script/source = "extends Character
 
 @export var interact_dist : float
 
-@onready var hud = get_parent().get_node(\"Camera2D\").get_child(0).get_child(0)
+@onready var hud = GameManager.current_level.get_node(\"Camera2D\").get_child(0).get_child(0)
 @onready var player = get_parent().get_node(\"Player\")
-@onready var prompt = get_node(\"KeyPrompt\")
 var rand = RandomNumberGenerator.new()
 
-func _ready():		
-	prompt.hide()
-	player.connect(\"Interact\", _on_player_interact)
-
 func _process(_delta):
-	prompt.visible = _get_player_close()
 	if _get_player_close():
 		animator._set_walk_animation(player.position - position)
-		
-func _on_player_interact():
-	if _get_player_close():
-		hud._set_text_box(portrait, default_text)
 
 func _on_timer_timeout():
 	if (_get_player_close()):
@@ -57,19 +47,7 @@ shape = SubResource("CircleShape2D_xpqn2")
 [node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("3_6ssvw")
 
-[node name="Timer" type="Timer" parent="." index="4"]
+[node name="Timer" type="Timer" parent="." index="7"]
 autostart = true
-
-[node name="KeyPrompt" type="Label" parent="." index="5"]
-offset_left = -3.0
-offset_top = -22.0
-offset_right = 75.0
-offset_bottom = 113.0
-scale = Vector2(0.1, 0.1)
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 100
-text = "E"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

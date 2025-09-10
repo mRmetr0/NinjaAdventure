@@ -29,7 +29,7 @@ script/source = "extends Control
 @export var item_box : Texture2D
 #references to other nodes
 @onready var profile : TextureRect = get_node(\"FacesetBox/Profile\")
-@onready var player : Player = get_parent().get_parent().get_parent().get_parent().get_node(\"Player\")
+@onready var player : Player = GameManager.main_player
 @onready var hover_sprite : Sprite2D = get_node(\"HoverSprite\")
 @onready var hovered_title : Label = get_node(\"ItemTextBackground/SelectedItemTitle\")
 @onready var hovered_desc : Label = get_node(\"ItemTextBackground/SelectedItemDesc\")

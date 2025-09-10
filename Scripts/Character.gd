@@ -13,9 +13,7 @@ signal ChangeWeapon (new_weapon : WeaponResource)
 @export var sprite_sheet : Texture2D
 @export var update_sprite_sheet : bool
 var current_color_state = Color.WHITE
-#TODO: remove default_text and move it to an 
-#	"interactable component" to apply on anything interactable
-@export_multiline var default_text : String
+
 @export var weapon : WeaponResource
 var canAct = true
 @onready var animator : BaseAnimator = get_node("AnimationPlayer")
@@ -97,3 +95,7 @@ func _color_hurt():
 
 func _handle_rage(apply : bool, duration = -1):
 	rage_component._handle_status(apply, duration)
+
+
+func _enable(extra_arg_0):
+	pass # Replace with function body.
