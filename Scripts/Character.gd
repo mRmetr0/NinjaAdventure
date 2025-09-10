@@ -76,6 +76,8 @@ func _take_damage(damage : int, stun_lock = 1.0):
 		set_physics_process(false)
 		var col = get_node("WalkingCollider")
 		col.call_deferred("set_disabled", true)
+		animator.play("RESET")
+		await get_tree().process_frame
 		animator.play("die")
 
 func _attack(direction : Vector2):
@@ -95,7 +97,3 @@ func _color_hurt():
 
 func _handle_rage(apply : bool, duration = -1):
 	rage_component._handle_status(apply, duration)
-
-
-func _enable(extra_arg_0):
-	pass # Replace with function body.

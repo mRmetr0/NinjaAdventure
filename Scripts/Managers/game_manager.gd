@@ -5,13 +5,14 @@ var random = RandomNumberGenerator.new()
 var current_level
 var main_player : Player
 var main_hud : GameUI
-const AUTOLOAD_AMOUNT = 4
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	current_level = get_tree().root.get_child(AUTOLOAD_AMOUNT)
+	current_level = get_tree().root.get_child(get_tree().root.get_child_count()-1)
 	main_player = current_level.get_node("Player")
-	
+	if current_level.name != "StartScene":
+		await get_tree().process_frame
+		main_player.setup_ui()
 
 func _change_scene(next_scene : String, newPos = null):
 	current_level.remove_child(main_player)

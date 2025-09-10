@@ -10,16 +10,23 @@
 resource_name = "parry_hitbox"
 script/source = "extends Area2D
 
+@export var base_damage = 1
+@export var base_stun_lock = 0.5
+
 @onready var character : Character = get_parent()
 @onready var character_hbox = character.get_node(\"BodyCollider\")
 
 func _on_area_entered(area):
 	if area.is_in_group(\"hitbox\") && area != character_hbox:
-		area._take_damage(character.weapon.damage, character.weapon.stun_lock)
+		var damage = base_damage if character.weapon == null else character.weapon.damage
+		var stun_lock = base_stun_lock if character.weapon == null else character.weapon.stun_lock
+		area._take_damage(damage, stun_lock)
 
 func _on_body_entered(body):
 	if body.is_in_group(\"hitbox\") && body != character:
-		body._take_damage(character.weapon.damage, character.weapon.stun_lock)
+		var damage = base_damage if character.weapon == null else character.weapon.damage
+		var stun_lock = base_stun_lock if character.weapon == null else character.weapon.stun_lock
+		body._take_damage(damage, stun_lock)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y4alc"]

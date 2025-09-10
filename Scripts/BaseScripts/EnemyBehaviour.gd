@@ -38,5 +38,6 @@ func _on_screen():
 
 func _off_screen():
 	if resetable:
+		await get_tree().create_timer(0.15).timeout
 		_reset()
 	set_physics_process(false)

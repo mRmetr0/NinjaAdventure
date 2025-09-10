@@ -73,7 +73,7 @@ func on_new_game_start():
 	SaveManager.current_save_file = selected_save
 	SaveManager.current_save_resource = SaveResource.new()
 	SaveManager.current_save_resource.player_name = name_edit.text
-	GameManager._change_scene(\"HomeScene\")
+	await GameManager._change_scene(\"HomeScene\")
 	
 #Remaining logic
 func _show_saves(enable_empty : bool = true):
@@ -108,7 +108,7 @@ script/source = "extends Button
 
 @export var save_name : String
 
-@onready var start_manager = get_tree().root.get_child(GameManager.AUTOLOAD_AMOUNT)
+@onready var start_manager = get_tree().root.get_child(get_tree().root.get_child_count()-1)
 
 var has_data = false
 
@@ -133,7 +133,7 @@ func _on_save_button_press():
 [sub_resource type="GDScript" id="GDScript_0k21y"]
 script/source = "extends Button
 
-@onready var manager = get_tree().root.get_child(GameManager.AUTOLOAD_AMOUNT)
+@onready var manager = get_tree().root.get_child(get_tree().root.get_child_count()-1)
 
 var title : String
 @export_multiline var desc : String
