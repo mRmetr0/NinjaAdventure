@@ -15,7 +15,7 @@ var parrying = false
 signal Interact
 signal ChangeItem
 signal ChangeCoins
-	
+
 func setup_ui(game_ui : GameUI = null):
 	if game_ui == null:
 		game_ui = get_parent().get_node("Camera2D").get_child(0).get_child(0)

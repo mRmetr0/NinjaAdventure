@@ -95,3 +95,7 @@ func _color_hurt():
 
 func _handle_rage(apply : bool, duration = -1):
 	rage_component._handle_status(apply, duration)
+
+
+func _enable(extra_arg_0):
+	pass # Replace with function body.

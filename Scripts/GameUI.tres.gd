@@ -32,7 +32,7 @@ func _process(_delta):
 			#_set_text_box()
 			_get_next_line()
 			
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("menu"):
 		get_tree().paused = !get_tree().paused
 		if get_tree().paused:

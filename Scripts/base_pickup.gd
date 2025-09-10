@@ -25,7 +25,7 @@ func _ready():
 		set_process(false)
 		timer.queue_free()
 
-func _process(delta):
+func _process(_delta):
 	# blink when the timer runs out:
 	if timer.time_left > despawn_timer/2:
 		return

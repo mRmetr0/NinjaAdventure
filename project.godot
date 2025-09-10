@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="NinjaAdventure"
+config/tags=PackedStringArray("adventure", "top_down")
 run/main_scene="res://Scenes/Levels/StartScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Assets/Items/Food/Sushi.png"

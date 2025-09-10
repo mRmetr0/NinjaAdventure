@@ -11,6 +11,7 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	current_level = get_tree().root.get_child(AUTOLOAD_AMOUNT)
 	main_player = current_level.get_node("Player")
+	
 
 func _change_scene(next_scene : String, newPos = null):
 	current_level.remove_child(main_player)
