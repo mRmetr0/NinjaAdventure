@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://cl5bgjglbp0bj"]
 
 [ext_resource type="Texture2D" uid="uid://bmqru0568d6ts" path="res://Assets/Items/Potion/Hear.png" id="1_lcxkw"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/ItemResource.gd" id="2_ek6cx"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="2_ek6cx"]
 
 [resource]
 script = ExtResource("2_ek6cx")

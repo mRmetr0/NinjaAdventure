@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SuitResource" load_steps=4 format=3 uid="uid://cswkpj4iu6hkc"]
 
 [ext_resource type="Texture2D" uid="uid://bsyljp8g88uwy" path="res://Assets/Actor/Characters/EskimoNinja/Faceset.png" id="1_nfilb"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SuitResource.gd" id="2_0a43p"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/suit_resource.gd" id="2_0a43p"]
 [ext_resource type="Texture2D" uid="uid://cd2438ptnloue" path="res://Assets/Actor/Characters/EskimoNinja/SpriteSheet.png" id="3_1luje"]
 
 [resource]
