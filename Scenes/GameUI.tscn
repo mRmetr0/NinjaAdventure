@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0yxyhit56ocu"]
+[gd_scene load_steps=11 format=3 uid="uid://b0yxyhit56ocu"]
 
 [ext_resource type="Script" path="res://Scripts/game_ui.gd" id="1_pmpyg"]
 [ext_resource type="Texture2D" uid="uid://bp7rqgxwdh1vw" path="res://Assets/HUD/Heart.png" id="1_u1nxu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b4610sl2fi4qg" path="res://Assets/Items/Potion/WaterPot.png" id="5_e683n"]
 [ext_resource type="Texture2D" uid="uid://d4nb6sn0xywmx" path="res://Assets/Items/Weapons/Sword2/Sprite.png" id="5_jiqq3"]
 [ext_resource type="PackedScene" uid="uid://13siya7oyt25" path="res://Scenes/PauseScreen.tscn" id="8_tvxln"]
+[ext_resource type="PackedScene" uid="uid://cjd4b4nj2wk0g" path="res://Scenes/Objects/dialogue_box_9pr.tscn" id="9_mktlq"]
 
 [node name="GameUI" type="Control"]
 process_mode = 3
@@ -133,7 +134,6 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Dialogue" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -170,6 +170,103 @@ scale = Vector2(0.1, 0.1)
 theme_override_font_sizes/font_size = 80
 autowrap_mode = 3
 max_lines_visible = 3
+
+[node name="Responses" type="Control" parent="Dialogue"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Response1" parent="Dialogue/Responses" instance=ExtResource("9_mktlq")]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+offset_left = 134.0
+offset_top = -22.0
+offset_right = 216.0
+offset_bottom = 7.0
+scale = Vector2(0.7, 0.7)
+
+[node name="Label" type="Label" parent="Dialogue/Responses/Response1"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 666.0
+offset_bottom = 177.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 70
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 2
+metadata/_edit_lock_ = true
+
+[node name="Response2" parent="Dialogue/Responses" instance=ExtResource("9_mktlq")]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+offset_left = 163.0
+offset_top = -2.0
+offset_right = 245.0
+offset_bottom = 27.0
+scale = Vector2(0.7, 0.7)
+
+[node name="Label" type="Label" parent="Dialogue/Responses/Response2"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 666.0
+offset_bottom = 177.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 70
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 2
+metadata/_edit_lock_ = true
+
+[node name="Response3" parent="Dialogue/Responses" instance=ExtResource("9_mktlq")]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+offset_left = 192.0
+offset_top = -22.0
+offset_right = 274.0
+offset_bottom = 7.0
+scale = Vector2(0.7, 0.7)
+
+[node name="Label" type="Label" parent="Dialogue/Responses/Response3"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 666.0
+offset_bottom = 177.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 70
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 2
+metadata/_edit_lock_ = true
+
+[node name="Response4" parent="Dialogue/Responses" instance=ExtResource("9_mktlq")]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+offset_left = 163.0
+offset_top = -42.0
+offset_right = 245.0
+offset_bottom = -13.0
+scale = Vector2(0.7, 0.7)
+
+[node name="Label" type="Label" parent="Dialogue/Responses/Response4"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 666.0
+offset_bottom = 177.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 70
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 2
+metadata/_edit_lock_ = true
 
 [node name="PauseScreen" parent="." instance=ExtResource("8_tvxln")]
 visible = false

@@ -26,7 +26,6 @@ func _process(_delta):
 	ray.rotation = atan2(-character.horiDir, character.vertDir)
 	if ray.get_collider() == player && !player.camouflaged:
 		OnNotice.emit()
-		print("FOUND")
 		set_enable(false)
 
 func _physics_process(_delta):

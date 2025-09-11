@@ -8,9 +8,6 @@ class_name GameUI
 @onready var money_display : Label = get_node("MoneyIcon/MoneyCounter")
 
 @onready var dialogue = get_node("Dialogue")
-@onready var portrait_box = get_node("Dialogue/Portrait")
-@onready var text_box = get_node("Dialogue/Text")
-
 @onready var pause_menu = get_node("PauseScreen")
 
 var heart_sprites : Array
@@ -19,6 +16,7 @@ var dialogue_count = 0
 func _ready():	
 	dialogue.hide()
 	pause_menu.hide()
+	pause_menu.set_process_input(false)
 	set_process(false)
 	# get all heart sprites
 	var container = get_node("HealthContainer")
@@ -26,21 +24,17 @@ func _ready():
 		var sprite = child.get_child(0)
 		heart_sprites.append(sprite)
 
-func _process(_delta):
-	if (get_tree().paused):
-		if Input.is_action_just_pressed("interact"):
-			#_set_text_box()
-			_get_next_line()
-			
 func _input(_event):
 	if Input.is_action_just_pressed("menu"):
 		get_tree().paused = !get_tree().paused
 		if get_tree().paused:
 			pause_menu.on_show()
 			pause_menu.show()
+			pause_menu.set_process_input(true)
 		else:
 			pause_menu._apply_changes()
 			pause_menu.hide()
+			pause_menu.set_process_input(false)
 
 func _update_health_ui(new_health : int):
 	new_health = max(0, new_health)
@@ -77,26 +71,4 @@ func _update_item_ui(newItem : ItemResource):
 	else:
 		item_display.get_parent().show()
 		item_display.texture = newItem.icon
-	
-func _set_text_box(portrait: Texture = null, text : String = "null"):
-	if (portrait == null && text == "null"):
-		return
-		
-	text_box.lines_skipped = 0
-	get_tree().paused = true
-	text_box.text = text
-	portrait_box.texture = portrait
-	dialogue.show()
-	await get_tree().create_timer(0.1).timeout
-	set_process(true)
-	
-func _get_next_line():
-	dialogue_count += 1
-	if dialogue_count * 3 >= text_box.get_line_count():
-		dialogue.hide()
-		get_tree().paused = false
-		set_process(false)
-		dialogue_count = 0
-	else:
-		text_box.lines_skipped = dialogue_count * 3
 
