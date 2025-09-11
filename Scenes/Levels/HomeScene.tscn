@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckrpjjbi14kov"]
+[gd_scene load_steps=10 format=3 uid="uid://ckrpjjbi14kov"]
 
 [ext_resource type="TileSet" uid="uid://duxxfmxo0ou7w" path="res://Assets/InteriorTileset.tres" id="1_gy420"]
 [ext_resource type="Script" path="res://Scripts/camera_movement.gd" id="2_wergj"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://boj2yua2rwd2t" path="res://Scenes/Objects/SimpleInteract.tscn" id="6_ex5fq"]
 [ext_resource type="PackedScene" uid="uid://b22ur6ag5uk63" path="res://Scenes/Objects/SceneChangeBox.tscn" id="6_xofx8"]
 [ext_resource type="PackedScene" uid="uid://dqqvy88qirldk" path="res://Scenes/Objects/Effects/curio_particle.tscn" id="7_cf13x"]
+[ext_resource type="Script" path="res://Scripts/Managers/dialogue_manager.gd" id="8_0vjjw"]
+[ext_resource type="Script" path="res://Scripts/ComponentScripts/dialogue.gd" id="9_8yjny"]
 
 [node name="HomeScene" type="TileMap"]
 y_sort_enabled = true
@@ -53,12 +55,123 @@ next_scene = "VillageScene"
 next_pos = Vector2(184, 48)
 play_sound = true
 
-[node name="SimpleInteract" parent="." instance=ExtResource("6_ex5fq")]
-position = Vector2(136, 96)
-interact_text = "My old stuff!
+[node name="SimpleInteract" parent="." node_paths=PackedStringArray("interact_trigger") instance=ExtResource("6_ex5fq")]
+position = Vector2(72, 88)
+interact_trigger = NodePath("DialogueManager")
+
+[node name="Node2D" parent="SimpleInteract" instance=ExtResource("7_cf13x")]
+metadata/_edit_lock_ = true
+
+[node name="DialogueManager" type="Node" parent="SimpleInteract"]
+script = ExtResource("8_0vjjw")
+
+[node name="DialogueStart" type="Node" parent="SimpleInteract/DialogueManager" node_paths=PackedStringArray("default_result")]
+script = ExtResource("9_8yjny")
+dialogue = "My old stuff!!!"
+default_result = NodePath("../DialogueNeutral")
+
+[node name="DialogueNeutral" type="Node" parent="SimpleInteract/DialogueManager" node_paths=PackedStringArray("result_1", "result_2", "result_3")]
+script = ExtResource("9_8yjny")
+dialogue = "I can take a little look around..."
+response_1 = "Bamboo sword"
+result_1 = NodePath("../DialogueBambooSword")
+response_2 = "Wooden toy"
+result_2 = NodePath("../DialogueWoodenToy")
+response_3 = "A letter"
+result_3 = NodePath("../DialogueLetter")
+response_4 = "Leave"
+
+[node name="DialogueBambooSword" type="Node" parent="SimpleInteract/DialogueManager" node_paths=PackedStringArray("default_result")]
+script = ExtResource("9_8yjny")
+dialogue = "My first bamboo sword!
 
 
-There is nothing inside that is worth bringing..."
+It has seen better days for sure. 
 
-[node name="Node2D" parent="." instance=ExtResource("7_cf13x")]
-position = Vector2(136, 96)
+
+I should leave it here. "
+default_result = NodePath("../DialogueNeutral")
+
+[node name="DialogueWoodenToy" type="Node" parent="SimpleInteract/DialogueManager" node_paths=PackedStringArray("default_result")]
+script = ExtResource("9_8yjny")
+dialogue = "My old wooden toy!
+
+
+I had this since I was a child. Too many fond memories to remember them all. "
+default_result = NodePath("../DialogueNeutral")
+
+[node name="DialogueLetter" type="Node" parent="SimpleInteract/DialogueManager" node_paths=PackedStringArray("default_result")]
+script = ExtResource("9_8yjny")
+dialogue = "The letter I got yesterday...
+
+
+\"Dear /name,
+
+
+It troubles me to inform you that we received news from our allies north. 
+They are under seige by monsters. If it does not stop there, our village will be next. 
+
+
+You are the only one of us that is experienced enough to aid them. 
+Sincerely 
+Headmaster Muskin\""
+default_result = NodePath("../DialogueNeutral")
+
+[node name="BookCaseInteract2" parent="." node_paths=PackedStringArray("interact_trigger") instance=ExtResource("6_ex5fq")]
+position = Vector2(176, 88)
+interact_trigger = NodePath("DialogueManager")
+
+[node name="Node2D" parent="BookCaseInteract2" instance=ExtResource("7_cf13x")]
+
+[node name="DialogueManager" type="Node" parent="BookCaseInteract2"]
+script = ExtResource("8_0vjjw")
+
+[node name="DialogueStart" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("default_result", "result_1", "result_2", "result_3")]
+script = ExtResource("9_8yjny")
+dialogue = "I remember reading every single one of these books. I really liked that one book.
+
+
+The art of..."
+default_result = NodePath("../DialogueNeutral")
+response_1 = "Combat"
+result_1 = NodePath("../DialogueCombat")
+response_2 = "Curiosity"
+result_2 = NodePath("../DialogueCurious")
+result_3 = NodePath("../DialogueIDK")
+response_4 = "Leaving"
+
+[node name="DialogueNeutral" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("result_1", "result_2", "result_3")]
+script = ExtResource("9_8yjny")
+dialogue = "There was another one...
+
+
+The art of..."
+response_1 = "Combat"
+result_1 = NodePath("../DialogueCombat")
+response_2 = "Curiosity"
+result_2 = NodePath("../DialogueCurious")
+result_3 = NodePath("../DialogueIDK")
+response_4 = "Leaving"
+
+[node name="DialogueCombat" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("default_result")]
+script = ExtResource("9_8yjny")
+dialogue = "Just a little read maybe...
+
+
+\"The ancient warriors never forgot about the strenght in focussed directional attacks. Using the arrow keys (or ABXY) allow the modern soldier to hone this strength all the same.\""
+default_result = NodePath("../DialogueNeutral")
+
+[node name="DialogueCurious" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("default_result")]
+script = ExtResource("9_8yjny")
+dialogue = "Just a little read maybe...
+
+\"Humanily's strongest instinct is it's curiosity. Exploration, the gathering and sharing of knowledge, discovery of new concepts, you name it! Sparkled curiosity can be interacted with (using E or RB) to learn more about your environemnt, friend or foe.\" "
+default_result = NodePath("../DialogueNeutral")
+
+[node name="DialogueIDK" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("default_result")]
+script = ExtResource("9_8yjny")
+dialogue = "The letter I got yesterday...
+
+
+\"Dear /name\""
+default_result = NodePath("../DialogueNeutral")

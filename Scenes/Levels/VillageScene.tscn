@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://u87b5rn465pc"]
+[gd_scene load_steps=22 format=3 uid="uid://u87b5rn465pc"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_ow033"]
 [ext_resource type="Script" path="res://Scripts/camera_movement.gd" id="2_dw2li"]
@@ -13,9 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://6crepfxklsrj" path="res://Assets/Actor/Characters/Master/SpriteSheet.png" id="6_w4tjq"]
 [ext_resource type="Texture2D" uid="uid://p1gnbaadfcww" path="res://Assets/Actor/Characters/OldMan/Faceset.png" id="9_kq4vq"]
 [ext_resource type="Texture2D" uid="uid://djoeshveb5a5k" path="res://Assets/Actor/Characters/OldMan/SpriteSheet.png" id="10_tjplp"]
+[ext_resource type="Script" path="res://Scripts/Managers/dialogue_manager.gd" id="11_o83mr"]
 [ext_resource type="Texture2D" uid="uid://dj5rpaonni5rc" path="res://Assets/Actor/Characters/Boy/Faceset.png" id="11_ott1f"]
 [ext_resource type="Texture2D" uid="uid://b08cf0j7vmcx8" path="res://Assets/Actor/Characters/Boy/SpriteSheet.png" id="12_ly4lq"]
 [ext_resource type="PackedScene" uid="uid://boj2yua2rwd2t" path="res://Scenes/Objects/SimpleInteract.tscn" id="12_o0h5d"]
+[ext_resource type="Script" path="res://Scripts/ComponentScripts/dialogue.gd" id="12_rdd41"]
 [ext_resource type="Texture2D" uid="uid://c2voml7c8b5gk" path="res://Assets/Items/Potion/LifePot.png" id="16_nux3x"]
 [ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/HealthPotion.tres" id="17_vvmar"]
 
@@ -66,6 +68,7 @@ script = ExtResource("2_dw2li")
 metadata/_edit_lock_ = true
 
 [node name="FullScreenParticle" parent="Camera2D" instance=ExtResource("4_xxtw6")]
+process_mode = 3
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -117,30 +120,73 @@ collision_mask = 1
 portrait = ExtResource("6_5at7o")
 sprite_sheet = ExtResource("6_w4tjq")
 
-[node name="SimpleInteract" parent="Master" instance=ExtResource("12_o0h5d")]
+[node name="SimpleInteract" parent="Master" node_paths=PackedStringArray("interact_trigger") instance=ExtResource("12_o0h5d")]
+interact_trigger = NodePath("DialogueManager")
 interact_dist = 15.0
-interact_text = "I suppose there is really nothing else I can do to make you stay. I suppose I understand. Good luck and make us proud."
+
+[node name="DialogueManager" type="Node" parent="Master/SimpleInteract"]
+script = ExtResource("11_o83mr")
+
+[node name="Dialogue" type="Node" parent="Master/SimpleInteract/DialogueManager"]
+script = ExtResource("12_rdd41")
+dialogue = "/name.
+
+
+I know you've always wanted to go out and explore the world.
+But I never wanted you to leave like this.
+
+But as much as I hate to see you go. 
+
+It is for the better. 
+
+
+This world needs you.
+
+
+And you need to live and learn out there for yourself.
+
+...
+
+
+I am proud of you.
+
+
+Good luck."
 
 [node name="OldMan" parent="." instance=ExtResource("5_hj00q")]
 position = Vector2(168, 312)
 portrait = ExtResource("9_kq4vq")
 sprite_sheet = ExtResource("10_tjplp")
 
-[node name="SimpleInteract" parent="OldMan" instance=ExtResource("12_o0h5d")]
+[node name="SimpleInteract" parent="OldMan" node_paths=PackedStringArray("interact_trigger") instance=ExtResource("12_o0h5d")]
+interact_trigger = NodePath("DialogueManager")
 interact_dist = 15.0
-interact_text = "Have you been to the dojo yet?"
+
+[node name="DialogueManager" type="Node" parent="OldMan/SimpleInteract"]
+script = ExtResource("11_o83mr")
+
+[node name="Dialogue" type="Node" parent="OldMan/SimpleInteract/DialogueManager"]
+script = ExtResource("12_rdd41")
+dialogue = "So you're leaving today. How nice. "
 
 [node name="Boy" parent="." instance=ExtResource("5_hj00q")]
 position = Vector2(376, 320)
 portrait = ExtResource("11_ott1f")
 sprite_sheet = ExtResource("12_ly4lq")
 
-[node name="SimpleInteract" parent="Boy" instance=ExtResource("12_o0h5d")]
+[node name="SimpleInteract" parent="Boy" node_paths=PackedStringArray("interact_trigger") instance=ExtResource("12_o0h5d")]
+interact_trigger = NodePath("DialogueManager")
 interact_dist = 15.0
-interact_text = "Is it true that you're leaving the village? I wish I could get out of here and fight evil too..."
+
+[node name="DialogueManager" type="Node" parent="Boy/SimpleInteract"]
+script = ExtResource("11_o83mr")
+
+[node name="Dialogue" type="Node" parent="Boy/SimpleInteract/DialogueManager"]
+script = ExtResource("12_rdd41")
+dialogue = "/name! /name! /name! Good luck on your journey! Be sure to come back and play again sometime ok?!"
 
 [node name="Player" parent="." instance=ExtResource("4_expn1")]
-position = Vector2(184, 56)
+position = Vector2(184, 48)
 
 [node name="PickUp" parent="." instance=ExtResource("6_tmybw")]
 position = Vector2(896, 280)
