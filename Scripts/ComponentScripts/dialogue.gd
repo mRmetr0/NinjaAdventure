@@ -3,6 +3,7 @@ class_name Dialogue
 
 @export_multiline var dialogue : String
 @export var portrait : Texture2D
+@export var default_result : Node
 @export_group("responses")
 @export var response_1 : String = ""
 @export var result_1 : Node
@@ -23,6 +24,9 @@ func _ready():
 		else:
 			portrait = GameManager.main_player.portrait
 
+func get_dialogue():
+	return dialogue.replace("/name", SaveManager.current_save_resource.player_name)
+
 func get_responses():
 	var full_list : Array[String] = [response_1, response_2, response_3, response_4]
 	var list : Array[String] = []
@@ -36,6 +40,10 @@ func choose_response(response_index : int):
 	if result == null:
 		get_parent().end_dialogue()
 		return
+	handle_result(result)
+
+func handle_result(result):
 	if result is Dialogue:
 		result = result as Dialogue
 		get_parent().start_dialogue(result)
+	

@@ -7,7 +7,7 @@ enum DiaState{
 }
 var current_state : DiaState = DiaState.TALKING
 
-@onready var ui : GameUI = get_viewport().get_camera_2d().get_child(0).get_child(0)
+@onready var ui : GameUI = GameManager.current_level.get_node("Camera2D").get_child(0).get_child(0)
 @onready var dialogue = ui.get_node("Dialogue")
 @onready var portrait_box = ui.get_node("Dialogue/Portrait")
 @onready var text_box = ui.get_node("Dialogue/Text")
@@ -47,7 +47,7 @@ func start_dialogue(new_dialogue : Dialogue = null):
 	current_state = DiaState.TALKING
 	dialogue_count = 0
 	text_box.lines_skipped = 0
-	text_box.text = current_dialogue.dialogue
+	text_box.text = current_dialogue.get_dialogue()
 	portrait_box.texture = current_dialogue.portrait
 	
 	response_container.hide()
@@ -65,7 +65,9 @@ func next_line():
 	if dialogue_count * 3 >= text_box.get_line_count(): 
 		#END OF DIALOGUE
 		if current_dialogue.get_responses().size() == 0:
+			await get_tree().process_frame
 			end_dialogue()
+			current_dialogue.handle_result(current_dialogue.default_result)
 		else:
 			show_responses()
 	else:

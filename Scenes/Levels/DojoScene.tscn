@@ -156,7 +156,7 @@ metadata/_edit_lock_ = true
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Objects/Door2"]
 
 [node name="Player" parent="." instance=ExtResource("4_s5xy5")]
-position = Vector2(408, -232)
+position = Vector2(128, 184)
 sprite_sheet = null
 
 [node name="Monk" parent="." instance=ExtResource("9_bnrol")]
@@ -190,7 +190,7 @@ result_1 = NodePath("../DialogueGreeting")
 
 [node name="DialogueLeaving" type="Node" parent="Monk/SimpleInteract/DialogueManager" node_paths=PackedStringArray("result_1")]
 script = ExtResource("20_r8k82")
-dialogue = "Ah yes, I heard you were going to leave the village and venture out into the world. But do not be mistaken. As ready as you are for this challenge, the outside world is a dangerous place. Be ready for everything"
+dialogue = "Ah yes, I heard you were going to leave the village and venture out into the world. Do not be mistaken. As ready as you are for this challenge, the outside world is a dangerous place. Be ready for anything and everything."
 portrait = ExtResource("10_2gecv")
 response_1 = "I will!"
 result_1 = NodePath("../DialogueGreeting")

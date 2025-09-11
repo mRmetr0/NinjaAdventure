@@ -134,6 +134,7 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Dialogue" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
