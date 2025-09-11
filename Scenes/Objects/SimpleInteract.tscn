@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://boj2yua2rwd2t"]
 
-[ext_resource type="Script" path="res://Scripts/ComponentScripts/InteractComponent.gd" id="2_wf84b"]
+[ext_resource type="Script" path="res://Scripts/ComponentScripts/interactable_component.gd" id="2_wf84b"]
 
 [node name="SimpleInteract" type="Node2D"]
 script = ExtResource("2_wf84b")

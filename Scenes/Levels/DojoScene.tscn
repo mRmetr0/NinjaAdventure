@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://d4nb6sn0xywmx" path="res://Assets/Items/Weapons/Sword2/Sprite.png" id="14_5q2wg"]
 [ext_resource type="Texture2D" uid="uid://cvbw4h8k7ls8k" path="res://Assets/Actor/Characters/EggGirl/SpriteSheet.png" id="14_u0se4"]
 [ext_resource type="PackedScene" uid="uid://pvcphmpe442v" path="res://Scenes/Components/guard_behaviour.tscn" id="15_kwln6"]
-[ext_resource type="Script" path="res://Scripts/ComponentScripts/InteractComponent.gd" id="16_otrlb"]
+[ext_resource type="Script" path="res://Scripts/ComponentScripts/interactable_component.gd" id="16_otrlb"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 vertices = PackedVector2Array(487, -265, 489, -361, 489, -215, 487, -263, 487, -311, 487, -313, 487, -359, 327, -265, 327, -311, 329, -295, 329, -215, 423, -89, 441, -87, 279, -87, 345, -89, 423, -297, 439, -295, 345, -297, 487, -217, 439, -215, 441, -217, 439, -231, 441, -263, 279, -361, 441, -359, 345, -359, 327, -313, 327, -359, 441, -119, 423, -119, 441, -311, 441, -313, 393, -169, 489, -169, 489, -151, 297, -151, 279, -39, 263, -39, 263, -57, 281, -57, 281, -25, 279, -23, 329, -23, 311, -25, 329, -39, 311, -57, 329, -57, 329, -41, 423, -39, 423, -41, 423, -57, 441, -57, 441, -25, 423, -23, 489, -23, 471, -25, 489, -121, 471, -119, 327, -121, 345, -119, 327, -89, 297, -89, 279, -169, 375, -169, 393, -231, 375, -249, 439, -249, 441, -265, 281, -313, 281, -311, 279, -215, 279, -231, 311, -233, 263, -231, 263, -233, 311, -263, 281, -265, 279, -263, 281, -359, 423, -359)

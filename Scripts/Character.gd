@@ -4,6 +4,7 @@ class_name Character
 
 signal ChangeHealth(new_health : int)
 signal ChangeWeapon (new_weapon : WeaponResource)
+var behaviours : Array[Node2D] = []
 #Default variabels
 @export var max_health : int = 8
 @onready var health : int = max_health
@@ -24,7 +25,7 @@ var raged = false;
 var frozen = false;
 @onready var rage_component : StatusComponent = get_node("RageComponent")
 
-#Private variables
+#movement variables
 var vertDir : float
 var horiDir : float
 
@@ -83,6 +84,9 @@ func _take_damage(damage : int, stun_lock = 1.0):
 		SoundManager.play_sound(SoundManager.SOUND.DIE)
 		set_process(false)
 		set_physics_process(false)
+		for behaviour in behaviours:
+			behaviour.set_process(false)
+			behaviour.set_physics_process(false)
 		var col = get_node("WalkingCollider")
 		col.call_deferred("set_disabled", true)
 		animator.play("RESET")

@@ -7,7 +7,7 @@
 resource_name = "healthbar"
 script/source = "extends Node2D
 
-@onready var character : EnemyBehaviour = get_parent()
+@onready var character : Character = get_parent()
 @onready var health_sprite : Sprite2D = get_node(\"HealthProgress\")
 @onready var max_health : int = character.max_health
 

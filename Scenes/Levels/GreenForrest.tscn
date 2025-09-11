@@ -57,7 +57,7 @@ script = ExtResource("2_0eh0v")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." groups=["hitbox"] instance=ExtResource("4_oiy3r")]
-position = Vector2(128, 184)
+position = Vector2(-136, 144)
 weapon = ExtResource("5_6kg3h")
 
 [node name="SceneChangeBox" parent="." instance=ExtResource("5_krb3e")]
@@ -80,8 +80,6 @@ position = Vector2(-56, 24)
 
 [node name="Enemy" parent="." instance=ExtResource("8_48c5j")]
 position = Vector2(-72, 120)
-resetable = true
 
 [node name="Enemy2" parent="." instance=ExtResource("8_48c5j")]
 position = Vector2(-168, 64)
-resetable = true

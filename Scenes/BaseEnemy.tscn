@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bp2qwfibe2ufe" path="res://Assets/Actor/Characters/Lion/SpriteSheet.png" id="2_3xyw3"]
 [ext_resource type="Resource" uid="uid://j8jb5anb2mnv" path="res://Resources/WeaponResources/LongSword.tres" id="2_08e5b"]
 [ext_resource type="Texture2D" uid="uid://dvugfmcxdnc3o" path="res://Assets/Actor/Characters/Lion/Faceset.png" id="2_a1ni1"]
-[ext_resource type="Script" path="res://Scripts/BaseScripts/enemy_behaviour.gd" id="2_qbym1"]
+[ext_resource type="Script" path="res://Scripts/ComponentScripts/combat_behaviour.gd" id="2_qbym1"]
 [ext_resource type="PackedScene" uid="uid://5ajxbqp55g16" path="res://Scenes/Objects/HealthBar.tscn" id="5_t7chy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_do2nw"]
@@ -12,8 +12,6 @@
 [node name="Enemy" instance=ExtResource("1_fjtlr")]
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("2_qbym1")
-resetable = false
 moveSpeed = 35
 portrait = ExtResource("2_a1ni1")
 sprite_sheet = ExtResource("2_3xyw3")
@@ -29,12 +27,17 @@ texture = ExtResource("2_3xyw3")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
 
 [node name="Timer" type="Timer" parent="." index="5"]
+wait_time = 0.5
 autostart = true
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." index="8"]
 
 [node name="Healthbar" parent="." index="10" instance=ExtResource("5_t7chy")]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_screen"]
-[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_off_screen"]
+[node name="EnemyBehaviour" type="Node2D" parent="." index="11"]
+script = ExtResource("2_qbym1")
+resetable = true
+
+[connection signal="timeout" from="Timer" to="EnemyBehaviour" method="_on_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="EnemyBehaviour" method="_on_screen"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="EnemyBehaviour" method="_off_screen"]
