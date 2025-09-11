@@ -1,8 +1,8 @@
 [gd_scene load_steps=30 format=3 uid="uid://waoc5b05mji6"]
 
-[ext_resource type="Script" path="res://Scripts/Character.gd" id="1_wh17m"]
+[ext_resource type="Script" path="res://Scripts/character.gd" id="1_wh17m"]
 [ext_resource type="Texture2D" uid="uid://cfbvcoxqu4o46" path="res://Assets/Actor/Characters/Skeleton/SpriteSheet.png" id="2_vrwyu"]
-[ext_resource type="Script" path="res://Scripts/BaseScripts/BaseAnimator.tres.gd" id="3_g8lb3"]
+[ext_resource type="Script" path="res://Scripts/BaseScripts/base_animator.gd" id="3_g8lb3"]
 [ext_resource type="Texture2D" uid="uid://cybl80usdanpe" path="res://Assets/Items/Weapons/BigSword/SpriteInHand.png" id="3_vdld0"]
 [ext_resource type="Texture2D" uid="uid://c3cg4k2csdp2u" path="res://Assets/Actor/Characters/Shadow.png" id="4_vsbjj"]
 [ext_resource type="Script" path="res://Scripts/ComponentScripts/StatusComponent.gd" id="6_sybw4"]
@@ -824,7 +824,6 @@ func _on_area_entered(area):
 	character.weapon._weapon_function(area)
 
 func _on_body_entered(body):
-	print(\"HIT\")
 	if body.is_in_group(\"hitbox\") && body != character:
 		body._take_damage(_calculate_damage(), character.weapon.stun_lock)
 	character.weapon._weapon_function(body)

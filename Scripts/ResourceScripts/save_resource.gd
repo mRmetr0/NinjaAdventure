@@ -22,6 +22,9 @@ var has_snow_suit = false
 func apply_data():
 	GameManager._change_scene(current_scene)
 	GameManager.main_player.coins = coins
+	#Give player gear:
+	#if current_weapon_equip == -1:
+		#GameManager.main_player.
 
 func _unlock_item(list_index : int, item_index : int):
 	if list_index == 0:
@@ -47,12 +50,12 @@ func _set_weapons(list):
 	has_great_sword = list[3]	
 
 func set_suits(_has_green : bool, _has_rage : bool, has_snow : bool):
-	has_great_sword = _has_green
+	has_green_suit = _has_green
 	has_rage_suit = _has_rage
 	has_snow_suit = has_snow
 
 func _set_suits(list):
-	has_great_sword = list[0]
+	has_green_suit = list[0]
 	has_rage_suit = list[1]
 	has_snow_suit = list[2]
 	
@@ -60,4 +63,4 @@ func _get_weapons():
 	return [has_sword, has_whip, has_axe, has_great_sword]
 	
 func _get_suits():
-	return[has_great_sword, has_rage_suit, has_snow_suit]
+	return[has_green_suit, has_rage_suit, has_snow_suit]

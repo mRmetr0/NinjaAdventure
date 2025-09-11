@@ -70,7 +70,6 @@ func _set_health(newHealth : int):
 func _take_damage(damage : int, stun_lock = 1.0):
 	if invincibility_counter > 0:
 		return
-	print(name, "Took " + str(damage))
 	_set_health(health - damage)
 	stun_lock = max(stun_lock, 0.3)
 	invincibility_counter = invincibility_duration

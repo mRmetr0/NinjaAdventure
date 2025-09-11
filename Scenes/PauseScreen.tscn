@@ -55,7 +55,7 @@ func _ready():
 		if player != null:
 			if menu_item.item == player.weapon:
 				_select_item(menu_item, false)
-			
+
 	for child in get_node(\"ClothingBoxBackground/HBoxContainer\").get_children():
 		var menu_item = child.get_child(0) as MenuItemUI
 		all_suits.append(menu_item)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bf710tm3ps2rl"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_qb6xd"]
-[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_72anh"]
+[ext_resource type="Script" path="res://Scripts/camera_movement.gd" id="2_72anh"]
 [ext_resource type="FontFile" uid="uid://ccvvahdhn6tgi" path="res://Assets/HUD/Font/joystix monospace.otf" id="4_bbpdp"]
 [ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="5_8s5nt"]
 [ext_resource type="PackedScene" uid="uid://cxgfgvjdjnfe0" path="res://Scenes/Objects/Effects/full_screen_particles.tscn" id="6_yppdw"]

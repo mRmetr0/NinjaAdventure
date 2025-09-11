@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ckrpjjbi14kov"]
 
 [ext_resource type="TileSet" uid="uid://duxxfmxo0ou7w" path="res://Assets/InteriorTileset.tres" id="1_gy420"]
-[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_wergj"]
+[ext_resource type="Script" path="res://Scripts/camera_movement.gd" id="2_wergj"]
 [ext_resource type="PackedScene" uid="uid://b0yxyhit56ocu" path="res://Scenes/GameUI.tscn" id="3_qgl00"]
 [ext_resource type="PackedScene" uid="uid://dsm3d6r5brn16" path="res://Scenes/Characters/Player.tscn" id="4_p10fa"]
 [ext_resource type="PackedScene" uid="uid://boj2yua2rwd2t" path="res://Scenes/Objects/SimpleInteract.tscn" id="6_ex5fq"]

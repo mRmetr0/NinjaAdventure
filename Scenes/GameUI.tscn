@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b0yxyhit56ocu"]
 
-[ext_resource type="Script" path="res://Scripts/GameUI.tres.gd" id="1_pmpyg"]
+[ext_resource type="Script" path="res://Scripts/game_ui.gd" id="1_pmpyg"]
 [ext_resource type="Texture2D" uid="uid://bp7rqgxwdh1vw" path="res://Assets/HUD/Heart.png" id="1_u1nxu"]
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="2_gvxld"]
 [ext_resource type="Texture2D" uid="uid://cbixquk7apigo" path="res://Assets/Items/Treasure/SilverCoin.png" id="2_hnvid"]

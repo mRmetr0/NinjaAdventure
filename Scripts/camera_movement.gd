@@ -1,6 +1,6 @@
 extends Camera2D
 
-@onready var player = get_parent().get_node("Player")
+@onready var player = GameManager.main_player
 @onready var resolution = get_viewport().get_visible_rect().size
 
 func _ready():
@@ -16,7 +16,9 @@ func _on_screen_exit(set_tween = true):
 		global_position = Vector2(moveModX * resolution.x, moveModY * resolution.y)
 	else:
 		var tween = get_tree().create_tween()
-		tween.tween_property(self, "global_position", new_pos, 0.6).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(\
+			self, "global_position", new_pos, 0.6)\
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _old_cam_set():
 	var direction = (player.global_position - (global_position + Vector2(resolution.x/2, resolution.y/2)))
