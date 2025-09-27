@@ -10,7 +10,6 @@ enum effects {
 	CHOP, # ABLE TO DESTROY WOODEN STRUCTURES
 	}
 
-@export var name : String
 @export var icon : Texture2D
 @export var weapon_sprite : Texture2D
 

@@ -137,7 +137,8 @@ response_1 = "Combat"
 result_1 = NodePath("../DialogueCombat")
 response_2 = "Curiosity"
 result_2 = NodePath("../DialogueCurious")
-result_3 = NodePath("../DialogueIDK")
+response_3 = "Silence"
+result_3 = NodePath("../DialogueSilence")
 response_4 = "Leaving"
 
 [node name="DialogueNeutral" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("result_1", "result_2", "result_3")]
@@ -150,7 +151,8 @@ response_1 = "Combat"
 result_1 = NodePath("../DialogueCombat")
 response_2 = "Curiosity"
 result_2 = NodePath("../DialogueCurious")
-result_3 = NodePath("../DialogueIDK")
+response_3 = "Scilence"
+result_3 = NodePath("../DialogueSilence")
 response_4 = "Leaving"
 
 [node name="DialogueCombat" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("default_result")]
@@ -168,10 +170,9 @@ dialogue = "Just a little read maybe...
 \"Humanily's strongest instinct is it's curiosity. Exploration, the gathering and sharing of knowledge, discovery of new concepts, you name it! Sparkled curiosity can be interacted with (using E or RB) to learn more about your environemnt, friend or foe.\" "
 default_result = NodePath("../DialogueNeutral")
 
-[node name="DialogueIDK" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("default_result")]
+[node name="DialogueSilence" type="Node" parent="BookCaseInteract2/DialogueManager" node_paths=PackedStringArray("default_result")]
 script = ExtResource("9_8yjny")
-dialogue = "The letter I got yesterday...
+dialogue = "Just a little read maybe...
 
-
-\"Dear /name\""
+TODO: TALK ABOUT STEALTH MECHANICS"
 default_result = NodePath("../DialogueNeutral")

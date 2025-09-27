@@ -5,7 +5,6 @@
 [node name="SimpleInteract" type="Node2D"]
 script = ExtResource("2_wf84b")
 interact_dist = 20.0
-interact_text = "[INTERACT_TEXT]"
 
 [node name="KeyPrompt" type="Label" parent="."]
 offset_left = -3.0

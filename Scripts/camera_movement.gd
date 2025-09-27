@@ -13,7 +13,8 @@ func _on_screen_exit(set_tween = true):
 	var moveModY = floor(player.global_position.y / resolution.y)
 	var new_pos = Vector2(moveModX * resolution.x, moveModY * resolution.y)
 	if !set_tween:
-		global_position = Vector2(moveModX * resolution.x, moveModY * resolution.y)
+		global_position = Vector2(moveModX * resolution.x, \
+									moveModY * resolution.y)
 	else:
 		var tween = get_tree().create_tween()
 		tween.tween_property(\
@@ -21,11 +22,13 @@ func _on_screen_exit(set_tween = true):
 			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _old_cam_set():
-	var direction = (player.global_position - (global_position + Vector2(resolution.x/2, resolution.y/2)))
+	var direction = (player.global_position - \
+					(global_position + Vector2(resolution.x/2, resolution.y/2)))
 	if (abs(direction.x) > abs(direction.y)):
 		direction.y = 0
 	else:
 		direction.x = 0
 	direction = direction.normalized()
-	global_position += Vector2(direction.x * resolution.x, direction.y * resolution.y)
+	global_position += Vector2(direction.x * resolution.x, \
+								direction.y * resolution.y)
 	

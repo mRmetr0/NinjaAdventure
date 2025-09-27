@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://boj2yua2rwd2t" path="res://Scenes/Objects/SimpleInteract.tscn" id="12_o0h5d"]
 [ext_resource type="Script" path="res://Scripts/ComponentScripts/dialogue.gd" id="12_rdd41"]
 [ext_resource type="Texture2D" uid="uid://c2voml7c8b5gk" path="res://Assets/Items/Potion/LifePot.png" id="16_nux3x"]
-[ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/HealthPotion.tres" id="17_vvmar"]
+[ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/heart_potion.tres" id="17_vvmar"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -9, 264, -9, 273, 400, -20, 399)])

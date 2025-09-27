@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6tsu7lvspmtv" path="res://Scenes/Objects/BasePickUp.tscn" id="1_ujn4e"]
 [ext_resource type="Texture2D" uid="uid://bmqru0568d6ts" path="res://Assets/Items/Potion/Hear.png" id="2_debtd"]
-[ext_resource type="Resource" uid="uid://cl5bgjglbp0bj" path="res://Resources/ItemResources/Heart.tres" id="3_oitxt"]
+[ext_resource type="Resource" uid="uid://cl5bgjglbp0bj" path="res://Resources/ItemResources/heart.tres" id="3_oitxt"]
 
 [node name="HeartPickUp" instance=ExtResource("1_ujn4e")]
 texture = ExtResource("2_debtd")
