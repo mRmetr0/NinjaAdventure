@@ -10,11 +10,13 @@ class_name MenuItemUI
 
 var item_icon : Texture
 var item_text : Label
+var quit_bg : NinePatchRect
 var lock_quit = false
 
 func _ready():
 	if can_quit:
 		item_text = get_node("Label")
+		quit_bg = get_node("QuitBG")
 		return
 		
 	if item == null:
@@ -36,11 +38,13 @@ func _ready():
 func on_hover_quit(hovering = false):
 	self_modulate = Color(0.2,0.2,0.2) if hovering else Color.WHITE
 	if hovering:
-		item_text.modulate = Color.WHITE
+		item_text.modulate = Color.BLACK
+		quit_bg.modulate = Color(0.7, 0.7, 0.7)
 	else:
 		lock_quit = false
 		item_text.text = "SAVE?"
 		item_text.modulate = Color.BLACK 
+		quit_bg.modulate = Color.WHITE
 
 func on_select_quit():
 	if lock_quit:

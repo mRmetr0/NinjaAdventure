@@ -3,10 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bog0mgbx3kxlo" path="res://Assets/HUD/NinePathRect/DialogueBubble.png" id="1_rn0wq"]
 
 [node name="DialogueBox9PR" type="NinePatchRect"]
-offset_left = 187.0
-offset_top = 116.0
-offset_right = 238.0
-offset_bottom = 139.0
+offset_right = 51.0
+offset_bottom = 23.0
 texture = ExtResource("1_rn0wq")
 patch_margin_left = 8
 patch_margin_top = 8
