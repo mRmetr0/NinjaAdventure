@@ -7,7 +7,8 @@ enum DiaState{
 }
 var current_state : DiaState = DiaState.TALKING
 
-@onready var ui : GameUI = GameManager.current_level.get_node("Camera2D").get_child(0).get_child(0)
+@onready var ui : GameUI = GameManager.current_level.get_node("Camera2D")\
+							.get_child(0).get_child(0)
 @onready var dialogue = ui.get_node("Dialogue")
 @onready var portrait_box = ui.get_node("Dialogue/Portrait")
 @onready var text_box = ui.get_node("Dialogue/Text")

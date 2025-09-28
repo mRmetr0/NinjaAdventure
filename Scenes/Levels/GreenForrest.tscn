@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://fa8vr88mr66r"]
+[gd_scene load_steps=19 format=3 uid="uid://fa8vr88mr66r"]
 
 [ext_resource type="TileSet" uid="uid://do3hfvfy58ok0" path="res://Assets/GroundTileSet.tres" id="1_0ulul"]
 [ext_resource type="Script" path="res://Scripts/camera_movement.gd" id="2_0eh0v"]
@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://boj2yua2rwd2t" path="res://Scenes/Objects/SimpleInteract.tscn" id="8_kd87k"]
 [ext_resource type="Script" path="res://Scripts/Managers/dialogue_manager.gd" id="9_pngi2"]
 [ext_resource type="Script" path="res://Scripts/ComponentScripts/dialogue.gd" id="10_7f55m"]
+[ext_resource type="Script" path="res://item_interactable_component.gd" id="11_ytq2r"]
+[ext_resource type="Resource" uid="uid://c3u5o6ee2ncon" path="res://Resources/ItemResources/QuestItems/Caring_key.tres" id="12_3fo8r"]
+[ext_resource type="Resource" uid="uid://2tnwilsgbusm" path="res://Resources/ItemResources/QuestItems/Farmers_key.tres" id="13_0nqfj"]
+[ext_resource type="Resource" uid="uid://cg6qn4nfnd0nl" path="res://Resources/ItemResources/QuestItems/Warding_key.tres" id="14_lt0yx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0oq0"]
 vertices = PackedVector2Array(-89, 103, -55, 87, -15, 87, -15, 169, -185, 167, -121, 119, -89, 73, -55, 23, -233, 23, -135, 73, -233, 121, -167, 89, -135, 89, -185, 121, -167, 119, -121, 103, -233, 169, -233, 167)
@@ -85,14 +89,16 @@ position = Vector2(-56, 24)
 
 [node name="QuestObjects" type="Node2D" parent="."]
 
-[node name="QuestPole" parent="QuestObjects" node_paths=PackedStringArray("interact_trigger") instance=ExtResource("8_kd87k")]
+[node name="QuestTotem1" type="Node2D" parent="QuestObjects"]
 position = Vector2(392, 88)
+
+[node name="Interactable" parent="QuestObjects/QuestTotem1" node_paths=PackedStringArray("interact_trigger") instance=ExtResource("8_kd87k")]
 interact_trigger = NodePath("DialogueManager")
 
-[node name="DialogueManager" type="Node" parent="QuestObjects/QuestPole"]
+[node name="DialogueManager" type="Node" parent="QuestObjects/QuestTotem1/Interactable"]
 script = ExtResource("9_pngi2")
 
-[node name="DialogueStart" type="Node" parent="QuestObjects/QuestPole/DialogueManager" node_paths=PackedStringArray("result_1", "result_2")]
+[node name="DialogueStart" type="Node" parent="QuestObjects/QuestTotem1/Interactable/DialogueManager" node_paths=PackedStringArray("result_1", "result_2")]
 script = ExtResource("10_7f55m")
 dialogue = "A guard totem!"
 response_1 = "A what?"
@@ -101,7 +107,7 @@ response_2 = "Read engravings"
 result_2 = NodePath("../DialogueType")
 response_3 = "Leave"
 
-[node name="DialogueExplain" type="Node" parent="QuestObjects/QuestPole/DialogueManager" node_paths=PackedStringArray("result_1")]
+[node name="DialogueExplain" type="Node" parent="QuestObjects/QuestTotem1/Interactable/DialogueManager" node_paths=PackedStringArray("result_1")]
 script = ExtResource("10_7f55m")
 dialogue = "To protect the fort up north. 
 Three totems would guard the front gate.
@@ -113,19 +119,35 @@ response_1 = "Read engravings"
 result_1 = NodePath("../DialogueType")
 response_2 = "Leave"
 
-[node name="DialogueType" type="Node" parent="QuestObjects/QuestPole/DialogueManager" node_paths=PackedStringArray("result_1")]
+[node name="DialogueType" type="Node" parent="QuestObjects/QuestTotem1/Interactable/DialogueManager" node_paths=PackedStringArray("result_1")]
 script = ExtResource("10_7f55m")
 dialogue = "There are engravings of farmers on each side of the totem."
 response_1 = "what?"
 result_1 = NodePath("../DialogueExplain")
 response_2 = "leave"
 
-[node name="Node2D" parent="QuestObjects/QuestPole" instance=ExtResource("7_m3s27")]
+[node name="Node2D" parent="QuestObjects/QuestTotem1/Interactable" instance=ExtResource("7_m3s27")]
 z_index = 10
 metadata/_edit_lock_ = true
 
+[node name="ItemInteract" type="Node2D" parent="QuestObjects/QuestTotem1" node_paths=PackedStringArray("interact_trigger")]
+script = ExtResource("11_ytq2r")
+possible_items = Array[Resource("res://Scripts/ResourceScripts/item_resource.gd")]([ExtResource("12_3fo8r"), ExtResource("13_0nqfj"), ExtResource("14_lt0yx")])
+interact_trigger = NodePath("DialogueManager")
+interact_dist = 20.0
+
+[node name="DialogueManager" type="Node" parent="QuestObjects/QuestTotem1/ItemInteract"]
+script = ExtResource("9_pngi2")
+
+[node name="StartDialogue" type="Node" parent="QuestObjects/QuestTotem1/ItemInteract/DialogueManager"]
+script = ExtResource("10_7f55m")
+dialogue = "Insert /item?"
+response_1 = "Yes"
+response_2 = "No"
+
 [node name="Player" parent="." groups=["hitbox"] instance=ExtResource("4_oiy3r")]
 position = Vector2(368, 120)
+item = ExtResource("12_3fo8r")
 weapon = ExtResource("5_6kg3h")
 
 [node name="Enemy" parent="." instance=ExtResource("8_48c5j")]

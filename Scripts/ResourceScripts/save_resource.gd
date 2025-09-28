@@ -27,12 +27,12 @@ func apply_data():
 		#GameManager.main_player.
 
 func _unlock_item(list_index : int, item_index : int):
-	if list_index == 0:
+	if list_index == 0:				# 0 if unlock weapon
 		var list = _get_weapons()
 		list[list_index] = true
 		_set_weapons(list)
 		list = _get_weapons()
-	elif list_index == 1:
+	elif list_index == 1:			# 1 if unlock suit
 		var list = _get_suits()
 		list[item_index] = true
 		_set_suits(list)

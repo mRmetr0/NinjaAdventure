@@ -25,7 +25,9 @@ func _ready():
 			portrait = GameManager.main_player.portrait
 
 func get_dialogue():
-	return dialogue.replace("/name", SaveManager.current_save_resource.player_name)
+	dialogue = dialogue.replace("/name", SaveManager.current_save_resource.player_name)
+	dialogue = dialogue.replace("/item", GameManager.main_player.item.item_name)
+	return dialogue
 
 func get_responses():
 	var full_list : Array[String] = [response_1, response_2, response_3, response_4]

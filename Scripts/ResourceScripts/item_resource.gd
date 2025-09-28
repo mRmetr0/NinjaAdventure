@@ -17,17 +17,16 @@ enum effects {
 @export var value : int
 @export var use_sound = SoundManager.SOUND.NULL
 
-func _use_item(player):
+func _use_item(player : Player):
 	SoundManager.play_sound(use_sound)
 	
 	match effect:
 		effects.HEAL_HEALTH:
 			player._set_health(player.health + value)
 		effects.QUEST:
-			pass
+			player.UseItemInteract.emit(self)
+			print("USING ITEM: ", item_name)
 	if expendable:
 		expendable_amount -= 1
-		if expendable_amount <= 0:
-			# REMOVE ITEM FROM PLAYER LIST
+		if expendable_amount <= 0:		# REMOVE ITEM FROM PLAYER LIST
 			player._set_item(null)
-			pass
