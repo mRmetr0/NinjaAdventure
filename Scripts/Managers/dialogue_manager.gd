@@ -59,7 +59,7 @@ func start_dialogue(new_dialogue : Dialogue = null):
 func end_dialogue():
 	dialogue.hide()
 	get_tree().paused = false
-	set_process(false)
+	set_process_input(false)
 
 func next_line():	
 	dialogue_count += 1

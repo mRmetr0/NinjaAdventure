@@ -26,7 +26,8 @@ func _ready():
 
 func get_dialogue():
 	dialogue = dialogue.replace("/name", SaveManager.current_save_resource.player_name)
-	dialogue = dialogue.replace("/item", GameManager.main_player.item.item_name)
+	if GameManager.main_player.item != null:
+		dialogue = dialogue.replace("/item", GameManager.main_player.item.item_name)
 	return dialogue
 
 func get_responses():
