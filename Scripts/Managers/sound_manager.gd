@@ -44,7 +44,6 @@ func _get_sound(sound_name : SOUND):
 		return sound_list[0]
 	return sound_list[sound_name]
 
-
 func play_sound(sound_name : SOUND):
 	if sound_name == SOUND.NULL:
 		return

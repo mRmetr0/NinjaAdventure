@@ -63,4 +63,4 @@ func _input(event):
 			god_resource.set_suits(true, true, true)
 			
 			SaveManager.current_save_resource = god_resource
-	
+			SoundManager.play_sound(SoundManager.SOUND.PICK_UP)
