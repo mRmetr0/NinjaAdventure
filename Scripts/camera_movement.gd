@@ -31,4 +31,3 @@ func _old_cam_set():
 	direction = direction.normalized()
 	global_position += Vector2(direction.x * resolution.x, \
 								direction.y * resolution.y)
-	

@@ -2,7 +2,6 @@ extends Node
 
 const SAVE_PATH = "user://saves/"
 const GLOBAL_DATA_FILE_NAME = "global.json"
-const SAVE_FILE_NAME = "save.json"
 var current_save_file : String
 var current_save_resource : SaveResource = SaveResource.new() # for testing purposes
 #const SECURITY_KEY = "0923874590"
@@ -42,7 +41,10 @@ func save_data(file_name : String, save_resource : SaveResource = null):
 				"green": save_resource.has_green_suit,
 				"rage": save_resource.has_rage_suit,
 				"snow": save_resource.has_snow_suit
-			}
+			},
+			"current_item": 0,
+			"item_list": save_resource.item_list,
+			"quest_item_list": save_resource.quest_item_list
 		}
 	}
 	print(data)
@@ -61,16 +63,23 @@ func load_data(file_name : String):
 	save_resource.player_name = data.player_data.name
 	save_resource.current_scene = data.current_level
 	save_resource.coins = data.player_data.coins
+	#Load data that can be null:
 	var weapons = data.player_data.weapons
 	if weapons != null:
 		save_resource.set_weapons(weapons.sword, weapons.whip, weapons.axe, weapons.great_sword)
 	var suits = data.player_data.suits
 	if suits != null:
 		save_resource.set_suits(suits.green, suits.rage, suits.snow)
+	var items : Array = data.player_data.item_list
+	if items != null:
+		save_resource.set_items(items)
+	var quest_items = data.player_data.quest_item_list
+	if quest_items != null:
+		save_resource.set_quest_items(quest_items)
 
 	return save_resource
 
-func _load_global_data():	
+func _load_global_data():
 	var data = _load_file(GLOBAL_DATA_FILE_NAME)
 	if data == null:
 		return

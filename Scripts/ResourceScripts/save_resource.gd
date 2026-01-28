@@ -16,8 +16,25 @@ var has_great_sword = false
 #Collected suits check:
 var current_suit_equip = -1
 var has_green_suit = false
-var has_rage_suit = false;
+var has_rage_suit = false
 var has_snow_suit = false
+#Collected/visible items check:
+var item_list : Array[int] = [
+	-1, #1 Healing potion
+	#FOOD: 
+	-1, #2
+	-1, #3
+	-1, #4
+	#COMBAT ITEMS:
+	-1, #5 Shurken
+	-1, #6
+	-1, #7
+]
+var quest_item_list : Array[int] = [
+	-1, #1 Caring key
+	-1, #2 Farmers key
+	-1, #3 Warding key
+]
 
 func apply_data():
 	GameManager._change_scene(current_scene)
@@ -26,7 +43,7 @@ func apply_data():
 	#if current_weapon_equip == -1:
 		#GameManager.main_player.
 
-func _unlock_item(list_index : int, item_index : int):
+func unlock_gear(list_index : int, item_index : int):
 	if list_index == 0:				# 0 if unlock weapon
 		var list = _get_weapons()
 		list[list_index] = true
@@ -36,6 +53,13 @@ func _unlock_item(list_index : int, item_index : int):
 		var list = _get_suits()
 		list[item_index] = true
 		_set_suits(list)
+
+func unlock_item(item_index : int, amount : int):
+	#ITEMS WILL BE DISPLAYED IN QUANTITY, 
+	#	-1 MEANS HIDDEN FROM THE PLAYERS INVENTORY
+	#	0 MEANS VISIBLE BUT HAS NO QUANTITY AVAILABLE
+	#EACH ITEM'S SPOT IN THE LIST IS THE EQUIVALENT TO THE ITEMS ID.
+	item_list[item_index] = amount
 
 func set_weapons(_has_sword : bool, _has_whip : bool, _has_axe : bool, _has_g_sword : bool):
 	has_sword = _has_sword
@@ -58,7 +82,15 @@ func _set_suits(list):
 	has_green_suit = list[0]
 	has_rage_suit = list[1]
 	has_snow_suit = list[2]
-	
+
+func set_items(list : Array):
+	for i in list.size():
+		item_list[i] = int(list[i])
+
+func set_quest_items(list : Array):
+	for i in list.size():
+		quest_item_list[i] = int(list[i])
+
 func _get_weapons():
 	return [has_sword, has_whip, has_axe, has_great_sword]
 	
