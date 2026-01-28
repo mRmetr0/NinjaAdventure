@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_ek6cx")
-name = "Heart"
 icon = ExtResource("1_lcxkw")
+id = -1
 expendable = true
 expendable_amount = 1
 effect = 0

@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_mjwk0")
 icon = ExtResource("1_8titm")
+id = 1
 expendable = false
 expendable_amount = 0
 effect = 2

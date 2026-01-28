@@ -5,10 +5,10 @@ class_name BasePickUp
 @export_category("RESOURCE")
 @export var resource : BaseResource
 @export var use_resource_on_touch = false
-var unlock_list_index = -1
-@export var unlock_item_index = -1
+@export var item_index = -1
 @export_category("GENERAL")
 @export var despawn_timer: float = -1.0
+@export var amount : int = 1
 @export_category("MISC")
 @export var coins_given = 0
 
@@ -55,14 +55,16 @@ func _handle_resource(body):
 	var player = body as Player
 	if resource is WeaponResource:
 		player._set_weapon(resource)
-		unlock_list_index = 0
+		SaveManager.current_save_resource.unlock_gear(0, item_index)
 	elif resource is SuitResource:
-		unlock_item_index = 1
+		SaveManager.current_save_resoure.unlock_gear(1, item_index)
 	elif resource is ItemResource:
 		if use_resource_on_touch:
 			resource._use_item(player)
-		else:
+			return
+		resource = resource as ItemResource
+		if resource.effect == resource.effects.QUEST:
+			pass
+		SaveManager.current_save_resource.aquire_item(resource.id, amount)
+		if player.item == null:
 			player._set_item(resource)
-			
-	if unlock_list_index >= 0 && unlock_item_index >= 0:
-		SaveManager.current_save_resource._unlock_item(unlock_list_index, unlock_item_index)
