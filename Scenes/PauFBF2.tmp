@@ -114,7 +114,7 @@ func _change_hover(menu_item : MenuItemUI):
 	hovered_title.text = menu_item.item_title
 	hovered_desc.text = menu_item.item_desc
 	hover_sprite.hide() if menu_item.can_quit else hover_sprite.show()
-	hover_sprite.position = menu_item.global_position + Vector2(7.5, 7.5)
+	hover_sprite.position = menu_item.global_position
 
 func _input(event):
 	if not (event is InputEventKey):
@@ -312,15 +312,13 @@ layout_mode = 0
 offset_right = 200.0
 offset_bottom = 69.0
 scale = Vector2(0.405, 0.405)
-theme_override_constants/separation = 5
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="WeaponBoxBackground/HBoxContainer"]
 z_index = 5
-custom_minimum_size = Vector2(34.965, 0)
+custom_minimum_size = Vector2(13.12, 6.15)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("5_dj5ja")
 expand_mode = 4
 stretch_mode = 5
@@ -329,10 +327,8 @@ item = ExtResource("6_0svyc")
 
 [node name="TextureRect2" type="TextureRect" parent="WeaponBoxBackground/HBoxContainer"]
 z_index = 5
-custom_minimum_size = Vector2(34.965, 0)
+custom_minimum_size = Vector2(13.12, 6.15)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("5_dj5ja")
 expand_mode = 4
 stretch_mode = 5
@@ -341,10 +337,8 @@ item = ExtResource("8_81wuh")
 
 [node name="TextureRect3" type="TextureRect" parent="WeaponBoxBackground/HBoxContainer"]
 z_index = 5
-custom_minimum_size = Vector2(34.965, 0)
+custom_minimum_size = Vector2(13.12, 6.15)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("5_dj5ja")
 expand_mode = 4
 stretch_mode = 5
@@ -353,10 +347,8 @@ item = ExtResource("10_hmrol")
 
 [node name="TextureRect4" type="TextureRect" parent="WeaponBoxBackground/HBoxContainer"]
 z_index = 5
-custom_minimum_size = Vector2(34.965, 0)
+custom_minimum_size = Vector2(13.12, 6.15)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("5_dj5ja")
 expand_mode = 4
 stretch_mode = 5
@@ -383,7 +375,6 @@ metadata/_edit_lock_ = true
 [node name="TextureRect" type="TextureRect" parent="ClothingBoxBackground/HBoxContainer"]
 z_index = 5
 layout_mode = 2
-size_flags_vertical = 4
 texture = ExtResource("10_casdk")
 stretch_mode = 5
 script = ExtResource("10_xrnae")
@@ -392,8 +383,6 @@ item = ExtResource("13_hkd2f")
 [node name="TextureRect2" type="TextureRect" parent="ClothingBoxBackground/HBoxContainer"]
 z_index = 5
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("4_ptfur")
 stretch_mode = 5
 script = ExtResource("10_xrnae")
@@ -402,8 +391,6 @@ item = ExtResource("11_lybmh")
 [node name="TextureRect3" type="TextureRect" parent="ClothingBoxBackground/HBoxContainer"]
 z_index = 5
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("6_isg5y")
 stretch_mode = 5
 script = ExtResource("10_xrnae")
@@ -412,8 +399,6 @@ item = ExtResource("15_xccn1")
 [node name="TextureRect4" type="TextureRect" parent="ClothingBoxBackground/HBoxContainer"]
 z_index = 5
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("5_ihv8t")
 stretch_mode = 5
 script = ExtResource("10_xrnae")
