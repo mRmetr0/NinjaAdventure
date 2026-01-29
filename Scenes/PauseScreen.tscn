@@ -33,7 +33,7 @@ script/source = "extends Control
 #references to other nodes
 @onready var profile : TextureRect = get_node(\"FacesetBox/Profile\")
 @onready var player : Player = GameManager.main_player
-@onready var hover_sprite : Sprite2D = get_node(\"HoverSprite\")
+@onready var hover_sprite : NinePatchRect = get_node(\"HoverSprite\")
 @onready var hovered_title : Label = get_node(\"ItemTextBackground/SelectedItemTitle\")
 @onready var hovered_desc : Label = get_node(\"ItemTextBackground/SelectedItemDesc\")
 @onready var quit_button : MenuItemUI = get_node(\"QuitButton\")
@@ -102,6 +102,12 @@ func _select_item(new_menu_item : MenuItemUI, play_sound = true):
 		_deselect_item(selected_suit)
 		selected_suit = new_menu_item
 		profile.texture = new_menu_item.item_icon
+	elif new_menu_item.item is ItemResource:
+		var item = new_menu_item.item as ItemResource
+		if SaveManager.current_save_resource.item_list[item.id] <= 0:
+			return
+		_deselect_item(selected_item)
+		selected_item = new_menu_item
 	new_menu_item.modulate = Color(0.7, 0.7, 0.7)
 	
 func _deselect_item(menu_item : MenuItemUI):
@@ -113,8 +119,15 @@ func _change_hover(menu_item : MenuItemUI):
 	quit_button.on_hover_quit(menu_item.can_quit)
 	hovered_title.text = menu_item.item_title
 	hovered_desc.text = menu_item.item_desc
+	hover_sprite.position = menu_item.global_position
+	#Set specific requirements to hoversprite:
 	hover_sprite.hide() if menu_item.can_quit else hover_sprite.show()
-	hover_sprite.position = menu_item.global_position + Vector2(7.5, 7.5)
+	if list_index == 2: #IF ON THE ITEM LIST:
+		hover_sprite.pivot_offset = Vector2i(-6.25,-6.25)
+		hover_sprite.size = Vector2i(35, 35)
+	else:
+		hover_sprite.pivot_offset = Vector2i(-5,-5)
+		hover_sprite.size = Vector2i(40, 40)
 
 func _input(event):
 	if not (event is InputEventKey):
@@ -203,7 +216,7 @@ func _set_item_show():
 		available_items.append(item)
 		if data.item_list[i] == 0:
 			#TODO: MAKE ITEMS WITH 0 AMOUNT UNSELECTABLE
-			pass
+			item.modulate = Color(0.4, 0.4, 0.4)
 "
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
@@ -594,8 +607,14 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="HoverSprite" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(22, 153)
-scale = Vector2(0.416667, 0.416667)
+[node name="HoverSprite" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 35.0
+offset_bottom = 35.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(-6.25, -6.25)
 texture = ExtResource("1_5g772")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
