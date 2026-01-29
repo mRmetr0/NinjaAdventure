@@ -103,8 +103,8 @@ func lose_item(index : int, lose_all : bool = false):
 	if lose_all:
 		item_list[index] = 0
 		return false
-	item_list[index] -= 1
-	return item_list.size()
+	item_list[index] = max(0, item_list[index] - 1)
+	return item_list[index]
 
 func aquire_quest_item(index : int):
 	quest_item_list[index] = 1

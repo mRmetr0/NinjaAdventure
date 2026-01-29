@@ -65,10 +65,14 @@ func _update_weapon_ui(newWeapon : WeaponResource):
 		weapon_display.get_parent().show()
 		weapon_display.texture = newWeapon.icon
 
-func _update_item_ui(newItem : ItemResource):
-	if newItem == null || (newItem.expendable && newItem.expendable_amount <= 0):
+func _update_item_ui(item : ItemResource):
+	if item == null || \
+	(item.effect != item.effects.QUEST && \
+	SaveManager.current_save_resource.item_list[item.id] <= 0) || \
+	(item.effect == item.effects.QUEST && \
+	SaveManager.current_save_resource.quest_item_list[item.id] <= 0):
 		item_display.get_parent().hide()
 	else:
 		item_display.get_parent().show()
-		item_display.texture = newItem.icon
+		item_display.texture = item.icon
 
