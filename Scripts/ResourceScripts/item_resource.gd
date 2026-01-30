@@ -12,6 +12,7 @@ enum effects {
 @export var icon : Texture2D
 @export var id : int = -1
 @export var expendable : bool
+@export var stay_in_menu : bool
 # on use data
 @export var effect : effects
 @export var value : int

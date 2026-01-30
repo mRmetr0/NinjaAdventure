@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://8exqu6aua2uu"]
+
+[ext_resource type="Texture2D" uid="uid://hqbey7jd05t1" path="res://Assets/HUD/Shuriken.png" id="1_joyf7"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="2_cwm5j"]
+
+[resource]
+script = ExtResource("2_cwm5j")
+icon = ExtResource("1_joyf7")
+id = 6
+expendable = true
+stay_in_menu = true
+effect = 3
+value = 0
+use_sound = 2
+item_name = "Shuriken"
+descripton = "The old, reliable, pointy, throwable star!"

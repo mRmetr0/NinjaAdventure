@@ -22,6 +22,7 @@ func _ready():
 		
 	if item == null:
 		queue_free()
+		return
 	
 	if item is WeaponResource:
 		item_icon = item.icon

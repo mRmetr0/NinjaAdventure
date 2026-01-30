@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://dk7owquuynuo2"]
+
+[ext_resource type="Texture2D" uid="uid://cno26y5a8x6o1" path="res://Assets/Items/Food/Onigiri.png" id="1_p0dby"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="2_h7kf8"]
+
+[resource]
+script = ExtResource("2_h7kf8")
+icon = ExtResource("1_p0dby")
+id = 1
+expendable = true
+effect = 0
+value = 999
+use_sound = 4
+item_name = "Health Potion"
+descripton = "My favorite! Regenerates all health upon consumption."

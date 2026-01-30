@@ -26,11 +26,11 @@ var has_snow_suit = false
 var item_list : Array[int] = [
 	-1, #0 Healing potion
 	#FOOD: 
-	-1, #1
-	-1, #2
-	-1, #3
+	-1, #1 Onigiri (special food)
+	-1, #2 Sushi (regular collectible food)
+	-1, #3 Yakitori (rare collectible food)
+	-1, #4 Fortune cookie (purchasable food with text)
 	#COMBAT ITEMS:
-	-1, #4
 	-1, #5 Shurken
 	-1, #6
 	-1, #7

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://13siya7oyt25"]
+[gd_scene load_steps=39 format=3 uid="uid://13siya7oyt25"]
 
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
 [ext_resource type="Texture2D" uid="uid://ciy7ahh1on7mx" path="res://Assets/HUD/Dialog/WeaponBox.png" id="1_xv58y"]
@@ -22,9 +22,20 @@
 [ext_resource type="Texture2D" uid="uid://c2voml7c8b5gk" path="res://Assets/Items/Potion/LifePot.png" id="19_jnskf"]
 [ext_resource type="Texture2D" uid="uid://ftde5qwuh35r" path="res://Assets/Items/Treasure/GoldKey.png" id="19_resgx"]
 [ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/RegularItems/heart_potion.tres" id="20_aetlo"]
+[ext_resource type="Texture2D" uid="uid://cno26y5a8x6o1" path="res://Assets/Items/Food/Onigiri.png" id="21_vtv6b"]
+[ext_resource type="Resource" uid="uid://dk7owquuynuo2" path="res://Resources/ItemResources/RegularItems/onigiri.tres" id="22_k4gkd"]
+[ext_resource type="Texture2D" uid="uid://cd8mf3822pfo8" path="res://Assets/Items/Food/Sushi.png" id="23_bqwjc"]
 [ext_resource type="Resource" uid="uid://c3u5o6ee2ncon" path="res://Resources/ItemResources/QuestItems/Caring_key.tres" id="23_sxkd4"]
 [ext_resource type="Resource" uid="uid://2tnwilsgbusm" path="res://Resources/ItemResources/QuestItems/Farmers_key.tres" id="24_0h6px"]
+[ext_resource type="Resource" uid="uid://p305dmg5nl2p" path="res://Resources/ItemResources/RegularItems/sushi.tres" id="24_vvejs"]
 [ext_resource type="Resource" uid="uid://cg6qn4nfnd0nl" path="res://Resources/ItemResources/QuestItems/Warding_key.tres" id="25_cv074"]
+[ext_resource type="Texture2D" uid="uid://ctdx3ew4o3jf2" path="res://Assets/Items/Food/Yakitori.png" id="25_xx3vf"]
+[ext_resource type="Resource" uid="uid://yjq8iuaf7hbt" path="res://Resources/ItemResources/RegularItems/yakitori.tres" id="26_jly1h"]
+[ext_resource type="Texture2D" uid="uid://o8bipinh8sfo" path="res://Assets/Items/Food/FortuneCookie.png" id="27_umj8g"]
+[ext_resource type="Resource" uid="uid://bmmp5um6dqt2d" path="res://Resources/ItemResources/RegularItems/fortune_cookie.tres" id="28_iulmu"]
+[ext_resource type="Resource" uid="uid://8exqu6aua2uu" path="res://Resources/ItemResources/RegularItems/shuriken.tres" id="30_20l0h"]
+[ext_resource type="Texture2D" uid="uid://3gq0j537utvu" path="res://Assets/Items/Scroll/ScrollEmpty.png" id="31_stgm0"]
+[ext_resource type="Resource" uid="uid://cgoo0dpr2dhli" path="res://Resources/ItemResources/RegularItems/scroll_empty.tres" id="32_nhxrj"]
 
 [sub_resource type="GDScript" id="GDScript_4uhu3"]
 script/source = "extends Control
@@ -217,7 +228,7 @@ func _set_item_show():
 		if i >= item_list.size(): 
 			item.hide()
 			continue
-		if item_list[i] < 0:
+		if item_list[i] < 0 || (item_list[i] == 0 && !item.item.stay_in_menu):
 			item.hide()
 			continue
 		item.show()
@@ -473,41 +484,41 @@ item = ExtResource("20_aetlo")
 z_index = 5
 custom_minimum_size = Vector2(10, 12)
 layout_mode = 2
-texture = ExtResource("19_resgx")
+texture = ExtResource("21_vtv6b")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("22_k4gkd")
 
 [node name="TextureRect2" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
 custom_minimum_size = Vector2(10, 12)
 layout_mode = 2
-texture = ExtResource("19_resgx")
+texture = ExtResource("23_bqwjc")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("24_vvejs")
 
 [node name="TextureRect3" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
 custom_minimum_size = Vector2(10, 12)
 layout_mode = 2
-texture = ExtResource("19_resgx")
+texture = ExtResource("25_xx3vf")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("26_jly1h")
 
 [node name="TextureRect4" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
 custom_minimum_size = Vector2(10, 12)
 layout_mode = 2
-texture = ExtResource("19_resgx")
+texture = ExtResource("27_umj8g")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("28_iulmu")
 
 [node name="TextureRect5" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
@@ -517,27 +528,27 @@ texture = ExtResource("11_15kmr")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("30_20l0h")
 
 [node name="TextureRect6" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
 custom_minimum_size = Vector2(10, 12)
 layout_mode = 2
-texture = ExtResource("19_resgx")
+texture = ExtResource("31_stgm0")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("32_nhxrj")
 
 [node name="TextureRect7" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
 custom_minimum_size = Vector2(10, 12)
 layout_mode = 2
-texture = ExtResource("19_resgx")
+texture = ExtResource("31_stgm0")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("32_nhxrj")
 
 [node name="TextureRect8" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
@@ -577,7 +588,6 @@ texture = ExtResource("19_resgx")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
 
 [node name="QuitButton" type="TextureRect" parent="."]
 layout_mode = 0
@@ -619,8 +629,10 @@ metadata/_edit_lock_ = true
 
 [node name="HoverSprite" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 35.0
-offset_bottom = 35.0
+offset_left = 8.0
+offset_top = 171.0
+offset_right = 43.0
+offset_bottom = 206.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(-6.25, -6.25)
 texture = ExtResource("1_5g772")
