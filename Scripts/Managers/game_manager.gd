@@ -54,13 +54,15 @@ func _input(event):
 			print("LOADING GAME")
 			var data = SaveManager.load_data(SaveManager.current_save_file)
 			data.apply_data()
-		if event.keycode == KEY_P:	#TODO: ADD GODMODE (for testing :)
+		if event.keycode == KEY_P:
 			#GODMODE:
 			var god_resource = SaveManager.current_save_resource
 			god_resource.player_name = "GOD"
 			god_resource.coins = 999
 			god_resource.set_weapons(true, true, true, true)
 			god_resource.set_suits(true, true, true)
+			for i in god_resource.item_list.size():
+				god_resource.item_list[i] = 999
 			
 			SaveManager.current_save_resource = god_resource
 			SoundManager.play_sound(SoundManager.SOUND.PICK_UP)

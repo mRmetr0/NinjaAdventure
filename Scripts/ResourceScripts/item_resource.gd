@@ -10,8 +10,9 @@ enum effects {
 }
 
 @export var icon : Texture2D
+@export var id : int = -1
 @export var expendable : bool
-@export var expendable_amount : int
+@export var stay_in_menu : bool
 # on use data
 @export var effect : effects
 @export var value : int
@@ -27,6 +28,6 @@ func _use_item(player : Player):
 			player.UseItemInteract.emit(self)
 			print("USING ITEM: ", item_name)
 	if expendable:
-		expendable_amount -= 1
-		if expendable_amount <= 0:		# REMOVE ITEM FROM PLAYER LIST
+		var is_empty : bool = SaveManager.current_save_resource.lose_item(id) <= 0
+		if is_empty:	# REMOVE ITEM FROM PLAYER LIST
 			player._set_item(null)

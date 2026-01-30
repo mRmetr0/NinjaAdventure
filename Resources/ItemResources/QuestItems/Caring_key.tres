@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://c3u5o6ee2ncon"]
 
-[ext_resource type="Texture2D" uid="uid://b75yedjj327xw" path="res://Assets/Items/Treasure/SilverKey.png" id="1_uxog5"]
+[ext_resource type="Texture2D" uid="uid://ftde5qwuh35r" path="res://Assets/Items/Treasure/GoldKey.png" id="1_wcpjk"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="2_fjd6b"]
 
 [resource]
 script = ExtResource("2_fjd6b")
-icon = ExtResource("1_uxog5")
+icon = ExtResource("1_wcpjk")
+id = 0
 expendable = false
-expendable_amount = 0
 effect = 2
 value = 0
 use_sound = 10

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://yjq8iuaf7hbt"]
+
+[ext_resource type="Texture2D" uid="uid://ctdx3ew4o3jf2" path="res://Assets/Items/Food/Yakitori.png" id="1_r6pog"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="2_ytjk5"]
+
+[resource]
+script = ExtResource("2_ytjk5")
+icon = ExtResource("1_r6pog")
+id = 3
+expendable = true
+stay_in_menu = false
+effect = 0
+value = 8
+use_sound = 4
+item_name = "Yakitori"
+descripton = "A filling meal! regenerates 2 hearts on use!"

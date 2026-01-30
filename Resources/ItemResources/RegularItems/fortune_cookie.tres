@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://bmmp5um6dqt2d"]
+
+[ext_resource type="Texture2D" uid="uid://o8bipinh8sfo" path="res://Assets/Items/Food/FortuneCookie.png" id="1_ua7rq"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="2_x2hvk"]
+
+[resource]
+script = ExtResource("2_x2hvk")
+icon = ExtResource("1_ua7rq")
+id = 4
+expendable = true
+stay_in_menu = false
+effect = 0
+value = 0
+use_sound = 0
+item_name = "Fortune cookie"
+descripton = "Always filled with rich wisdom and a stale bite."

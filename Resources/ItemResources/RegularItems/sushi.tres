@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://p305dmg5nl2p"]
+
+[ext_resource type="Texture2D" uid="uid://cd8mf3822pfo8" path="res://Assets/Items/Food/Sushi.png" id="1_2c22q"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="2_u1nf6"]
+
+[resource]
+script = ExtResource("2_u1nf6")
+icon = ExtResource("1_2c22q")
+id = 2
+expendable = true
+stay_in_menu = false
+effect = 0
+value = 2
+use_sound = 4
+item_name = "Sushi"
+descripton = "A delectable choice. Heals half a heart on use."

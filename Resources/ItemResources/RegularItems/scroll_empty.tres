@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://cgoo0dpr2dhli"]
+
+[ext_resource type="Texture2D" uid="uid://3gq0j537utvu" path="res://Assets/Items/Scroll/ScrollEmpty.png" id="1_g703a"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/item_resource.gd" id="1_lgewd"]
+
+[resource]
+script = ExtResource("1_lgewd")
+icon = ExtResource("1_g703a")
+id = 6
+expendable = false
+stay_in_menu = false
+effect = 3
+value = 0
+use_sound = 10
+item_name = "Empty scroll"
+descripton = "Although currently useless; it can cast spells when inscribed properly"

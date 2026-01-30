@@ -5,12 +5,12 @@
 
 [resource]
 script = ExtResource("1_3bfad")
-name = "HealthPotion"
 icon = ExtResource("1_cn1qs")
+id = 0
 expendable = true
-expendable_amount = 3
+stay_in_menu = true
 effect = 0
 value = 4
 use_sound = 4
 item_name = "Health Potion"
-descripton = "Heals an entire heart on use"
+descripton = "Heals an entire heart on use."
