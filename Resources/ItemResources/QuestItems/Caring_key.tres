@@ -8,6 +8,7 @@ script = ExtResource("2_fjd6b")
 icon = ExtResource("1_wcpjk")
 id = 0
 expendable = false
+stay_in_menu = false
 effect = 2
 value = 0
 use_sound = 10
