@@ -28,7 +28,5 @@ func _use_item(player : Player):
 			print("USING ITEM: ", item_name)
 	if expendable:
 		var is_empty : bool = SaveManager.current_save_resource.lose_item(id) <= 0
-		print(SaveManager.current_save_resource.lose_item(id))
-		print(is_empty)
 		if is_empty:	# REMOVE ITEM FROM PLAYER LIST
 			player._set_item(null)

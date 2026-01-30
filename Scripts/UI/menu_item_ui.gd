@@ -7,11 +7,12 @@ class_name MenuItemUI
 
 var item_title : String = "QUIT"
 var item_desc : String = "SAVE AND QUIT THE GAME"
-var bg : NinePatchRect
 
 var item_icon : Texture
 var item_text : Label
+var selectable : bool
 var lock_quit = false
+var bg : NinePatchRect
 
 func _ready():
 	if can_quit:

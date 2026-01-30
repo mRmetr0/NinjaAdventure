@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://13siya7oyt25"]
+[gd_scene load_steps=28 format=3 uid="uid://13siya7oyt25"]
 
 [ext_resource type="Texture2D" uid="uid://dfhw6rahcscrw" path="res://Assets/HUD/Dialog/FacesetBox.png" id="1_5g772"]
 [ext_resource type="Texture2D" uid="uid://ciy7ahh1on7mx" path="res://Assets/HUD/Dialog/WeaponBox.png" id="1_xv58y"]
@@ -22,6 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://c2voml7c8b5gk" path="res://Assets/Items/Potion/LifePot.png" id="19_jnskf"]
 [ext_resource type="Texture2D" uid="uid://ftde5qwuh35r" path="res://Assets/Items/Treasure/GoldKey.png" id="19_resgx"]
 [ext_resource type="Resource" uid="uid://b8ds32qqqg8lc" path="res://Resources/ItemResources/RegularItems/heart_potion.tres" id="20_aetlo"]
+[ext_resource type="Resource" uid="uid://c3u5o6ee2ncon" path="res://Resources/ItemResources/QuestItems/Caring_key.tres" id="23_sxkd4"]
+[ext_resource type="Resource" uid="uid://2tnwilsgbusm" path="res://Resources/ItemResources/QuestItems/Farmers_key.tres" id="24_0h6px"]
+[ext_resource type="Resource" uid="uid://cg6qn4nfnd0nl" path="res://Resources/ItemResources/QuestItems/Warding_key.tres" id="25_cv074"]
 
 [sub_resource type="GDScript" id="GDScript_4uhu3"]
 script/source = "extends Control
@@ -38,7 +41,6 @@ script/source = "extends Control
 @onready var hovered_desc : Label = get_node(\"ItemTextBackground/SelectedItemDesc\")
 @onready var quit_button : MenuItemUI = get_node(\"QuitButton\")
 
-var hovered_item : MenuItemUI
 var hovered_index = 0 # index of current item in list player is hovering over
 var list_index = 0 # index of current list player is selecting
 var list_layers = [] # amount of lists the player can chose between
@@ -85,15 +87,17 @@ func _ready():
 
 func on_show():
 	_set_item_show()
+	if selected_item != null && \\
+		SaveManager.current_save_resource.item_list[selected_item.item.id] <= 0:
+		selected_item == null
 	list_index = 0 if available_weapons.size() > 0 else 1
-	hovered_index = clamp(hovered_index, 0, list_layers[list_index].size())
+	hovered_index = clamp(hovered_index, 0, list_layers[list_index].size()-1)
 	_change_hover(list_layers[list_index][hovered_index])
 
 func _select_item(new_menu_item : MenuItemUI, play_sound = true):
-	if play_sound:
-		SoundManager.play_sound(SoundManager.SOUND.L_ATTACK)
 	if new_menu_item.can_quit:
 		quit_button.on_select_quit()
+		SoundManager.play_sound(SoundManager.SOUND.L_ATTACK)
 		return
 	if new_menu_item.item is WeaponResource:
 		_deselect_item(selected_weapon)
@@ -102,12 +106,14 @@ func _select_item(new_menu_item : MenuItemUI, play_sound = true):
 		_deselect_item(selected_suit)
 		selected_suit = new_menu_item
 		profile.texture = new_menu_item.item_icon
-	elif new_menu_item.item is ItemResource:
-		var item = new_menu_item.item as ItemResource
-		if SaveManager.current_save_resource.item_list[item.id] <= 0:
-			return
+	elif new_menu_item.item is ItemResource && new_menu_item.selectable:
 		_deselect_item(selected_item)
 		selected_item = new_menu_item
+	elif !new_menu_item.selectable:
+		SoundManager.play_sound(SoundManager.SOUND.H_ATTACK)
+		return
+	if play_sound:
+		SoundManager.play_sound(SoundManager.SOUND.L_ATTACK)
 	new_menu_item.modulate = Color(0.7, 0.7, 0.7)
 	
 func _deselect_item(menu_item : MenuItemUI):
@@ -201,22 +207,26 @@ func _set_item_show():
 		else:
 			suit.hide()
 		counter += 1
-	#set items:
+	#set items (including quest):
 	available_items.clear()
+	var item_list : Array = data.item_list.duplicate()
+	item_list.append_array(data.quest_item_list.duplicate())
 	for i in all_items.size():
 		var item = all_items[i]
 		#TODO: REMOVE WHEN ALL ITEMS HAVE BEEN IMPLEMENTED
-		if i >= data.item_list.size():
+		if i >= item_list.size(): 
 			item.hide()
 			continue
-		if data.item_list[i] < 0:
+		if item_list[i] < 0:
 			item.hide()
 			continue
 		item.show()
 		available_items.append(item)
-		if data.item_list[i] == 0:
-			#TODO: MAKE ITEMS WITH 0 AMOUNT UNSELECTABLE
+		item.selectable = item_list[i] > 0
+		if !item.selectable:
 			item.modulate = Color(0.4, 0.4, 0.4)
+			if selected_item == item:
+				selected_item = null
 "
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynomg"]
@@ -537,7 +547,7 @@ texture = ExtResource("19_resgx")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("23_sxkd4")
 
 [node name="TextureRect9" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
@@ -547,7 +557,7 @@ texture = ExtResource("19_resgx")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("24_0h6px")
 
 [node name="TextureRect10" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
@@ -557,7 +567,7 @@ texture = ExtResource("19_resgx")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("10_xrnae")
-item = ExtResource("20_aetlo")
+item = ExtResource("25_cv074")
 
 [node name="TextureRect11" type="TextureRect" parent="ItemBoxBackground/GridContainer"]
 z_index = 5
